@@ -123,13 +123,27 @@ export function Key() {
         <div className="flex h-full items-center justify-center w-full md:h-auto text-black text-3xl font-semibold">Key</div>
         <div className="flex justify-normal flex-row left-[10%] w-[80%] h-full md:h-auto">
           {/* Divs with notes A to G */}
-          <div className="flex basis-7/10 w-[70%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
+          {/* <div className="absolute flex w-[70%] justify-evenly flex-row left-0 top-[10%] h-[80%]">
+            <div className="basis-1/6 h-[100%] w-[2%] bg-black"></div>
+            <div className="basis-1/6 h-[100%] w-[2%] bg-black"></div>
+            <div className="basis-1/6 h-[100%] w-[2%] bg-black"></div>
+            <div className="basis-1/6 h-[100%] w-[2%] bg-black"></div>
+            <div className="basis-1/6 h-[100%] w-[2%] bg-black"></div>
+            <div className="basis-1/6 h-[100%] w-[2%] bg-black"></div>
+          </div> */}
+          <div className="relative flex w-[100%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">A</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">B</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">C</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">D</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">E</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">F</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">G</div>
           </div>
           {/* Divs with # and b */}
@@ -137,6 +151,7 @@ export function Key() {
             <div className="flex basis-1/5 h-[100%]"></div>
             <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
               <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">#</div>
+              <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
               <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">b</div>
             </div>
           </div>
