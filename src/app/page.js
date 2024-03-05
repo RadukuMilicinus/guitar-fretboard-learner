@@ -59,12 +59,10 @@ export function Intervals(){
     );
 }
 
-export function Options(){
-    return (
-      <div className="relative top-[20%] left-[15%] h-[25%] w-[65%] rounded-3xl bg-[#E39D34]">
-        <Intervals> </Intervals>
-        <div className="absolute grid grid-cols-2 gap-3 left-[15%] top-[5%] w-[50%] h-[90%] bg-[#E39D34]"> 
-          <div className="relative flex justify-center w-[100%] h-[100%] bg-blue-400 rounded-lg">
+export function GridChordScale(){
+  return (
+     <div className="relative grid grid-cols-2 gap-3 left-0 top-[5%] h-[90%] bg-[#E39D34]"> 
+          {/* <div className="relative flex justify-center w-[100%] h-[100%] bg-blue-400 rounded-lg">
             <div className="absolute flex items-center justify-center h-[50%] w-full">
               <div className="absolute font-medium text-xl font-roboto">Key</div>
             </div>
@@ -72,7 +70,6 @@ export function Options(){
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Insert key...</div>
             </div>
           </div>
-          {/* Scales */}
           <div className="relative w-[100%] h-[100%] bg-blue-400 rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center h-full w-[50%]">
@@ -87,7 +84,6 @@ export function Options(){
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Choose scale...</div>
             </div>
           </div>
-          {/* Chords */}
           <div className="relative w-[100%] h-[100%] bg-blue-400 rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center h-full w-[50%]">
@@ -102,7 +98,6 @@ export function Options(){
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Choose chord...</div>
             </div>
           </div>
-          {/* Arpeggios */}
           <div className="relative w-[100%] h-[100%] bg-blue-400 rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center h-full w-[50%]">
@@ -116,8 +111,60 @@ export function Options(){
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Choose arpeggio...</div>
             </div>
-          </div>
+          </div> */}
         </div> 
+  );
+}
+
+export function Key() {
+  return (
+    <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
+      <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
+        <div className="flex h-full items-center justify-center w-full md:h-auto text-black text-3xl font-semibold">Key</div>
+        <div className="flex justify-normal flex-row left-[10%] w-[80%] h-full md:h-auto">
+          {/* Divs with notes A to G */}
+          <div className="flex basis-7/10 w-[70%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">A</div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">B</div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">C</div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">D</div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">E</div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">F</div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">G</div>
+          </div>
+          {/* Divs with # and b */}
+          <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
+            <div className="flex basis-1/5 h-[100%]"></div>
+            <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
+              <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">#</div>
+              <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">b</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
+        <div className="flex h-1/2 items-center justify-center w-full md:h-auto text-black text-2xl font-semibold">Note representation</div>
+        <div className="flex flex-row left-[10%] w-[80%] h-[100%]">
+          {/* Your content for the second part */}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Options(){
+    return (
+      <div className="relative top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
+        <Intervals> </Intervals>
+        <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
+          <div className="relative col-span-3">
+            <Key></Key>
+          </div>  
+          <div className="relative col-span-4">
+            <GridChordScale></GridChordScale>
+          </div>  
+          <div className="relative col-span-3"></div>  
+        </div>
       </div>
     );
 }
@@ -126,7 +173,7 @@ export function Options(){
 
 export default function Home() {
   return (
-    <div className="absolute top-0 left-0 h-full w-full bg-orange-200">
+    <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
 
       <Options></Options>
 
@@ -141,7 +188,7 @@ export default function Home() {
         <div className="string5"></div>
         <div className="string6"></div>
       </div>
-      <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#E39D34]">
+      <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
         <div className="string2"></div>
         <div className="string3"></div>
