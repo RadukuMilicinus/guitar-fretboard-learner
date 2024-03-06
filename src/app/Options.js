@@ -1,61 +1,72 @@
-export default function Options(){
-    return (
-        <div className="relative top-[20%] left-[15%] h-[25%] w-[65%] rounded-3xl bg-[#E39D34]">
-        <div className="absolute grid grid-cols-2 gap-3 left-[15%] top-[5%] w-[50%] h-[90%] bg-[#E39D34]"> 
-          <div className="relative flex justify-center w-[100%] h-[100%] bg-blue-400 rounded-lg">
-            <div className="absolute flex items-center justify-center h-[50%] w-full">
-              <div className="absolute font-medium text-xl font-roboto">Key</div>
-            </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Insert key...</div>
+import react from 'react';
+
+// export default function Options(){
+//   return (
+
+//   );
+// }
+
+export default function Key(){
+  return (
+    <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
+      <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
+        <div className="flex h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Key</div>
+        <div className="flex justify-normal flex-row left-[10%] w-[80%] h-full md:h-auto">
+          {/* Divs with notes A to G */}
+          
+          <div className="relative flex w-[100%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">A</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">B</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">C</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">D</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">E</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">F</div>
+            <div className="w-[1%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="basis-1/7 h-[100%] items-center justify-center text-xl font-bold">G</div>
+          </div>
+          {/* Divs with # and b */}
+          <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
+            <div className="flex basis-1/5 h-[100%]"></div>
+            <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
+              <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">#</div>
+              <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+              <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">b</div>
             </div>
           </div>
-          {/* Scales */}
-          <div className="relative w-[100%] h-[100%] bg-blue-400 rounded-lg">
-            <div className="absolute left-0 top-0 h-[50%] w-full">
-              <div className="flex items-center h-full w-[50%]">
-                <div className="font-medium text-xl font-roboto mx-auto">Scale</div>
-              </div>
-              <div className="absolute left-[50%] top-0 h-[100%] w-[50%]">
-                <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
-                <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#039500]"></div>
-              </div>
-            </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Choose scale...</div>
-            </div>
-          </div>
-          {/* Chords */}
-          <div className="relative w-[100%] h-[100%] bg-blue-400 rounded-lg">
-            <div className="absolute left-0 top-0 h-[50%] w-full">
-              <div className="flex items-center h-full w-[50%]">
-                <div className="font-medium text-xl font-roboto mx-auto">Chord</div>
-              </div>
-              <div className="absolute left-[50%] top-0 h-[100%] w-[50%]">
-                <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
-                <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#039500]"></div>
-              </div>
-            </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Choose chord...</div>
-            </div>
-          </div>
-          {/* Arpeggios */}
-          <div className="relative w-[100%] h-[100%] bg-blue-400 rounded-lg">
-            <div className="absolute left-0 top-0 h-[50%] w-full">
-              <div className="flex items-center h-full w-[50%]">
-                <div className="font-medium text-xl font-roboto mx-auto">Arpeggio</div>
-              </div>
-              <div className="absolute left-[50%] top-0 h-[100%] w-[50%]">
-                <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
-                <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#039500]"></div>
-              </div>
-            </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-white rounded-lg" onClick={null}>Choose arpeggio...</div>
-            </div>
-          </div>
-        </div> 
+        </div>
       </div>
-    );
+      <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
+        <div className="flex h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Note representation</div>
+        <div className="flex flex-row left-[10%] w-[80%] h-1/2">
+          <div className="relative flex flex-row w-1/2 h-full">
+            <div className="flex basis-4/5 h-full font-semibold text-2xl text-black justify-center items-center">
+              Intervals
+            </div>
+            <div className="flex basis-1/5 h-[100%] justify-center items-center relative">
+              <div className="flex absolute justify-center items-center w-6 h-6 bg-[#727777] rounded-full z-0"></div>
+              <div className="flex absolute justify-center items-center w-4 h-4 bg-[#3D3D3D] rounded-full z-1"></div>
+            </div>
+          </div>
+          <div className="relative flex flex-row w-1/2 h-full">
+            <div className="flex basis-4/5 h-full font-semibold text-2xl text-black justify-center items-center">
+              Note name
+            </div>
+            <div className="flex basis-1/5 h-[100%] justify-center items-center relative">
+              <div className="flex absolute justify-center items-center w-6 h-6 bg-[#727777] rounded-full z-0"></div>
+              <div className="flex absolute justify-center items-center w-4 h-4 bg-[#3D3D3D] rounded-full z-1"></div>
+            </div>
+          </div>
+          {/* Your content for the second part */}
+        </div>
+      </div>
+    </div>
+  );
 }
+
+
+
