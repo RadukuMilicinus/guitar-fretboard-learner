@@ -28,32 +28,89 @@ export function Dot(){
 
 export function Intervals(){
     return (
-        <div className="absolute top-[5%] left-[70%] w-[25%] h-[90%] bg-slate-500">
+        <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-slate-500 z-1">
           <div className="relative top-0 left-0 h-[30%] w-[100%] bg-slate-500">
             <div className="flex items-center h-full w-[50%]">
               <div className="font-medium text-xl font-roboto mx-auto">Intervals</div>
             </div>
             <div className="absolute left-[50%] top-0 h-[100%] w-[50%]">
-              <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
-              <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
+              <div className="relative top-[25%] left-[25%] w-[50%] h-[40%] rounded-full bg-black"></div>
+              <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div>
             </div>
           </div>
-          <div className="absolut grid grid-cols-3 top-0 left-0 h-[70%] w-[100%] bg-white">
-            <div className="relative flex items-center h-full">
-              <div className="absolute w-[80%] left-0 top-0 h-full">Root</div>
-              <Dot></Dot>
+          <div className="relative grid grid-cols-3 top-0 left-0 h-[70%] w-[100%] bg-white">
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">Root</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
             </div>
-            <div className="relative">3</div>
-            <div className="relative">#5/b6</div>
-            <div className="relative">b2</div>
-            <div className="relative">4</div>
-            <div className="relative">6</div>
-            <div className="relative">2</div>
-            <div className="relative">#4/b5</div>
-            <div className="relative">b7</div>
-            <div className="relative">b3</div>
-            <div className="relative">5</div>
-            <div className="relative">7</div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">3</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">#5/b6</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">b2</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">4</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">6</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">2</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">#4/b5</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">b7</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">b3</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">5</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
+            <div className="relative flex flex-row items-center h-full w-full">
+              <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">7</div>
+              <div className="relative basis-2/5 h-full flex justify-center items-center">
+                <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+              </div>
+            </div>
           </div>
         </div> 
     );
@@ -119,7 +176,6 @@ export function GridChordScale(){
 export function Options(){
     return (
       <div className="relative top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
-        <Intervals> </Intervals>
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
             <Key></Key>
@@ -129,6 +185,7 @@ export function Options(){
           </div>  
           <div className="relative col-span-3"></div>  
         </div>
+        <Intervals> </Intervals>
       </div>
     );
 }
