@@ -159,7 +159,25 @@ export function Key() {
       </div>
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
         <div className="flex h-1/2 items-center justify-center w-full md:h-auto text-black text-2xl font-semibold">Note representation</div>
-        <div className="flex flex-row left-[10%] w-[80%] h-[100%]">
+        <div className="flex flex-row left-[10%] w-[80%] h-1/2">
+          <div className="relative flex flex-row w-1/2 h-full">
+            <div className="flex basis-3/5 h-full font-semibold text-2xl text-black justify-center items-center">
+              Intervals
+            </div>
+            <div className="flex basis-2/5 h-[100%] justify-center items-center relative">
+              <div className="flex justify-center items-center w-6 h-6 bg-[#727777] rounded-full z-0"></div>
+              <div className="flex absolute justify-center items-center w-4 h-4 bg-[#3D3D3D] rounded-full z-1"></div>
+            </div>
+          </div>
+          <div className="relative flex flex-row w-1/2 h-full">
+            <div className="flex basis-3/5 h-full font-semibold text-2xl text-black justify-center items-center">
+              Note name
+            </div>
+            <div className="flex basis-2/5 h-[100%] justify-center items-center relative">
+              <div className="flex justify-center items-center w-6 h-6 bg-[#727777] rounded-full z-0"></div>
+              <div className="flex absolute justify-center items-center w-4 h-4 bg-[#3D3D3D] rounded-full z-1"></div>
+            </div>
+          </div>
           {/* Your content for the second part */}
         </div>
       </div>
