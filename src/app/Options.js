@@ -9,30 +9,43 @@ import React, { useState } from 'react';
 //   );
 // }
 
-export function Note({note}) {
+export function Note({note, onClick, color}) {
 
   const [colorNote, pressNote] = useState("[#727777]")
+  // const [pressed, setPress] = useState(false)
 
   const changeColorNote = () => {
+
     if( colorNote == "blue-700" ){
       pressNote("[#727777]")
-      // console.log("note color: " + colorNote)
+
+      // change K changes the 
+      // changeK()
+      // changeK()
+      
     } else {
       pressNote("blue-700")
+      // changeK()
       // console.log("note color: " + colorNote)
     }
   }
 
+  // for(var i = 0; i < keysPressed.length ; i++){
+  //   if((i === 0 && note === "A") || (i === 1 && note === "B") || (i === 2 && note === "C") || (i === 3  && note === "D") || (i === 4 && note === "E") || (i === 5 && note === "F") || (i === 6 && note === "G")){
+  //     changeColorNote();
+  //   }
+  // }
+
   return (
     <div className="relative basis-1/7 h-[100%] w-full items-center justify-center" onClick={changeColorNote}>
       {note === "A" ?
-      <div className={"absolute w-[100%] h-full z-1 rounded-l-md" + (" bg-" + colorNote)}>
+      <div className={"absolute w-[100%] h-full z-1 rounded-l-md" + (" bg-" + color)} onClick={onClick}>
         <div className="relative flex text-xl font-bold justify-center items-center">{note}</div>
       </div> : note === "G" ? 
-      <div className={"absolute w-[100%] h-full z-1 rounded-r-md" + (" bg-" + colorNote)}>
+      <div className={"absolute w-[100%] h-full z-1 rounded-r-md" + (" bg-" + color)} onClick={onClick}>
         <div className="relative flex text-xl font-bold justify-center items-center">{note}</div>
       </div> : 
-        <div className={"absolute w-[100%] h-full z-1" + (" bg-" + colorNote)}>
+        <div className={"absolute w-[100%] h-full z-1" + (" bg-" + color)} onClick={onClick}>
           <div className="relative flex text-xl font-bold justify-center items-center">{note}</div>
         </div>      
     },
@@ -74,7 +87,7 @@ export function SharpFlat({accidental}) {
 
 export function NoteRep({text}){
   
-  const [color, setColor] = useState("bg-blue-700")
+  const [color, setColor] = useState("bg-[#727777]")
 
   const changeState = () => {
     if ( color === "bg-blue-700" ){
@@ -102,6 +115,23 @@ export function NoteRep({text}){
 
 export default function Key(){
 
+  const [pressedKeys, setPressedKeys] = useState([false, false, false, false, false, false, false]);
+
+  const keyChange = (index) => {
+    // Create a new array to update the pressed keys
+    const updatedKeys = [...pressedKeys];
+    
+    // Reset all keys to false (not pressed)
+    for (let i = 0; i < updatedKeys.length; i++) {
+      updatedKeys[i] = false;
+    }
+
+    // Set the currently pressed key to true
+    updatedKeys[index] = true;
+
+    // Update the state with the new array
+    setPressedKeys(updatedKeys);
+  };
 
   return (
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
@@ -111,20 +141,19 @@ export default function Key(){
           {/* Divs with notes A to G */}
           
           <div className="relative flex w-[100%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
-            <Note note="A"></Note> 
-            {/* <div className="absolute basis-1/7 h-[100%] items-center justify-center text-xl font-bold">A</div> */}
+            <Note note="A" onClick={() => keyChange(0)} color={pressedKeys[0] ? 'blue-700' : '#727777'}></Note>
             <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <Note note="B"></Note> 
+            <Note note="B" onClick={() => keyChange(1)} color={pressedKeys[1] ? 'blue-700' : '#727777'}></Note>
             <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <Note note="C"></Note> 
+            <Note note="C" onClick={() => keyChange(2)} color={pressedKeys[2] ? 'blue-700' : '#727777'}></Note>
             <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <Note note="D"></Note> 
+            <Note note="D" onClick={() => keyChange(3)} color={pressedKeys[3] ? 'blue-700' : '#727777'}></Note>
             <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <Note note="E"></Note> 
+            <Note note="E" onClick={() => keyChange(4)} color={pressedKeys[4] ? 'blue-700' : '#727777'}></Note>
             <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <Note note="F"></Note> 
+            <Note note="F" onClick={() => keyChange(5)} color={pressedKeys[5] ? 'blue-700' : '#727777'}></Note>
             <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <Note note="G"></Note> 
+            <Note note="G" onClick={() => keyChange(6)} color={pressedKeys[6] ? 'blue-700' : '#727777'}></Note>
           </div>
           {/* Divs with # and b */}
           <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
@@ -133,12 +162,6 @@ export default function Key(){
               <SharpFlat accidental="#"></SharpFlat>
               <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
               <SharpFlat accidental="b"></SharpFlat>
-              {/* <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">
-                #
-                <div className="absolute w-[100%] h-[100%] rounded-l-md"></div>
-              </div>
-              <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-              <div className="flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">b</div> */}
             </div>
           </div>
         </div>
