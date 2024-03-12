@@ -1,12 +1,12 @@
 'use client'
 import Image from "next/image";
-// import {
-//   Dropdown,
-//   DropdownTrigger,
-//   DropdownMenu,
-//   DropdownSection,
-//   DropdownItem
-// } from "@nextui-org/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  DropdownItem
+} from "@nextui-org/react";
 import Key from "./Options";
 import React, { useState } from 'react';
 
@@ -31,7 +31,7 @@ export function Dot(){
 
 export function Interval({text}){
 
-  const [color, setColor] = useState("bg-blue-700")
+  const [color, setColor] = useState("bg-[727777]")
 
   const changeState = () => {
     if ( color === "bg-blue-700" ){
@@ -43,10 +43,11 @@ export function Interval({text}){
 
   return (
     <div className="relative flex flex-row items-center h-full w-full">
-      <div className="flex justify-center items-center relative basis-3/5 h-full font-semibold">{text}</div>
+      <div className="flex justify-center items-center relative basis-3/5 h-full text-xl   font-semibold">{text}</div>
       <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={changeState}>
-        <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
-        {color === "bg-[#727777]" &&
+        {color === "bg-blue-700" ?
+          <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+          :
           <React.Fragment>
             <div className="absolute justify-center items-center w-5 h-5 bg-[#727777] rounded-full z-0"></div>
             <div className="absolute justify-center items-center w-3 h-3 bg-[#3D3D3D] rounded-full z-1"></div>
@@ -89,6 +90,28 @@ export function Intervals(){
     );
 }
 
+export function ChordsDropdown() {
+
+  return (
+    <Dropdown>
+      <DropdownTrigger>
+        <Button variant="bordered">
+          Chords
+        </Button>
+      </DropdownTrigger>
+      <DropdownMenu aria-label="Static Actions">
+        <DropdownItem key="new">New file</DropdownItem>
+        <DropdownItem key="copy">Copy link</DropdownItem>
+        <DropdownItem key="edit">Edit file</DropdownItem>
+        <DropdownItem key="delete" className="text-danger" color="danger">
+          Delete file
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
+  );
+}
+
+
 export function GridChordScale(){
   return (
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
@@ -101,7 +124,8 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert chord...</div>
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert chord...</div>
+              {/* <ChordsDropdown></ChordsDropdown> */}
             </div>
           </div>
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
@@ -113,7 +137,7 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert scale...</div>
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex items-center justify-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert scale...</div>
             </div>
           </div>
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
@@ -123,7 +147,7 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center justify-center align-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Choose tuning...</div>
+              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center justify-center items-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Choose tuning...</div>
             </div>
           </div>
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">

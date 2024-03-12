@@ -30,11 +30,6 @@ export function Note({note, onClick, color}) {
     }
   }
 
-  // for(var i = 0; i < keysPressed.length ; i++){
-  //   if((i === 0 && note === "A") || (i === 1 && note === "B") || (i === 2 && note === "C") || (i === 3  && note === "D") || (i === 4 && note === "E") || (i === 5 && note === "F") || (i === 6 && note === "G")){
-  //     changeColorNote();
-  //   }
-  // }
 
   return (
     <div className="relative basis-1/7 h-[100%] w-full items-center justify-center" onClick={changeColorNote}>
@@ -53,7 +48,7 @@ export function Note({note, onClick, color}) {
   );
 }
 
-export function SharpFlat({accidental}) {
+export function SharpFlat({accidental, onClick, color}) {
 
   const [colorNote, pressNote] = useState("[#727777]")
 
@@ -71,14 +66,14 @@ export function SharpFlat({accidental}) {
   if(accidental === "#"){
    return (
       <div className="relative flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">
-          <div className={"absolute w-full h-full rounded-l-md z-1" + ( " bg-" + colorNote)} onClick={changeColorNote}>
+          <div className={"absolute w-full h-full rounded-l-md z-1" + ( " bg-" + color)} onClick={onClick}>
             <div className="relative w-full h-full flex justify-center items-center">{accidental}</div>
           </div>
         </div>);
   }
   return (
         <div className="relative flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">
-          <div className={"absolute w-full h-full rounded-r-md z-1" + ( " bg-" + colorNote)} onClick={changeColorNote}>
+          <div className={"absolute w-full h-full rounded-r-md z-1" + ( " bg-" + color)} onClick={onClick}>
             <div className="relative w-full h-full flex justify-center items-center">{accidental}</div>
           </div>
         </div> 
@@ -117,21 +112,57 @@ export default function Key(){
 
   const [pressedKeys, setPressedKeys] = useState([false, false, false, false, false, false, false]);
 
+  const [pressedAccs, setAccidentals] = useState([false, false]);
+
   const keyChange = (index) => {
     // Create a new array to update the pressed keys
     const updatedKeys = [...pressedKeys];
-    
-    // Reset all keys to false (not pressed)
-    for (let i = 0; i < updatedKeys.length; i++) {
-      updatedKeys[i] = false;
-    }
 
-    // Set the currently pressed key to true
-    updatedKeys[index] = true;
+    if( updatedKeys[index] === true ){
+      // Reset all keys to false (not pressed)
+      for (let i = 0; i < updatedKeys.length; i++) {
+        updatedKeys[i] = false;
+      }
+
+    } else{
+      // Reset all keys to false (not pressed)
+      for (let i = 0; i < updatedKeys.length; i++) {
+        updatedKeys[i] = false;
+      }
+
+      // Set the currently pressed key to true
+      updatedKeys[index] = true;
+    }
+    
 
     // Update the state with the new array
     setPressedKeys(updatedKeys);
   };
+
+  const accidentalsChange = (idx) => {
+    // Create a new array to update the pressed keys
+    const updatedAccs = [...pressedAccs];
+
+    if( updatedAccs[idx] === true ){
+      // Reset all keys to false (not pressed)
+      for (let i = 0; i < updatedAccs.length; i++) {
+        updatedAccs[i] = false;
+      }
+
+    } else{
+      // Reset all keys to false (not pressed)
+      for (let i = 0; i < updatedAccs.length; i++) {
+        updatedAccs[i] = false;
+      }
+
+      // Set the currently pressed key to true
+      updatedAccs[idx] = true;
+    }
+    
+
+    // Update the state with the new array
+    setAccidentals(updatedAccs);
+  }
 
   return (
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
@@ -159,9 +190,9 @@ export default function Key(){
           <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
             <div className="flex basis-1/5 h-[100%]"></div>
             <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
-              <SharpFlat accidental="#"></SharpFlat>
+              <SharpFlat accidental="#" onClick={() => accidentalsChange(0)} color={pressedAccs[0] ? 'blue-700' : "#727777"}></SharpFlat>
               <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-              <SharpFlat accidental="b"></SharpFlat>
+              <SharpFlat accidental="b" onClick={() => accidentalsChange(1)} color={pressedAccs[1] ? 'blue-700' : "#727777"}></SharpFlat>
             </div>
           </div>
         </div>
