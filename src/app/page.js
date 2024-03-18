@@ -65,7 +65,7 @@ export function Intervals(){
         <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
           <div className="relative top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D]">
             <div className="flex items-center h-full w-[50%]">
-              <div className="font-medium text-2xl font-roboto mx-auto">Intervals</div>
+              <div className="font-medium text-2xl font-roboto mx-auto text-black">Intervals</div>
             </div>
             <div className="absolute left-[50%] top-0 h-[100%] w-[50%]">
               <div className="relative top-[25%] left-[25%] w-[50%] h-[40%] rounded-full bg-black"></div>
@@ -95,7 +95,7 @@ export function ChordsDropdown() {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="bordered">
+        <Button variant="bordered" className="text-black">
           Chords
         </Button>
       </DropdownTrigger>
@@ -111,13 +111,62 @@ export function ChordsDropdown() {
   );
 }
 
+export function Instrument({instrName, onChange, isActive}) {
+  // Determine the background color based on whether the instrument is active
+  const bgColor = isActive ? "bg-blue-700" : "bg-[#727777]";
+
+  return (
+        <div className="relative flex basis-1/3 items-center justify-center w-[100%] h-[100%]" onClick={onChange}>
+          {
+            instrName === "Guitar" ?
+            <div className={`absolute flex w-[100%] items-center justify-center rounded-l-md h-[100%] z-1 ${bgColor}`}>
+              <div className="relative flex items-center justify-center text-xl font-bold text-black">
+                {instrName}
+              </div>
+            </div> 
+              :
+            instrName === "Piano" ?
+            <div className={`absolute flex w-[100%] items-center justify-center rounded-r-md h-[100%] z-1 ${bgColor}`}>
+              <div className="relative flex items-center justify-center text-xl font-bold text-black">
+                {instrName}
+              </div>
+            </div> 
+              :
+            <div className={`absolute flex w-[100%] items-center justify-center h-[100%] z-1 ${bgColor}`}>
+              <div className="relative flex items-center justify-center text-xl font-bold text-black">
+                {instrName}
+              </div>
+            </div> 
+          }
+          
+        </div>
+  );
+}
+
+
 
 export function GridChordScale(){
+
+  // State to hold the name of the currently active instrument
+    const [activeInstrument, setActiveInstrument] = useState("");
+
+    // Function to handle instrument selection
+    const handleInstrumentChange = (instrumentName) => {
+      if (activeInstrument === instrumentName) {
+        // If the same instrument is clicked again, toggle it off
+        setActiveInstrument("");
+      } else {
+        // Set the new active instrument
+        setActiveInstrument(instrumentName);
+      }
+    };
+
+
   return (
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full">
-              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50%]">Chord</div>
+              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50% text-black">Chord</div>
               <div className="relative w-[50%] h-[100%]">
                 <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
                 <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
@@ -130,7 +179,7 @@ export function GridChordScale(){
           </div>
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full">
-              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50%]">Scale</div>
+              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50%] text-black">Scale</div>
               <div className="relative w-[50%] h-[100%]">
                 <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
                 <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
@@ -143,7 +192,7 @@ export function GridChordScale(){
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center justify-center h-full w-full">
-                <div className="text-2xl font-semibold font-roboto mx-auto">Tuning</div>
+                <div className="text-2xl font-semibold font-roboto mx-auto text-black">Tuning</div>
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
@@ -153,16 +202,17 @@ export function GridChordScale(){
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center justify-center h-full w-full">
-                <div className="text-2xl font-semibold font-roboto mx-auto">Instrument</div>
+                <div className="text-2xl font-semibold font-roboto mx-auto text-black">Instrument</div>
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
               <div className="relative flex w-[100%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
-                <div className="flex basis-1/3 h-[100%] items-center justify-center text-xl font-bold">Guitar</div>
+                <Instrument instrName="Guitar" onChange={() => handleInstrumentChange("Guitar")} isActive={activeInstrument === "Guitar"} />
                 <div className="w-[2%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-                <div className="flex basis-1/3 h-[100%] items-center justify-center text-xl font-bold">Bass</div>
+                <Instrument instrName="Bass" onChange={() => handleInstrumentChange("Bass")} isActive={activeInstrument === "Bass"} />
+                {/* <div className="flex basis-1/3 h-[100%] items-center justify-center text-xl font-bold text-black">Bass</div> */}
                 <div className="w-[2%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-                <div className="flex basis-1/3 h-[100%] items-center justify-center text-xl font-bold">Piano</div>              
+                <Instrument instrName="Piano" onChange={() => handleInstrumentChange("Piano")} isActive={activeInstrument === "Piano"} />
               </div>
             </div>
           </div> 
