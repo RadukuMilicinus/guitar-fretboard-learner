@@ -1,5 +1,6 @@
 'use client'
 import Image from "next/image";
+
 import {
   Dropdown,
   DropdownTrigger,
@@ -9,7 +10,8 @@ import {
   dropdown
 } from "@nextui-org/react";
 import Key from "./Options";
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
+import {Scale, Interval, Note, Chord} from "tonal";
 
 export function Fret() {
   return (
@@ -29,9 +31,16 @@ export function Dot(){
   );
 }
 
-export function Interval({text}){
+export function Intervals(items){
 
   const [color, setColor] = useState("bg-[727777]")
+
+  useEffect(() => {
+    // This function will be called every time `switchVal` changes.
+    if (!items.switchVal) {
+      setColor("bg-[#727777]");
+    }
+  }, [items.switchVal]); // Dependency array, ensures effect runs only if switchVal changes.
 
   const changeState = () => {
     if ( color === "bg-blue-700" ){
@@ -41,11 +50,12 @@ export function Interval({text}){
     }
   }
 
+
   return (
     <div className="relative flex flex-row items-center h-full w-full">
-      <div className="flex justify-center items-center relative basis-3/5 h-full text-xl   font-semibold">{text}</div>
+      <div className="flex justify-center items-center relative basis-3/5 h-full text-xl   font-semibold">{items.text}</div>
       <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={changeState}>
-        {color === "bg-blue-700" ?
+        {color === "bg-blue-700" && items.switchVal ?
           <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
           :
           <React.Fragment>
@@ -73,7 +83,7 @@ export function Switch(items){
 
 
 
-export function Intervals(){
+export function Intervs(){
 
     const [switchVal, setSwitchVal] = useState(false);
 
@@ -96,18 +106,18 @@ export function Intervals(){
             </div>
           </div>
           <div className="relative grid grid-cols-3 top-0 left-0 h-[70%] w-[100%] bg-[#3D3D3D]">
-            <Interval text="Root"></Interval>
-            <Interval text="3"></Interval>
-            <Interval text="#5/b6"></Interval>
-            <Interval text="b2"></Interval>
-            <Interval text="4"></Interval>
-            <Interval text="6"></Interval>
-            <Interval text="2"></Interval>
-            <Interval text="#4/b5"></Interval>
-            <Interval text="b7"></Interval>
-            <Interval text="b3"></Interval>
-            <Interval text="5"></Interval>
-            <Interval text="7"></Interval>
+            <Intervals text="Root" switchVal={switchVal}></Intervals>
+            <Intervals text="3" switchVal={switchVal}></Intervals>
+            <Intervals text="#5/b6" switchVal={switchVal}></Intervals>
+            <Intervals text="b2" switchVal={switchVal}></Intervals>
+            <Intervals text="4" switchVal={switchVal}></Intervals>
+            <Intervals text="6" switchVal={switchVal} ></Intervals>
+            <Intervals text="2" switchVal={switchVal}></Intervals>
+            <Intervals text="#4/b5" switchVal={switchVal}></Intervals>
+            <Intervals text="b7" switchVal={switchVal}></Intervals>
+            <Intervals text="b3" switchVal={switchVal}></Intervals>
+            <Intervals text="5" switchVal={switchVal}></Intervals>
+            <Intervals text="7" switchVal={switchVal}></Intervals>
           </div>
         </div> 
     );
@@ -404,12 +414,59 @@ export function Options(){
           </div>  
           <div className="relative col-span-3"></div>  
         </div>
-        <Intervals> </Intervals>
+        <Intervs> </Intervs>
       </div>
     );
 }
 
+function scaleHasNote(scale, note) {
+  for (let i = 0 ; i < scale.length ; i++){
+    if( scale[i] == note ){
+      return true;
+    }
+  }
+  return false;
+}
 
+export function String(items){
+  
+  var scale = items.scale;
+  var index = items.index;
+  var strNr = items.strNr;
+
+  var fretboard = [['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'], 
+                   ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'], 
+                   ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'], 
+                   ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', ,'D#', 'E', 'F', 'F#', 'G'], 
+                   ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], 
+                   ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E']]
+
+
+  
+  var notesString = fretboard[strNr - 1]
+
+  return (
+    <div className="relative top-0 left-0 flex flex-row justify-evenly w-full h-full">
+      {
+        notesString.map((note, idx) => 
+          <div className="relative flex justify-center items-center top-0 left-0 basis-1/12 h-full">
+            {idx > 0 && strNr < 6 && <div className="absolute left-[-2px] top-[-25%] h-[250%] w-[6px] bg-slate-500"></div>}
+            {strNr === 6 && idx > 0 &&  <div className="absolute left-[-2px] top-[-25%] h-[140%] w-[6px] bg-slate-500"></div>}
+            { 
+              scaleHasNote(scale, note) ?
+                <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note}</div>
+                :
+                  <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+            }
+          </div>
+        )         
+      }
+      {/* {[...Array(notesString.length - 1)].map((_, idx) => (
+        <div key={idx} className={`absolute top-0 h-full w-[1%] bg-[#4A4A4A] ${idx === 0 ? 'left-0' : ''}`} style={{ left: `${(100 / 12) * (idx + 1)}%` }}></div>
+      ))} */}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -421,7 +478,7 @@ export default function Home() {
 
       </div> 
       <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
-        <div className="string1"></div>
+        <div className="absolute top-[5%] left-0 w-[100%] h-[2%] bg-[#D9D9D9] z-1"></div>
         <div className="string2"></div>
         <div className="string3"></div>
         <div className="string4"></div>
@@ -430,13 +487,32 @@ export default function Home() {
       </div>
       <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
+        <div className="absolute top-[2%] left-0 w-full h-[8%] ">
+          <String scale={Scale.get("C major").notes} strNr={1}></String>
+        </div>
         <div className="string2"></div>
+        <div className="absolute top-[20%] left-0 w-full h-[8%]">
+          <String scale={Scale.get("C major").notes} strNr={2}></String>
+        </div>
         <div className="string3"></div>
+        <div className="absolute top-[38%] left-0 w-full h-[8%]">
+          <String scale={Scale.get("C major").notes} strNr={3}></String>
+        </div>
         <div className="string4"></div>
+        <div className="absolute top-[56%] left-0 w-full h-[8%]">
+          <String scale={Scale.get("C major").notes} strNr={4}></String>
+        </div>
         <div className="string5"></div>
+        <div className="absolute top-[74%] left-0 w-full h-[8%]">
+          <String scale={Scale.get("C major").notes} strNr={5}></String>
+        </div>
         <div className="string6"></div>
+        <div className="absolute top-[91%] left-0 w-full h-[8%]">
+          <String scale={Scale.get("C major").notes} strNr={6}></String>
+        </div>
 
         <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
+          {/* <Fret></Fret>
           <Fret></Fret>
           <Fret></Fret>
           <Fret></Fret>
@@ -446,8 +522,7 @@ export default function Home() {
           <Fret></Fret>
           <Fret></Fret>
           <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
+          <Fret></Fret> */}
         </div>
 
         {/* <div className="absolute top-[46.5%] left-[27.5%] w-6 h-6"> 
