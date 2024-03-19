@@ -120,35 +120,35 @@ export function SharpFlat({accidental, onClick, color}) {
   );
 }
 
-export function NoteRep({text}){
-  
-  const [color, setColor] = useState("bg-[#727777]")
+export function NoteRep({text, changeRep, noteRep}){
+  // Determine the className based on the noteRep prop.
+  const className = noteRep
+    ? "bg-blue-700" // Active state
+    : "bg-[#727777]"; // Inactive state with gray background
 
-  const changeState = () => {
-    if ( color === "bg-blue-700" ){
-      setColor("bg-[#727777]")
-    } else {
-      setColor("bg-blue-700")
-    }
-  }
+  const handleClick = () => {
+    changeRep(); // Call the function passed from the parent to change the representation
+  };
 
   return (
-    <div className="relative flex flex-row items-center h-full w-full">
-      <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-semibold text-2xl">{text}</div>
-      <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={changeState}>
-        <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
-        {color === "bg-[#727777]" &&
-          <React.Fragment>
-            <div className="absolute justify-center items-center w-5 h-5 bg-[#727777] rounded-full z-0"></div>
-            <div className="absolute justify-center items-center w-3 h-3 bg-[#3D3D3D] rounded-full z-1"></div>
-          </React.Fragment>
-        }
+    <div className="relative flex flex-row items-center h-full w-full cursor-pointer" onClick={handleClick}>
+      <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-semibold text-2xl">
+        {text}
+      </div>
+      <div className="relative basis-2/5 h-full flex justify-center items-center">
+        <div className={`relative rounded-full w-5 h-5 ${className} flex justify-center items-center`}>
+          {!noteRep && (
+            <React.Fragment>
+              {/* These elements are only shown when noteRep is false (inactive) */}
+              <div className="absolute rounded-full w-5 h-5 bg-[#727777]"></div>
+              <div className="absolute rounded-full w-3 h-3 bg-[#3D3D3D]"></div>
+            </React.Fragment>
+          )}
+        </div>
       </div>
     </div>
   );
 }
-
-
 
 export default function Key(){
 
@@ -206,6 +206,20 @@ export default function Key(){
     setAccidentals(updatedAccs);
   }
 
+  // if one is switched, transmit switch to parent so that the switch is implemented in the sibing
+  const [noteRep, changeNoteRep] = useState([false, false])
+
+  const changeNotesRep = (idx) => {
+    // Create a new state array where all values are set to false
+    const updatedNoteReps = noteRep.map(() => false);
+
+    // Set the clicked button to true, toggling it on, and ensuring the other is off
+    updatedNoteReps[idx] = !noteRep[idx];
+
+    // Update the state with the new array
+    changeNoteRep(updatedNoteReps);
+  }
+
 
   return (
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
@@ -213,18 +227,8 @@ export default function Key(){
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
         <div className="flex h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
-          <NoteRep text="Intervals"></NoteRep>
-          {/* <div className="relative flex flex-row w-1/2 h-full">
-            <div className="flex basis-4/5 h-full font-semibold text-2xl text-black justify-center items-center">
-              Intervals
-            </div>
-            <div className="flex basis-1/5 h-[100%] justify-center items-center relative">
-              <div className="flex absolute justify-center items-center w-6 h-6 bg-[#727777] rounded-full z-0"></div>
-              <div className="flex absolute justify-center items-center w-4 h-4 bg-[#3D3D3D] rounded-full z-1"></div>
-            </div>
-          </div> */}
-          <NoteRep text="Note name"></NoteRep>
-          {/* Your content for the second part */}
+          <NoteRep text="Intervals" changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]}></NoteRep>
+          <NoteRep text="Note name" changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]}></NoteRep>
         </div>
       </div>
     </div>

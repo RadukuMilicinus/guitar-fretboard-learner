@@ -5,7 +5,8 @@ import {
   DropdownTrigger,
   DropdownMenu,
   DropdownSection,
-  DropdownItem
+  DropdownItem,
+  dropdown
 } from "@nextui-org/react";
 import Key from "./Options";
 import React, { useState } from 'react';
@@ -27,7 +28,6 @@ export function Dot(){
     <div className="absolute left-[70%] top-1/2 transform -translate-y-1/2 w- h-3 rounded-full bg-red-600 border-black border-2"></div>
   );
 }
-
 
 export function Interval({text}){
 
@@ -144,8 +144,47 @@ export function Instrument({instrName, onChange, isActive}) {
 }
 
 
+export function DropdownChord(){
+
+  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus4']
+
+  return (
+   <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar max-h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
+      {chordNames.map((chord, index) => (
+          <div key={index} className="relative flex justify-center align-middle items-center w-full h-1/5 text-black text-2xl hover:bg-gray-200 cursor-pointer z-auto">
+            {chord}
+          </div> 
+      ))}
+    </div>
+  );
+}
+
 
 export function GridChordScale(){
+
+    const [dropDownChord, setDropDown] = useState(false);
+
+    const changeDropDownState = () => {
+      setDropDown(!dropDownChord)
+    }
+
+
+
+    const [chordPressed, setPressedChord] = [false, false, false, false, false, false];
+
+    const changePressedChord = (index) => {
+      previousChords = [...chordPressed]
+
+
+      if( previousChords[index] === false ){
+        previousChords = previousChords.map((chord) => {chord = false;})
+        previousChords[index] = true
+      } else previousChords = previousChords.map((chord) => {chord = false;})
+      
+      setPressedChord(previousChords)
+    }
+
+
 
   // State to hold the name of the currently active instrument
     const [activeInstrument, setActiveInstrument] = useState("");
@@ -162,6 +201,8 @@ export function GridChordScale(){
     };
 
 
+  
+
   return (
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
@@ -172,25 +213,30 @@ export function GridChordScale(){
                 <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
               </div>
             </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert chord...</div>
+            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={changeDropDownState}>
+                {
+                 dropDownChord && <DropdownChord>Insert chord...</DropdownChord>
+              
+                }
+              </div>
               {/* <ChordsDropdown></ChordsDropdown> */}
             </div>
           </div>
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
-            <div className="absolute flex flex-row items-center justify-center h-[50%] w-full">
+            <div className="absolute flex flex-row items-center justify-center h-[50%] w-full z-0">
               <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50%] text-black">Scale</div>
               <div className="relative w-[50%] h-[100%]">
                 <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
                 <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
               </div>
             </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
+            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-0">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex items-center justify-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert scale...</div>
             </div>
           </div>
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
-            <div className="absolute left-0 top-0 h-[50%] w-full">
+            <div className="absolute left-0 top-0 h-[50%] w-full z-0">
               <div className="flex items-center justify-center h-full w-full">
                 <div className="text-2xl font-semibold font-roboto mx-auto text-black">Tuning</div>
               </div>
