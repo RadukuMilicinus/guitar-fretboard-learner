@@ -58,18 +58,41 @@ export function Interval({text}){
   );
 }
 
+export function Switch(items){
+  // Determine the classes for left position
+  const leftClass = items.switchVal ? 'left-[45%]': 'left-[5%]';
+  // Determine the classes for background color
+  const bgColorClass = items.switchVal ? 'bg-blue-700' : 'bg-[#cb2a2a]';
+
+  return (
+    <div className={`absolute top-[10%] w-[50%] max-h-[80%] h-[80%] rounded-full ${leftClass} ${bgColorClass} z-2`} 
+         onClick={items.changeSwitch}>
+    </div>
+  );
+}
+
 
 
 export function Intervals(){
+
+    const [switchVal, setSwitchVal] = useState(false);
+
+    const changeSwitch = () => {
+      setSwitchVal(!switchVal);
+      console.log("Switch value has been changed to", switchVal);
+    }
+
     return (
         <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
-          <div className="relative top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D]">
-            <div className="flex items-center h-full w-[50%]">
-              <div className="font-medium text-2xl font-roboto mx-auto text-black">Intervals</div>
+          <div className="relative flex flex-row items-center justify-center top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D]">
+            <div className="flex items-center h-full w-[50%] basis-1/2">
+              <div className="text-3xl font-semibold font-roboto mx-auto text-black">Intervals</div>
             </div>
-            <div className="absolute left-[50%] top-0 h-[100%] w-[50%]">
-              <div className="relative top-[25%] left-[25%] w-[50%] h-[40%] rounded-full bg-black"></div>
-              <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div>
+            <div className="flex basis-1/2 left-[50%] items-center justify-center top-0 h-[100%] w-[50%]">
+              <div className="relative w-[50%] h-[40%] rounded-full bg-black z-0" onClick={() => changeSwitch()}>
+                <Switch switchVal={switchVal} changeSwitch={changeSwitch}></Switch>
+              </div>
+              {/* <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div> */}
             </div>
           </div>
           <div className="relative grid grid-cols-3 top-0 left-0 h-[70%] w-[100%] bg-[#3D3D3D]">
@@ -274,17 +297,16 @@ export function GridChordScale(){
     };
 
 
+  ///////////////////////////////////////////////////////
+  //          SET CHORD 
+  //
   
 
   return (
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full">
-              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50% text-black">Chord</div>
-              <div className="relative w-[50%] h-[100%]">
-                <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
-                <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
-              </div>
+              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Chord</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownChord}>
@@ -306,11 +328,7 @@ export function GridChordScale(){
           </div>
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full z-0">
-              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[50%] text-black">Scale</div>
-              <div className="relative w-[50%] h-[100%]">
-                <div className="relative top-[25%] left-[25%] w-[50%] h-[50%] rounded-full bg-black"></div>
-                <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
-              </div>
+              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Scale</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex items-center justify-center text-opacity-70 font-medium  text-black bg-[#727777] rounded-lg" onClick={changeDropDownScale}>
