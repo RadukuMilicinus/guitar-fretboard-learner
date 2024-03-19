@@ -152,7 +152,7 @@ export function DropdownChord(items){
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
       {chordNames.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedChord(index)}>
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] font-medium text-opacity-70 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedChord(index)}>
             {chord}
           </div> 
       ))}
@@ -163,12 +163,27 @@ export function DropdownChord(items){
 export function DropdownScale(items){
 
 
-  const chordNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
+  const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
 
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
-      {chordNames.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-80 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
+      {scaleNames.map((chord, index) => (
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
+            {chord}
+          </div> 
+      ))}
+    </div>
+  );
+}
+
+export function DropdownTuning(items){
+
+  const tunings = ['E standard', 'D standard', 'C standard', 'Drop D', 'Drop A - 7 string', 'B standard - 7 string']
+
+  return (
+   <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
+      {tunings.map((chord, index) => (
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedTuning(index)}>
             {chord}
           </div> 
       ))}
@@ -179,13 +194,17 @@ export function DropdownScale(items){
 
 export function GridChordScale(){
 
+
+
+    //////////////////////////////////////
+    //          Chord dropdown          //                        
+    //////////////////////////////////////
+    
     const [dropDownChord, setDropDown] = useState(false);
 
-    const changeDropDownState = () => {
+    const changeDropDownChord = () => {
       setDropDown(!dropDownChord)
     }
-
-
 
     const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus 4']
     const [indexChordPressed, setIndexChordPressed] = useState(-1);
@@ -197,6 +216,10 @@ export function GridChordScale(){
 
     }
     
+    //////////////////////////////////////
+    //          Scale dropdown          //                        
+    //////////////////////////////////////
+
     const [dropDownScale, setDropDownScale] = useState(false);
 
     const changeDropDownScale = () => {
@@ -207,11 +230,32 @@ export function GridChordScale(){
     const [indexScalePressed, setIndexScalePressed] = useState(-1);
 
     const setScalePressed = (index) => {
-      console.log("chord %s has been chosen with index %d", chordNames[index], index);
+      console.log("scale %s has been chosen with index %d", scaleNames[index], index);
       setIndexScalePressed(index);
-      console.log("chord %s WITH INDEX %d has been chosen", chordNames[index], indexChordPressed);
+      console.log("scale %s WITH INDEX %d has been chosen", scaleNames[index], indexScalePressed);
 
     }
+
+    //////////////////////////////////////
+    //          Tuning dropdown         //                        
+    //////////////////////////////////////
+
+    const [dropDownTuning, setDropDownTuning] = useState(false);
+
+    const changeDropDownTuning = () => {
+      setDropDownTuning(!dropDownTuning)
+    }
+    
+    const tunings = ['E standard', 'D standard', 'C standard', 'Drop D', 'Drop A - 7 string', 'B standard - 7 string']
+    const [indexTuningPressed, setIndexTuningPressed] = useState(-1);
+
+    const setTuningPressed = (index) => {
+      console.log("tuning %s has been chosen with index %d", tunings[index], index);
+      setIndexTuningPressed(index);
+      console.log("tuning %s WITH INDEX %d has been chosen", tunings[index], indexTuningPressed);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -243,7 +287,7 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownState}>
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownChord}>
                 { dropDownChord ? 
                   (
                     <DropdownChord setPressedChord={setChordPressed} />
@@ -274,7 +318,7 @@ export function GridChordScale(){
                   (
                     <DropdownScale setPressedScale={setScalePressed} />
                   ) : indexScalePressed > -1 ? 
-                  
+
                   (
                     <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
                       {scaleNames[indexScalePressed]}
@@ -292,7 +336,21 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center justify-center items-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Choose tuning...</div>
+              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={changeDropDownTuning}>
+                { dropDownTuning ? 
+                  (
+                    <DropdownTuning setPressedTuning={setTuningPressed} />
+                  ) : indexTuningPressed > -1 ? 
+                  
+                  (
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
+                      {tunings[indexTuningPressed]}
+                    </div>
+                  ) : (
+                      "Choose tuning..." // Placeholder text when no chord is selected
+                )}
+
+              </div>
             </div>
           </div>
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
