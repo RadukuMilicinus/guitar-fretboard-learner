@@ -144,14 +144,31 @@ export function Instrument({instrName, onChange, isActive}) {
 }
 
 
-export function DropdownChord(){
+export function DropdownChord(items){
+
 
   const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus4']
 
   return (
-   <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar max-h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
+   <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
       {chordNames.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full h-1/5 text-black text-2xl hover:bg-gray-200 cursor-pointer z-auto">
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedChord(index)}>
+            {chord}
+          </div> 
+      ))}
+    </div>
+  );
+}
+
+export function DropdownScale(items){
+
+
+  const chordNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
+
+  return (
+   <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
+      {chordNames.map((chord, index) => (
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-80 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
             {chord}
           </div> 
       ))}
@@ -170,18 +187,30 @@ export function GridChordScale(){
 
 
 
-    const [chordPressed, setPressedChord] = [false, false, false, false, false, false];
+    const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus 4']
+    const [indexChordPressed, setIndexChordPressed] = useState(-1);
 
-    const changePressedChord = (index) => {
-      previousChords = [...chordPressed]
+    const setChordPressed = (index) => {
+      console.log("chord %s has been chosen with index %d", chordNames[index], index);
+      setIndexChordPressed(index);
+      console.log("chord %s WITH INDEX %d has been chosen", chordNames[index], indexChordPressed);
 
+    }
+    
+    const [dropDownScale, setDropDownScale] = useState(false);
 
-      if( previousChords[index] === false ){
-        previousChords = previousChords.map((chord) => {chord = false;})
-        previousChords[index] = true
-      } else previousChords = previousChords.map((chord) => {chord = false;})
-      
-      setPressedChord(previousChords)
+    const changeDropDownScale = () => {
+      setDropDownScale(!dropDownScale)
+    }
+    
+    const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
+    const [indexScalePressed, setIndexScalePressed] = useState(-1);
+
+    const setScalePressed = (index) => {
+      console.log("chord %s has been chosen with index %d", chordNames[index], index);
+      setIndexScalePressed(index);
+      console.log("chord %s WITH INDEX %d has been chosen", chordNames[index], indexChordPressed);
+
     }
 
 
@@ -214,11 +243,19 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={changeDropDownState}>
-                {
-                 dropDownChord && <DropdownChord>Insert chord...</DropdownChord>
-              
-                }
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownState}>
+                { dropDownChord ? 
+                  (
+                    <DropdownChord setPressedChord={setChordPressed} />
+                  ) : indexChordPressed > -1 ? 
+                  
+                  (
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
+                      {chordNames[indexChordPressed]}
+                    </div>
+                  ) : (
+                      "Select a chord..." // Placeholder text when no chord is selected
+                )}
               </div>
               {/* <ChordsDropdown></ChordsDropdown> */}
             </div>
@@ -231,8 +268,21 @@ export function GridChordScale(){
                 <div className="absolute top-[15%] left-[20%] w-[30%] h-[70%] rounded-full bg-[#cb2a2a]"></div>
               </div>
             </div>
-            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-0">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex items-center justify-center text-opacity-50 text-black bg-[#727777] rounded-lg" onClick={null}>Insert scale...</div>
+            <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex items-center justify-center text-opacity-70 font-medium  text-black bg-[#727777] rounded-lg" onClick={changeDropDownScale}>
+                { dropDownScale ? 
+                  (
+                    <DropdownScale setPressedScale={setScalePressed} />
+                  ) : indexScalePressed > -1 ? 
+                  
+                  (
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
+                      {scaleNames[indexScalePressed]}
+                    </div>
+                  ) : (
+                      "Choose scale..." // Placeholder text when no chord is selected
+                )}
+              </div>
             </div>
           </div>
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
