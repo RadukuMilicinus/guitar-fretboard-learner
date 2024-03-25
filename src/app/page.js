@@ -10,7 +10,7 @@ import {
   dropdown
 } from "@nextui-org/react";
 import Key from "./Options";
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useRef } from 'react';
 import {Scale, Interval, Note, Chord} from "tonal";
 
 export function Fret() {
@@ -311,7 +311,6 @@ export function GridChordScale(){
   //          SET CHORD 
   //
   
-
   return (
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
@@ -319,7 +318,7 @@ export function GridChordScale(){
               <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Chord</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownChord}>
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-xl text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownChord}>
                 { dropDownChord ? 
                   (
                     <DropdownChord setPressedChord={setChordPressed} />
@@ -341,7 +340,7 @@ export function GridChordScale(){
               <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Scale</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
-              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center flex items-center justify-center text-opacity-70 font-medium  text-black bg-[#727777] rounded-lg" onClick={changeDropDownScale}>
+              <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-xl flex items-center justify-center text-opacity-70 font-medium  text-black bg-[#727777] rounded-lg" onClick={changeDropDownScale}>
                 { dropDownScale ? 
                   (
                     <DropdownScale setPressedScale={setScalePressed} />
@@ -364,7 +363,7 @@ export function GridChordScale(){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={changeDropDownTuning}>
+              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-xl justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={changeDropDownTuning}>
                 { dropDownTuning ? 
                   (
                     <DropdownTuning setPressedTuning={setTuningPressed} />
@@ -402,12 +401,12 @@ export function GridChordScale(){
   );
 }
 
-export function Options(){
+export function Options(items){
     return (
       <div className="relative top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
-            <Key></Key>
+            <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAcc={items.changeAcc}></Key>
           </div>  
           <div className="relative col-span-4">
             <GridChordScale></GridChordScale>
@@ -433,17 +432,47 @@ export function String(items){
   var scale = items.scale;
   var index = items.index;
   var strNr = items.strNr;
-
-  var fretboard = [['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'], 
-                   ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'], 
-                   ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'], 
-                   ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', ,'D#', 'E', 'F', 'F#', 'G'], 
-                   ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], 
-                   ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E']]
-
-
+  var key = items.keyChosen;
+  var accidental = items.accidental;
   
-  var notesString = fretboard[strNr - 1]
+  const [notesString, setNotesString] = useState([]);
+    
+  // const fretboardGeneric = [
+  //     ['F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E'], 
+  //     ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'], 
+  //     ['Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G'], 
+  //     ['D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D'], 
+  //     ['A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A'], 
+  //     ['F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E']
+  // ];
+
+  // const notesString = fretboardGeneric[strNr - 1];
+
+  useEffect(() => {
+    const fretboard = [
+      ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'], 
+      ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'], 
+      ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'], 
+      ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'], 
+      ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'], 
+      ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E']
+    ];
+
+    const fretboard2 = [
+      ['F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E'], 
+      ['C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B'], 
+      ['Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G'], 
+      ['D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D'], 
+      ['A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G', 'G#/Ab', 'A'], 
+      ['F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E']
+    ];
+
+    // Determine which fretboard to use based on the accidental
+    const selectedFretboard = items.accidental === "#" || items.accidental === "" ? fretboard : fretboard2;
+
+    // Set the notes string based on the selected fretboard and string number
+    setNotesString(selectedFretboard[items.strNr - 1]);
+  }, [items.accidental, items.strNr]);
 
   return (
     <div className="relative top-0 left-0 flex flex-row justify-evenly w-full h-full">
@@ -453,8 +482,13 @@ export function String(items){
             {idx > 0 && strNr < 6 && <div className="absolute left-[-2px] top-[-25%] h-[250%] w-[6px] bg-slate-500"></div>}
             {strNr === 6 && idx > 0 &&  <div className="absolute left-[-2px] top-[-25%] h-[140%] w-[6px] bg-slate-500"></div>}
             { 
-              scaleHasNote(scale, note) ?
-                <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note}</div>
+              scaleHasNote(scale, note + items.accidental) ?
+                (
+                  (note === items.keyChosen) ?
+                  <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note}</div>
+                :
+                  <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note}</div>
+                )
                 :
                   <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
             }
@@ -469,10 +503,40 @@ export function String(items){
 }
 
 export default function Home() {
+
+  const [keyChosen, setKey] = useState("C") // initially set to null 
+  const [accidental, setAccidental] = useState("") // initially set to null 
+  const [tuning, setTuning] = useState("") // initially set to null 
+  const [chord, setChord] = useState("") // initially set to null 
+  const [scale, setScale] = useState("") // initially set to null 
+
+  const changeKey = (keyName) => {
+    setKey(keyName)
+    console.log("Key = %s", keyName)
+  }
+  
+  const changeAccidental = (accidental) => {
+    setAccidental(accidental)
+    console.log("Accidental = %s", accidental)
+  }
+
+  const changeTuning = (newTuning) => {
+    setTuning(newTuning)
+  }
+  
+  const changeChord = (newChord) => {
+    setChord(newChord)
+  }
+  
+  const changeScale = (newScale) => {
+    setScale(newScale)
+  }
+
+
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
 
-      <Options></Options>
+      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chord} change_scale={changeScale} scale={scale}></Options>
 
       <div className="absolute top-[55%] left-[6%] w-[80%] h-[30%]">
 
@@ -488,27 +552,27 @@ export default function Home() {
       <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
         <div className="absolute top-[2%] left-0 w-full h-[8%] ">
-          <String scale={Scale.get("C major").notes} strNr={1}></String>
+          <String scale={Scale.get(keyChosen + accidental + " major").notes} keyChosen={keyChosen} accidental={accidental} strNr={1}></String>
         </div>
         <div className="string2"></div>
         <div className="absolute top-[20%] left-0 w-full h-[8%]">
-          <String scale={Scale.get("C major").notes} strNr={2}></String>
+          <String scale={Scale.get(keyChosen + accidental + " major").notes} keyChosen={keyChosen} accidental={accidental} strNr={2}></String>
         </div>
         <div className="string3"></div>
         <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String scale={Scale.get("C major").notes} strNr={3}></String>
+          <String scale={Scale.get( keyChosen + accidental + " major" ).notes} keyChosen={keyChosen} accidental={accidental} strNr={3}></String>
         </div>
         <div className="string4"></div>
         <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String scale={Scale.get("C major").notes} strNr={4}></String>
+          <String scale={Scale.get( keyChosen + accidental + " major" ).notes} keyChosen={keyChosen} accidental={accidental} strNr={4}></String>
         </div>
         <div className="string5"></div>
         <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String scale={Scale.get("C major").notes} strNr={5}></String>
+          <String scale={Scale.get( keyChosen + accidental + " major" ).notes} keyChosen={keyChosen} accidental={accidental} strNr={5}></String>
         </div>
         <div className="string6"></div>
         <div className="absolute top-[91%] left-0 w-full h-[8%]">
-          <String scale={Scale.get("C major").notes} strNr={6}></String>
+          <String scale={Scale.get( keyChosen + accidental + " major" ).notes} keyChosen={keyChosen} accidental={accidental} strNr={6}></String>
         </div>
 
         <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">

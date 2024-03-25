@@ -17,3 +17,6 @@ console.log(Ddim);
   
 var notesString = fretboard[2]
 console.log(notesString)
+
+var DbMaj = Scale.get("Db major").notes
+console.log(DbMaj)

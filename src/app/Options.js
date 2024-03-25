@@ -11,6 +11,9 @@ import React, { useState } from 'react';
 
 export function Keys({pressedKeys, pressedAccs, keyChange, accidentalsChange}){
   
+
+
+  
     return (
 
         <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
@@ -74,13 +77,13 @@ export function Note({note, onClick, color}) {
   return (
     <div className="relative basis-1/7 h-[100%] w-full items-center justify-center" onClick={changeColorNote}>
       {note === "A" ?
-      <div className={"absolute w-[100%] h-full z-1 rounded-l-md" + (" bg-" + color)} onClick={onClick}>
+      <div className={`absolute w-[100%] h-full z-1 rounded-l-md bg-${color}`} onClick={onClick}>
         <div className="relative flex text-xl font-bold justify-center items-center">{note}</div>
       </div> : note === "G" ? 
-      <div className={"absolute w-[100%] h-full z-1 rounded-r-md" + (" bg-" + color)} onClick={onClick}>
+      <div className={`absolute w-[100%] h-full z-1 rounded-r-md bg-${color}`} onClick={onClick}>
         <div className="relative flex text-xl font-bold justify-center items-center">{note}</div>
       </div> : 
-        <div className={"absolute w-[100%] h-full z-1" + (" bg-" + color)} onClick={onClick}>
+        <div className={`absolute w-[100%] h-full z-1 bg-${color}`} onClick={onClick}>
           <div className="relative flex text-xl font-bold justify-center items-center">{note}</div>
         </div>      
     },
@@ -150,7 +153,7 @@ export function NoteRep({text, changeRep, noteRep}){
   );
 }
 
-export default function Key(){
+export default function Key(items){
 
   const [pressedKeys, setPressedKeys] = useState([false, false, false, false, false, false, false]);
 
@@ -175,8 +178,10 @@ export default function Key(){
       // Set the currently pressed key to true
       updatedKeys[index] = true;
     }
-    
 
+    const Keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    items.changeKey(Keys[index])
+    
     // Update the state with the new array
     setPressedKeys(updatedKeys);
   };
@@ -190,8 +195,11 @@ export default function Key(){
       for (let i = 0; i < updatedAccs.length; i++) {
         updatedAccs[i] = false;
       }
-
+      items.changeAcc('')
     } else{
+      
+      const Accs = ['#', 'b']
+
       // Reset all keys to false (not pressed)
       for (let i = 0; i < updatedAccs.length; i++) {
         updatedAccs[i] = false;
@@ -199,7 +207,9 @@ export default function Key(){
 
       // Set the currently pressed key to true
       updatedAccs[idx] = true;
+      items.changeAcc(Accs[idx])
     }
+    
     
 
     // Update the state with the new array
