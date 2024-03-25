@@ -20,3 +20,6 @@ console.log(notesString)
 
 var DbMaj = Scale.get("Db major").notes
 console.log(DbMaj)
+
+var s = "D"
+console.log(s.split("/"))
