@@ -23,3 +23,14 @@ console.log(DbMaj)
 
 var s = "D"
 console.log(s.split("/"))
+
+var CmajPent = Scale.get("C major pentatonic").notes
+console.log(CmajPent)
+
+console.log("Major Pentatonic".toLowerCase())
+
+var CmajSeven = Chord.get("C maj7").notes
+console.log("Cmaj7: %s", CmajSeven)
+
+var Csus2 = Chord.get("C sus2").notes
+console.log("Csus2: %s", Csus2)

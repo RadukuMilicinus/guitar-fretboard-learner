@@ -224,7 +224,9 @@ export function DropdownTuning(items){
   );
 }
 
-
+//////////////////////////////
+// Used in Options
+///////////////////////////////
 export function GridChordScale(items){
 
 
@@ -250,6 +252,7 @@ export function GridChordScale(items){
     const [indexScalePressed, setIndexScalePressed] = useState(-1);
 
     const setChordPressed = (index) => {
+      console.log("============== START SET CHORD PRESSED =============== ")
       console.log("chord %s has been chosen with index %d", chordNames[index], index);
       setIndexChordPressed(index);
       console.log("chord %s WITH INDEX %d has been chosen", chordNames[index], indexChordPressed);
@@ -259,6 +262,8 @@ export function GridChordScale(items){
       }
       setIndexScalePressed(-1);
       items.changeScaleType('')
+      console.log("chord has been chosen and scale set to ''")
+      console.log("=========== END SET CHORD PRESSED =================== ")
     }
     
     //////////////////////////////////////
@@ -269,6 +274,7 @@ export function GridChordScale(items){
     const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
 
     const setScalePressed = (index) => {
+      console.log("============== START SET SCALE PRESSED ========= ")
       console.log("scale %s has been chosen with index %d", scaleNames[index], index);
       setIndexScalePressed(index);
       console.log("scale %s WITH INDEX %d has been chosen", scaleNames[index], indexScalePressed);
@@ -278,6 +284,8 @@ export function GridChordScale(items){
       }
       setIndexChordPressed(-1)
       items.changeChordType('')
+      console.log("scale has been chosen and chord set to ''")
+      console.log("=========== END SET SCALE PRESSED ========= ")
     }
 
     //////////////////////////////////////
@@ -464,12 +472,15 @@ export function String(items){
   const [scale, chScale] = useState(sc);
 
   useEffect(() => {
-    chScale(sc)
-  }, [sc])
-  
-  useEffect(() => {
-    chScale(chord)
-  }, [chord])
+    if(sc.length === 0){   // check if length of scale is equal to 0, then choose chord
+      chScale(chord)
+    } else {             // chord is empty
+      chScale(sc)
+    }
+    console.log("Scale changed to = %s for string", sc)
+  }, [sc, chord])
+
+  // commenting this allows scale to be changed
 
   return (
     <div className="relative top-0 left-0 flex flex-row justify-evenly w-full h-full">
@@ -514,6 +525,19 @@ export function String(items){
       }
     </div>
   );
+}
+
+function changeName(chordType){
+
+  if(chordType == "major 7"){
+    return "maj7"
+  } else if(chordType == "minor 7"){
+    return "min7"
+  } else if(chordType == "Sus 2"){
+    return "sus2"
+  } else if(chordType == "Sus 4"){
+    return "sus4"
+  } else return chordType
 }
 
 export default function Home() {
@@ -572,14 +596,13 @@ export default function Home() {
   //   // for logic you need to define based on how these properties relate in your application.
   // };
 
+
   useEffect(() => {
     console.log("Chord type in Home updated to:", chordType);
-    setScale('')
   }, [chordType]);
 
   useEffect(() => {
     console.log("Scale type in Home updated to:", scale);
-    setChord('')
   }, [scale]);
 
   return (
@@ -599,28 +622,28 @@ export default function Home() {
       <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
         <div className="absolute top-[2%] left-0 w-full h-[8%] ">
-          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={1}></String> 
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1}></String>
           {/* noteRepresentation next !!! */}
         </div>
         <div className="string2"></div>
         <div className="absolute top-[20%] left-0 w-full h-[8%]">
-          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={2}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2}></String>
         </div>
         <div className="string3"></div>
         <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={3}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3}></String>
         </div>
         <div className="string4"></div>
         <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={4}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4}></String>
         </div>
         <div className="string5"></div>
         <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={5}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5}></String>
         </div>
         <div className="string6"></div>
         <div className="absolute top-[91%] left-0 w-full h-[8%]">
-          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={6}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6}></String>
         </div>
 
         <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
