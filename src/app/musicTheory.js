@@ -34,3 +34,48 @@ console.log("Cmaj7: %s", CmajSeven)
 
 var Csus2 = Chord.get("C sus2").notes
 console.log("Csus2: %s", Csus2)
+
+
+// P - perfect interval (root, 4th, 5th, 6th)
+// G - G = 1P
+// G - Ab = 2m
+// G - A =  2M
+// G - Bb = 3m
+// G - B = 3M
+// G - C = 4P
+// G - Db = 5d
+// G - D = 5P
+// G - Eb = 6m
+// G - E = 6M
+// G - F = 7m
+// G - F# = 7M
+var root = "G"
+var note = "Bb"
+console.log("Distance between note %s and root %s: %s", note, root, Interval.distance(root, note));
+
+function getInterval(root, note){
+
+  // G - Ab = 2m
+  // G - A =  2M
+  // G - Bb = 3m
+  // G - B = 3M
+  // G - C = 4P
+  // G - Db = 5d
+  // G - D = 5P
+  // G - Eb = 6m
+  // G - E = 6M
+  // G - F = 7m
+  // G - F# = 7M
+
+  var interval = Interval.distance(root, note)
+
+  if(interval.includes("P", 0) || interval.includes("M", 0)){
+    interval = interval[0]
+  } else if(interval.includes("m", 0)){
+    interval = "b" + interval[0]
+  } 
+
+  return interval
+}
+
+console.log("The interval between %s and %s is %s", note, root, getInterval(root, note))

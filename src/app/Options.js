@@ -121,24 +121,26 @@ export function SharpFlat({accidental, onClick, color}) {
   );
 }
 
-export function NoteRep({text, changeRep, noteRep}){
+export function NoteRep(items){
   // Determine the className based on the noteRep prop.
-  const className = noteRep
+  const className = items.noteRep
     ? "bg-blue-700" // Active state
     : "bg-[#727777]"; // Inactive state with gray background
 
   const handleClick = () => {
-    changeRep(); // Call the function passed from the parent to change the representation
+    items.changeRep(); // Call the function passed from the parent to change the representation
+    items.chRepNotes();
+    console.log("Note representation changed to ..")
   };
 
   return (
     <div className="relative flex flex-row items-center h-full w-full cursor-pointer" onClick={handleClick}>
       <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-semibold text-2xl">
-        {text}
+        {items.text}
       </div>
       <div className="relative basis-2/5 h-full flex justify-center items-center">
         <div className={`relative rounded-full w-5 h-5 ${className} flex justify-center items-center`}>
-          {!noteRep && (
+          {!items.noteRep && (
             <React.Fragment>
               {/* These elements are only shown when noteRep is false (inactive) */}
               <div className="absolute rounded-full w-5 h-5 bg-[#727777]"></div>
@@ -235,8 +237,8 @@ export default function Key(items){
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
         <div className="flex h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
-          <NoteRep text="Intervals" changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]}></NoteRep>
-          <NoteRep text="Note name" changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]}></NoteRep>
+          <NoteRep text="Intervals" changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
+          <NoteRep text="Note name" changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>
         </div>
       </div>
     </div>

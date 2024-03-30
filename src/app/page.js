@@ -425,7 +425,7 @@ export function Options(items){
       <div className="relative top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
-            <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAccidental={items.changeAcc}></Key>
+            <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
           </div>  
           <div className="relative col-span-4">
             <GridChordScale changeChordType={items.change_chord} changeScaleType={items.change_scale}></GridChordScale>
@@ -446,6 +446,32 @@ function scaleHasNote(scale, note) {
   return false;
 }
 
+function getInterval(root, note){
+
+  // G - Ab = 2m
+  // G - A =  2M
+  // G - Bb = 3m
+  // G - B = 3M
+  // G - C = 4P
+  // G - Db = 5d
+  // G - D = 5P
+  // G - Eb = 6m
+  // G - E = 6M
+  // G - F = 7m
+  // G - F# = 7M
+
+  var interval = Interval.distance(root, note)
+
+  if(interval.includes("P", 0) || interval.includes("M", 0)){
+    interval = interval[0]
+  } else if(interval.includes("m", 0)){
+    interval = "b" + interval[0]
+  } 
+
+  return interval
+}
+
+
 export function String(items){
   
   var sc = items.scale;
@@ -454,6 +480,8 @@ export function String(items){
   var key = items.keyChosen;
   var accidental = items.accidental;
   var chord = items.chord;
+
+  var noteRepres = items.note_rep
 
   
   // const [notesString, setNotesString] = useState([]);
@@ -491,33 +519,72 @@ export function String(items){
             {strNr === 6 && idx > 0 &&  <div className="absolute left-[-2px] top-[-25%] h-[140%] w-[6px] bg-slate-500"></div>}
             { 
                 note.split("/").length == 1 && scaleHasNote(scale, note) ?
-                (
-                  (note == items.keyChosen) ?
-                    <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note}</div>
-                  :
-                    <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note}</div>
-                  
+                ( 
+                  (items.note_rep === 1) ? 
+                  (
+                    (note == items.keyChosen) ?
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note}</div>
+                    :
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note}</div>
+                  ) :
+                  (
+                    (note == items.keyChosen) ?
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen, note)}</div>
+                    :
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen, note)}</div>
+                  ) 
                 ) :
                 (scaleHasNote(scale, note.split("/")[0]) || scaleHasNote(scale, note.split("/")[1])) ?
                 (
                   scaleHasNote(scale, note.split("/")[0]) ?
                   (
-                    (note.split("/")[0] === items.keyChosen + accidental) ?
-                       <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note.split("/")[0]}</div>
+
+                    (items.note_rep === 1) ? 
+                    (
+                      (note.split("/")[0] === items.keyChosen + accidental) ?
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note.split("/")[0]}</div>
+                        :
+                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note.split("/")[0]}</div>
+                    ) 
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note.split("/")[0]}</div>
+                    (
+                      (note == items.keyChosen) ?
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen, note)}</div>
+                      :
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen, note)}</div>
+                    ) 
+
+                    
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
                   (
-                    (note.split("/")[1] === items.keyChosen + accidental) ?
-                       <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note.split("/")[1]}</div>
+
+                    (items.note_rep === 1) ? 
+                    (
+                      (note.split("/")[1] === items.keyChosen + accidental) ?
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note.split("/")[1]}</div>
+                        :
+                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note.split("/")[1]}</div>
+                    ) 
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note.split("/")[1]}</div>
+                    (
+                      (note.split("/")[1] === items.keyChosen + accidental) ?
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note)}</div>
+                      :
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note)}</div>
+                    )
+
                   ) :
-                    <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+                    (items.note_rep === 1) ? 
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+                    :
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{getInterval(items.keyChosen, note)}</div>
                 )
                   :
-                    <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+                    (items.note_rep === 1) ? 
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+                    :
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden"> {getInterval(items.keyChosen, note)} </div>
                   
             }
           </div>
@@ -572,6 +639,13 @@ export default function Home() {
     setScale(newScale)
   }
 
+  const changeNoteRep = (nr) => {
+    // if note rep = 0 => intervals, else note names
+    setNoteRep(nr)
+    if(nr === 0) console.log('note representation changed to intervals')
+    else console.log('note representation changed to note names')
+  }
+
    // Custom function to manage chordType and scale synchronously
   // const manageChordAndScale = (updatedState) => {
   //   // updatedState is an object with keys 'chordType' and 'scale', either of which may be undefined
@@ -608,7 +682,7 @@ export default function Home() {
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
 
-      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale}></Options>
+      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep}></Options>
       <div className="absolute top-[55%] left-[6%] w-[80%] h-[30%]">
       </div> 
       <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
@@ -622,28 +696,28 @@ export default function Home() {
       <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
         <div className="absolute top-[2%] left-0 w-full h-[8%] ">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1} note_rep={noteRep} ></String>
           {/* noteRepresentation next !!! */}
         </div>
         <div className="string2"></div>
         <div className="absolute top-[20%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2} note_rep={noteRep}  ></String>
         </div>
         <div className="string3"></div>
         <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3} note_rep={noteRep}  ></String>
         </div>
         <div className="string4"></div>
         <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4} note_rep={noteRep}  ></String>
         </div>
         <div className="string5"></div>
         <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5} note_rep={noteRep} ></String>
         </div>
         <div className="string6"></div>
         <div className="absolute top-[91%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6}></String>
+          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6} note_rep={noteRep} ></String>
         </div>
 
         <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
