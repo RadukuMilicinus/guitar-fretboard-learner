@@ -238,35 +238,46 @@ export function GridChordScale(items){
     const changeDropDownChord = () => {
       setDropDown(!dropDownChord)
     }
+    
+    const [dropDownScale, setDropDownScale] = useState(false);
+
+    const changeDropDownScale = () => {
+      setDropDownScale(!dropDownScale)
+    }
 
     const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus 4']
     const [indexChordPressed, setIndexChordPressed] = useState(-1);
+    const [indexScalePressed, setIndexScalePressed] = useState(-1);
 
     const setChordPressed = (index) => {
       console.log("chord %s has been chosen with index %d", chordNames[index], index);
       setIndexChordPressed(index);
       console.log("chord %s WITH INDEX %d has been chosen", chordNames[index], indexChordPressed);
       items.changeChordType(chordNames[index]) // this changes chord and passes this value to parent
+      if(dropDownScale === true){
+        changeDropDownScale()
+      }
+      setIndexScalePressed(-1);
+      items.changeScaleType('')
     }
     
     //////////////////////////////////////
     //          Scale dropdown          //                        
     //////////////////////////////////////
 
-    const [dropDownScale, setDropDownScale] = useState(false);
-
-    const changeDropDownScale = () => {
-      setDropDownScale(!dropDownScale)
-    }
     
     const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
-    const [indexScalePressed, setIndexScalePressed] = useState(-1);
 
     const setScalePressed = (index) => {
       console.log("scale %s has been chosen with index %d", scaleNames[index], index);
       setIndexScalePressed(index);
       console.log("scale %s WITH INDEX %d has been chosen", scaleNames[index], indexScalePressed);
-
+      items.changeScaleType(scaleNames[index])
+      if(dropDownChord === true){
+        changeDropDownChord()
+      }
+      setIndexChordPressed(-1)
+      items.changeChordType('')
     }
 
     //////////////////////////////////////
@@ -406,10 +417,10 @@ export function Options(items){
       <div className="relative top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
-            <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAcc={items.changeAcc}></Key>
+            <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAccidental={items.changeAcc}></Key>
           </div>  
           <div className="relative col-span-4">
-            <GridChordScale changeChordType={items.change_chord}></GridChordScale>
+            <GridChordScale changeChordType={items.change_chord} changeScaleType={items.change_scale}></GridChordScale>
           </div>  
           <div className="relative col-span-3"></div>  
         </div>
@@ -429,11 +440,13 @@ function scaleHasNote(scale, note) {
 
 export function String(items){
   
-  var scale = items.scale;
+  var sc = items.scale;
   var index = items.index;
   var strNr = items.strNr;
   var key = items.keyChosen;
   var accidental = items.accidental;
+  var chord = items.chord;
+
   
   // const [notesString, setNotesString] = useState([]);
     
@@ -447,6 +460,16 @@ export function String(items){
   ];
 
   const notesString = fretboardGeneric[strNr - 1];
+
+  const [scale, chScale] = useState(sc);
+
+  useEffect(() => {
+    chScale(sc)
+  }, [sc])
+  
+  useEffect(() => {
+    chScale(chord)
+  }, [chord])
 
   return (
     <div className="relative top-0 left-0 flex flex-row justify-evenly w-full h-full">
@@ -500,6 +523,7 @@ export default function Home() {
   const [tuning, setTuning] = useState("") // initially set to null 
   const [chordType, setChord] = useState("major") // initially set to null 
   const [scale, setScale] = useState("") // initially set to null 
+  const [noteRep, setNoteRep] = useState(1);
 
   const changeKey = (keyName) => {
     setKey(keyName)
@@ -524,18 +548,45 @@ export default function Home() {
     setScale(newScale)
   }
 
+   // Custom function to manage chordType and scale synchronously
+  // const manageChordAndScale = (updatedState) => {
+  //   // updatedState is an object with keys 'chordType' and 'scale', either of which may be undefined
+  //   if (updatedState.chordType !== undefined) {
+  //     setChordType(updatedState.chordType);
+  //     setScale('');
+  //     // Here, implement logic to determine how changing the chordType might affect the scale
+  //     // For simplicity, this example does not implement real music theory logic
+  //     // Example:
+  //     // setScale(chordTypeToScale(updatedState.chordType));
+  //   }
+
+  //   if (updatedState.scale !== undefined) {
+  //     setScale(updatedState.scale);
+  //     setChord('');
+  //     // Similarly, implement logic to adjust chordType based on the new scale, if necessary
+  //     // Example:
+  //     // setChordType(scaleToChordType(updatedState.scale));
+  //   }
+
+  //   // Note: The above implementations of chordTypeToScale and scaleToChordType are placeholders
+  //   // for logic you need to define based on how these properties relate in your application.
+  // };
+
   useEffect(() => {
     console.log("Chord type in Home updated to:", chordType);
+    setScale('')
   }, [chordType]);
 
+  useEffect(() => {
+    console.log("Scale type in Home updated to:", scale);
+    setChord('')
+  }, [scale]);
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
 
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale}></Options>
-
       <div className="absolute top-[55%] left-[6%] w-[80%] h-[30%]">
-
       </div> 
       <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
         <div className="absolute top-[5%] left-0 w-[100%] h-[2%] bg-[#D9D9D9] z-1"></div>
@@ -548,27 +599,28 @@ export default function Home() {
       <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
         <div className="absolute top-[2%] left-0 w-full h-[8%] ">
-          <String scale={Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1}></String>
+          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={1}></String> 
+          {/* noteRepresentation next !!! */}
         </div>
         <div className="string2"></div>
         <div className="absolute top-[20%] left-0 w-full h-[8%]">
-          <String scale={Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2}></String>
+          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={2}></String>
         </div>
         <div className="string3"></div>
         <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String scale={Chord.get( keyChosen + accidental + " " + chordType.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3}></String>
+          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={3}></String>
         </div>
         <div className="string4"></div>
         <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String scale={Chord.get( keyChosen + accidental + " " + chordType.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4}></String>
+          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={4}></String>
         </div>
         <div className="string5"></div>
         <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String scale={Chord.get( keyChosen + accidental + " " + chordType.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5}></String>
+          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={5}></String>
         </div>
         <div className="string6"></div>
         <div className="absolute top-[91%] left-0 w-full h-[8%]">
-          <String scale={Chord.get( keyChosen + accidental + " " + chordType.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6}></String>
+          <String scale={Scale.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes} chord={ Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes } keyChosen={keyChosen} accidental={accidental} strNr={6}></String>
         </div>
 
         <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">

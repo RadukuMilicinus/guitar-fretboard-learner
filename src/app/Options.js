@@ -11,8 +11,6 @@ import React, { useState } from 'react';
 
 export function Keys({pressedKeys, pressedAccs, keyChange, accidentalsChange}){
   
-
-
   
     return (
 
@@ -195,7 +193,7 @@ export default function Key(items){
       for (let i = 0; i < updatedAccs.length; i++) {
         updatedAccs[i] = false;
       }
-      items.changeAcc('')
+      items.changeAccidental('')
     } else{
       
       const Accs = ['#', 'b']
@@ -207,7 +205,7 @@ export default function Key(items){
 
       // Set the currently pressed key to true
       updatedAccs[idx] = true;
-      items.changeAcc(Accs[idx])
+      items.changeAccidental(Accs[idx])
     }
     
     
