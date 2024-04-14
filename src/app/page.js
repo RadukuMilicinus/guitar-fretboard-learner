@@ -11,7 +11,9 @@ import {
 } from "@nextui-org/react";
 import Key from "./Options";
 import React, { useState , useEffect, useRef } from 'react';
-import {Scale, Interval, Note, Chord} from "tonal";
+import {Scale, Interval, Note, Chord, transpose} from "tonal";
+import {Howl, Howler} from 'howler';
+// import {SampleLibrary} from '../../tonejs-instruments/Tonejs-Instruments';
 
 export function Fret() {
   return (
@@ -50,11 +52,24 @@ export function Intervals(items){
     }
   }
 
+  const notes = ['Ab/G#', 'A', 'Bb/A#', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G']
+
+  useEffect(() => {
+    if(!items.switchVal){
+      setColor("bg-[#727777]")
+    }
+  }, [items.switchVal])
 
   return (
     <div className="relative flex flex-row items-center h-full w-full">
       <div className="flex justify-center items-center relative basis-3/5 h-full text-xl   font-semibold">{items.text}</div>
-      <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={changeState}>
+      <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={() => 
+                                                                                          {
+                                                                                            if(items.switchVal === true){
+                                                                                              changeState(); 
+                                                                                              items.setInterv();
+                                                                                           }
+                                                                                          }}>
         {color === "bg-blue-700" && items.switchVal ?
           <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
           :
@@ -83,14 +98,22 @@ export function Switch(items){
 
 
 
-export function Intervs(){
+export function Intervs(items){
 
     const [switchVal, setSwitchVal] = useState(false);
 
     const changeSwitch = () => {
       setSwitchVal(!switchVal);
+      items.defaultIntervs();
       console.log("Switch value has been changed to", switchVal);
     }
+
+    useEffect(() => {
+      if(items.scale.length != '' || items.chord != ''){
+        items.defaultIntervs();
+        setSwitchVal(false)
+      }
+    }, [items.scale, items.chord])
 
     return (
         <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
@@ -106,18 +129,19 @@ export function Intervs(){
             </div>
           </div>
           <div className="relative grid grid-cols-3 top-0 left-0 h-[70%] w-[100%] bg-[#3D3D3D]">
-            <Intervals text="Root" switchVal={switchVal}></Intervals>
-            <Intervals text="3" switchVal={switchVal}></Intervals>
-            <Intervals text="#5/b6" switchVal={switchVal}></Intervals>
-            <Intervals text="b2" switchVal={switchVal}></Intervals>
-            <Intervals text="4" switchVal={switchVal}></Intervals>
-            <Intervals text="6" switchVal={switchVal} ></Intervals>
-            <Intervals text="2" switchVal={switchVal}></Intervals>
-            <Intervals text="#4/b5" switchVal={switchVal}></Intervals>
-            <Intervals text="b7" switchVal={switchVal}></Intervals>
-            <Intervals text="b3" switchVal={switchVal}></Intervals>
-            <Intervals text="5" switchVal={switchVal}></Intervals>
-            <Intervals text="7" switchVal={switchVal}></Intervals>
+            {/* here ch intervals is a function and changes the intervals in the Home function */} 
+            <Intervals text="Root" switchVal={switchVal} setInterv={() => {items.chIntervals(0); console.log("root interval chosen")}} key={items.key}></Intervals>             
+            <Intervals text="3" switchVal={switchVal}  setInterv={() => {items.chIntervals(4); console.log("3rd interval chosen")}} key={items.key} ></Intervals>
+            <Intervals text="#5/b6" switchVal={switchVal} setInterv={() => {items.chIntervals(8); console.log("#5/b6 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="b2" switchVal={switchVal} setInterv={() => {items.chIntervals(1); console.log("b2 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="4" switchVal={switchVal} setInterv={() => {items.chIntervals(5); console.log("4 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="6" switchVal={switchVal} setInterv={() => {items.chIntervals(9); console.log("6 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="2" switchVal={switchVal} setInterv={() => {items.chIntervals(2); console.log("2 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="#4/b5" switchVal={switchVal} setInterv={() => {items.chIntervals(6); console.log("#4/b5 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="b7" switchVal={switchVal} setInterv={() => {items.chIntervals(10); console.log("b7 chosen")}} key={items.key} > </Intervals>
+            <Intervals text="b3" switchVal={switchVal} setInterv={() => {items.chIntervals(3); console.log("b3 chosen")}} key={items.key}  ></Intervals>
+            <Intervals text="5" switchVal={switchVal} setInterv={() => {items.chIntervals(7); console.log("5 chosen")}} key={items.key} ></Intervals>
+            <Intervals text="7" switchVal={switchVal} setInterv={() => {items.chIntervals(11); console.log("7 chosen")}} key={items.key}></Intervals>
           </div>
         </div> 
     );
@@ -432,7 +456,7 @@ export function Options(items){
           </div>  
           <div className="relative col-span-3"></div>  
         </div>
-        <Intervs> </Intervs>
+        <Intervs defaultIntervs={items.defaultIntervs} chIntervals={items.changeIntervals} scale={items.scale} chord={items.chord} key={items.key}> </Intervs>
       </div>
     );
 }
@@ -466,7 +490,12 @@ function getInterval(root, note){
     interval = interval[0]
   } else if(interval.includes("m", 0)){
     interval = "b" + interval[0]
-  } 
+  } else if(interval.includes("A", 0)){
+    interval = "#" + interval[0]
+  } else if(interval.includes("d", 0)){
+    interval = "b" + interval[0]
+  }
+
 
   return interval
 }
@@ -480,6 +509,7 @@ export function String(items){
   var key = items.keyChosen;
   var accidental = items.accidental;
   var chord = items.chord;
+  var intervs = items.notes;
 
   var noteRepres = items.note_rep
 
@@ -500,13 +530,16 @@ export function String(items){
   const [scale, chScale] = useState(sc);
 
   useEffect(() => {
-    if(sc.length === 0){   // check if length of scale is equal to 0, then choose chord
+    if(sc.length === 0 && intervs.length === 0){   // check if length of scale is equal to 0, then choose chord
       chScale(chord)
-    } else {             // chord is empty
+    } else if(intervs.length === 0){
       chScale(sc)
-    }
+    } else {             // chord is empty
+      chScale(intervs)
+      console.log("On string, intervals is now on")
+    } 
     console.log("Scale changed to = %s for string", sc)
-  }, [sc, chord])
+  }, [sc, chord, intervs])
 
   // commenting this allows scale to be changed
 
@@ -516,7 +549,7 @@ export function String(items){
         notesString.map((note, idx) => 
           <div className="relative flex justify-center items-center top-0 left-0 basis-1/12 h-full">
             {idx > 0 && strNr < 6 && <div className="absolute left-[-2px] top-[-25%] h-[250%] w-[6px] bg-slate-500"></div>}
-            {strNr === 6 && idx > 0 &&  <div className="absolute left-[-2px] top-[-25%] h-[140%] w-[6px] bg-slate-500"></div>}
+            {strNr === 6 && idx > 0 && <div className="absolute left-[-2px] top-[-25%] h-[140%] w-[6px] bg-slate-500"></div>}
             { 
                 note.split("/").length == 1 && scaleHasNote(scale, note) ?
                 ( 
@@ -549,12 +582,10 @@ export function String(items){
                       :
                     (
                       (note == items.keyChosen) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen, note)}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen, note.split("/")[0])}</div>
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen, note)}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen, note.split("/")[0])}</div>
                     ) 
-
-                    
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
                   (
@@ -569,9 +600,9 @@ export function String(items){
                       :
                     (
                       (note.split("/")[1] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note)}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note)}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
                     )
 
                   ) :
@@ -615,6 +646,20 @@ export default function Home() {
   const [chordType, setChord] = useState("major") // initially set to null 
   const [scale, setScale] = useState("") // initially set to null 
   const [noteRep, setNoteRep] = useState(1);
+  const [intervals, setIntervals] = useState([false, false, false, false, false, false, false, false, false, false, false, false])
+  const notes = ['Ab/G#', 'A', 'Bb/A#', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G']
+  const [chosenNotes, setChosenNotes] = useState([])
+
+  // var guitar = SampleLibrary.load(
+  //   {
+  //     instruments: "guitar-acoustic",
+  //     ext: ".wav"
+  //   }
+  // )
+
+  // useEffect(() => {
+  //   guitar.toMaster()
+  // }, [])
 
   const changeKey = (keyName) => {
     setKey(keyName)
@@ -645,6 +690,56 @@ export default function Home() {
     if(nr === 0) console.log('note representation changed to intervals')
     else console.log('note representation changed to note names')
   }
+
+  const setIntervsToFalse = () => {
+    const intervs = [false, false, false, false, false, false, false, false, false, false, false, false]
+    setIntervals(intervs)
+    console.log("Intervals are now = %s", intervs)
+    intervs.forEach((elem) => {
+      console.log(elem)
+    })
+    setChosenNotes([])
+    console.log("Chosen notes are now =")
+    chosenNotes.forEach((elem) => {
+      console.log(elem)
+    })
+  }
+
+  const changeIntervsAndSetNotes = (index) => {
+    console.log("Change intervs and set notes called")
+    const newIntervs = [...intervals];
+    newIntervs[index] = !newIntervs[index];
+
+    const chosenNotesCpy = [...chosenNotes]
+    // based on key append or remove note
+    if(newIntervs[index] === false){
+      var idx = 0
+      
+      // if the interval has been set to false, then remove that note from chosenNotes
+      // calculate what degree the note is and remove it
+      
+      var intervName = Interval.fromSemitones(index)
+      var newNote = transpose(keyChosen, intervName)
+      for(var i = 0; i < chosenNotes.length ; i++){
+        if(newNote == chosenNotes[i]) {
+          idx = i
+          break
+        }
+      }
+      chosenNotesCpy.splice(idx, 1)
+    } else {
+      var intervName = Interval.fromSemitones(index)
+      var newNote = transpose(keyChosen, intervName)
+      chosenNotesCpy.push(newNote)
+    }
+
+    changeScale('')
+    changeChord('')
+
+    setIntervals(newIntervs);
+    setChosenNotes(chosenNotesCpy);
+    console.log("Chosen notes are: %s", chosenNotesCpy);
+  };
 
    // Custom function to manage chordType and scale synchronously
   // const manageChordAndScale = (updatedState) => {
@@ -679,10 +774,12 @@ export default function Home() {
     console.log("Scale type in Home updated to:", scale);
   }, [scale]);
 
+
+
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
 
-      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep}></Options>
+      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
       <div className="absolute top-[55%] left-[6%] w-[80%] h-[30%]">
       </div> 
       <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
@@ -696,28 +793,28 @@ export default function Home() {
       <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
         <div className="string1"></div>
         <div className="absolute top-[2%] left-0 w-full h-[8%] ">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1} note_rep={noteRep} ></String>
+          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1} note_rep={noteRep} notes={chosenNotes}></String>
           {/* noteRepresentation next !!! */}
         </div>
         <div className="string2"></div>
         <div className="absolute top-[20%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2} note_rep={noteRep}  ></String>
+          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2} note_rep={noteRep}  notes={chosenNotes} ></String>
         </div>
         <div className="string3"></div>
         <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3} note_rep={noteRep}  ></String>
+          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3} note_rep={noteRep} notes={chosenNotes}></String>
         </div>
         <div className="string4"></div>
         <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4} note_rep={noteRep}  ></String>
+          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4} note_rep={noteRep}  notes={chosenNotes}></String>
         </div>
         <div className="string5"></div>
         <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5} note_rep={noteRep} ></String>
+          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5} note_rep={noteRep}  notes={chosenNotes} ></String>
         </div>
         <div className="string6"></div>
         <div className="absolute top-[91%] left-0 w-full h-[8%]">
-          <String chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6} note_rep={noteRep} ></String>
+          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6} note_rep={noteRep}  notes={chosenNotes} ></String>
         </div>
 
         <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">

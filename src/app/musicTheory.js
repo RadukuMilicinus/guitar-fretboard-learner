@@ -1,4 +1,4 @@
-import {Scale, Interval, Note, Chord} from "tonal";
+import {Scale, Interval, Note, Chord, transpose} from "tonal";
 
 var fretboard = [['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'E'], 
                  ['A', 'A#', 'B', 'C', 'C#', 'D', 'E', 'F', 'F#', 'G', 'G#', 'A'], 
@@ -79,3 +79,8 @@ function getInterval(root, note){
 }
 
 console.log("The interval between %s and %s is %s", note, root, getInterval(root, note))
+
+var key = "C"
+var interval = Interval.fromSemitones(6)
+var newNote = transpose(key, interval)
+console.log("newNote = %s", newNote)
