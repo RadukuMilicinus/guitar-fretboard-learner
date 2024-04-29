@@ -62,7 +62,7 @@ export function Intervals(items){
 
   return (
     <div className="relative flex flex-row items-center h-full w-full">
-      <div className="flex justify-center items-center relative basis-3/5 h-full text-xl   font-semibold">{items.text}</div>
+      <div className="flex break-words justify-center items-center relative basis-3/5 h-full text-xs lg:max-xl:text-sm xl:max-2xl:text-lg  2xl:text-xl font-semibold">{items.text}</div>
       <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={() => 
                                                                                           {
                                                                                             if(items.switchVal === true){
@@ -74,8 +74,8 @@ export function Intervals(items){
           <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
           :
           <React.Fragment>
-            <div className="absolute justify-center items-center w-5 h-5 bg-[#727777] rounded-full z-0"></div>
-            <div className="absolute justify-center items-center w-3 h-3 bg-[#3D3D3D] rounded-full z-1"></div>
+            <div className="absolute justify-center items-center w-4 h-4 xl:w-5 xl:h-5 bg-[#727777] rounded-full z-0"></div>
+            <div className="absolute justify-center items-center w-2 h-2 xl:w-3 xl:h-3 bg-[#3D3D3D] rounded-full z-1"></div>
           </React.Fragment>
         }
       </div>
@@ -118,11 +118,11 @@ export function Intervs(items){
     return (
         <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
           <div className="relative flex flex-row items-center justify-center top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D]">
-            <div className="flex items-center h-full w-[50%] basis-1/2">
-              <div className="text-3xl font-semibold font-roboto mx-auto text-black">Intervals</div>
+            <div className="flex items-center h-full w-[70%] basis-1/2">
+              <div className="text-lg lg:text-xl  xl:text-2xl  2xl:text-3xl font-semibold font-roboto mx-auto text-black">Intervals</div>
             </div>
             <div className="flex basis-1/2 left-[50%] items-center justify-center top-0 h-[100%] w-[50%]">
-              <div className="relative w-[50%] h-[40%] rounded-full bg-black z-0" onClick={() => changeSwitch()}>
+              <div className="relative w-[70%] lg:w-[50%] h-[40%] rounded-full bg-black z-0" onClick={() => changeSwitch()}>
                 <Switch switchVal={switchVal} changeSwitch={changeSwitch}></Switch>
               </div>
               {/* <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div> */}
@@ -177,20 +177,20 @@ export function Instrument({instrName, onChange, isActive}) {
           {
             instrName === "Guitar" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-l-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xl font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-xl font-bold text-black">
                 {instrName}
               </div>
             </div> 
               :
             instrName === "Piano" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-r-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xl font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-xl font-bold text-black">
                 {instrName}
               </div>
             </div> 
               :
             <div className={`absolute flex w-[100%] items-center justify-center h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xl font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-xl font-bold text-black">
                 {instrName}
               </div>
             </div> 
@@ -225,7 +225,7 @@ export function DropdownScale(items){
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
       {scaleNames.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-sm lg:text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
             {chord}
           </div> 
       ))}
@@ -240,7 +240,7 @@ export function DropdownTuning(items){
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
       {tunings.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedTuning(index)}>
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-sm lg:text-base hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedTuning(index)}>
             {chord}
           </div> 
       ))}
@@ -358,7 +358,7 @@ export function GridChordScale(items){
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full">
-              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Chord</div>
+              <div className="flex relative text-xl lg:max-2xl:text-2xl 2xl:text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Chord</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-xl text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={changeDropDownChord}>
@@ -368,11 +368,13 @@ export function GridChordScale(items){
                   ) : indexChordPressed > -1 ? 
                   
                   (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-base lg:text-lg bg-[#727777] rounded-lg">
                       {chordNames[indexChordPressed]}
                     </div>
                   ) : (
-                      "Select a chord..." // Placeholder text when no chord is selected
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg">
+                      Select a chord...
+                    </div>
                 )}
               </div>
               {/* <ChordsDropdown></ChordsDropdown> */}
@@ -380,7 +382,7 @@ export function GridChordScale(items){
           </div>
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full z-0">
-              <div className="flex relative text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Scale</div>
+              <div className="flex relative text-xl lg:max-2xl:text-2xl 2xl:text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Scale</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-xl flex items-center justify-center text-opacity-70 font-medium  text-black bg-[#727777] rounded-lg" onClick={changeDropDownScale}>
@@ -390,11 +392,13 @@ export function GridChordScale(items){
                   ) : indexScalePressed > -1 ? 
 
                   (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-base lg:text-lg bg-[#727777] rounded-lg overflow-hidden">
                       {scaleNames[indexScalePressed]}
                     </div>
                   ) : (
-                      "Choose scale..." // Placeholder text when no chord is selected
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg overflow-hidden">
+                      Choose scale...
+                    </div>
                 )}
               </div>
             </div>
@@ -402,7 +406,7 @@ export function GridChordScale(items){
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full z-0">
               <div className="flex items-center justify-center h-full w-full">
-                <div className="text-2xl font-semibold font-roboto mx-auto text-black">Tuning</div>
+                <div className="text-xl lg:max-2xl:text-2xl 2xl:text-2xl font-semibold font-roboto mx-auto text-black">Tuning</div>
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
@@ -417,7 +421,9 @@ export function GridChordScale(items){
                       {tunings[indexTuningPressed]}
                     </div>
                   ) : (
-                      "Choose tuning..." // Placeholder text when no chord is selected
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg overflow-hidden">
+                      Choose tuning...
+                    </div>
                 )}
 
               </div>
@@ -426,7 +432,7 @@ export function GridChordScale(items){
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center justify-center h-full w-full">
-                <div className="text-2xl font-semibold font-roboto mx-auto text-black">Instrument</div>
+                <div className="text-xl lg:max-2xl:text-2xl 2xl:text-2xl font-semibold font-roboto mx-auto text-black">Instrument</div>
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
@@ -462,8 +468,10 @@ export function Options(items){
 }
 
 function scaleHasNote(scale, note) {
+  console.log("note = %s", note)
   for (let i = 0 ; i < scale.length ; i++){
-    if( scale[i] == note ){
+    console.log("scale[%d] = ", i, scale[i])
+    if( scale[i] === note ){
       return true;
     }
   }
@@ -562,17 +570,17 @@ export function String(items){
 
   function play (note, strNr){
     var idx = -1
-    for(var i = 0; i < fretboardGeneric.length ; i++){
+    for(var i = 0; i < fretboardGeneric[strNr - 1].length ; i++){
       if(note === fretboardGeneric[strNr - 1][i]) {
         idx = i
         break
       }
     }
 
-    console.log("Playing note %s NOW", note)
+    console.log("Playing note %s NOW", note, "sound = %s", sounds[idx + 1])
 
     var howler = new Howl({
-      src: [sounds[idx]], 
+      src: [sounds[idx + 1]], 
       volume: 1,
     })
 
@@ -594,13 +602,13 @@ export function String(items){
                     (note == items.keyChosen) ?
                       <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                     :
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note);play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                   ) :
                   (
                     (note == items.keyChosen) ?
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={play(note, strNr)}>{getInterval(items.keyChosen, note)}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(items.keyChosen, note)}</div>
                     :
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={play(note, strNr)}>{getInterval(items.keyChosen, note)}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(items.keyChosen, note)}</div>
                   ) 
                 ) :
                 (scaleHasNote(scale, note.split("/")[0]) || scaleHasNote(scale, note.split("/")[1])) ?
@@ -611,16 +619,16 @@ export function String(items){
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[0] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note.split("/")[0]}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                         :
-                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note.split("/")[0]}</div>
+                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                     ) 
                       :
                     (
                       (note == items.keyChosen) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen, note.split("/")[0])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50"  onClick={() => { play(note, strNr) }} >{getInterval(items.keyChosen, note.split("/")[0])}</div>
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen, note.split("/")[0])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen, note.split("/")[0])}</div>
                     ) 
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
@@ -629,16 +637,16 @@ export function String(items){
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[1] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{note.split("/")[1]}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{note.split("/")[1]}</div>
                         :
-                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{note.split("/")[1]}</div>
+                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{note.split("/")[1]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[1] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50">{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
                     )
 
                   ) :
@@ -700,13 +708,25 @@ export default function Home() {
           'samples/samples/guitar-acoustic/A3.mp3','samples/samples/guitar-acoustic/As3.mp3', 'samples/samples/guitar-acoustic/B3.mp3', 'samples/samples/guitar-acoustic/C3.mp3', 'samples/samples/guitar-acoustic/Cs2.mp3',
           'samples/samples/guitar-acoustic/D3.mp3', 'samples/samples/guitar-acoustic/Ds3.mp3', 'samples/samples/guitar-acoustic/E3.mp3']
   
-  var highE = ['samples/samples/guitar-acoustic/E4.mp3', 'samples/samples/guitar-acoustic/F4.mp3', 'samples/samples/guitar-acoustic/Fs4.mp3', 'samples/samples/guitar-acoustic/G4.mp3', 'samples/samples/guitar-acoustic/Gs4.mp3',
-          'samples/samples/guitar-acoustic/A5.mp3','samples/samples/guitar-acoustic/As5.mp3', 'samples/samples/guitar-acoustic/B5.mp3', 'samples/samples/guitar-acoustic/C5.mp3', 'samples/samples/guitar-acoustic/Cs5.mp3',
-          'samples/samples/guitar-acoustic/D5.mp3', 'samples/samples/guitar-nylon/Ds5.mp3', 'samples/samples/guitar-nylon/E5.mp3']
+  var Astring = ['samples/samples/guitar-acoustic/A3.mp3', 'samples/samples/guitar-acoustic/As3.mp3', 'samples/samples/guitar-acoustic/B3.mp3', 'samples/samples/guitar-acoustic/C3.mp3', 'samples/samples/guitar-acoustic/Cs3.mp3',
+          'samples/samples/guitar-acoustic/D3.mp3','samples/samples/guitar-acoustic/Ds3.mp3', 'samples/samples/guitar-acoustic/E3.mp3', 'samples/samples/guitar-acoustic/F3.mp3', 'samples/samples/guitar-acoustic/Fs3.mp3',
+          'samples/samples/guitar-acoustic/G3.mp3', 'samples/samples/guitar-nylon/Gs3.mp3', 'samples/samples/guitar-nylon/A4.mp3']
+  
+  var Dstring = ['samples/samples/guitar-acoustic/D3.mp3', 'samples/samples/guitar-acoustic/Ds3.mp3', 'samples/samples/guitar-acoustic/E3.mp3', 'samples/samples/guitar-acoustic/F3.mp3', 'samples/samples/guitar-acoustic/Fs3.mp3',
+          'samples/samples/guitar-acoustic/G3.mp3','samples/samples/guitar-acoustic/Gs3.mp3', 'samples/samples/guitar-acoustic/A4.mp3', 'samples/samples/guitar-acoustic/As4.mp3', 'samples/samples/guitar-acoustic/B4.mp3',
+          'samples/samples/guitar-acoustic/C4.mp3', 'samples/samples/guitar-nylon/Cs4.mp3', 'samples/samples/guitar-acoustic/D4.mp3']
+  
+  var Gstring = ['samples/samples/guitar-acoustic/G3.mp3', 'samples/samples/guitar-acoustic/Gs3.mp3', 'samples/samples/guitar-acoustic/A4.mp3', 'samples/samples/guitar-acoustic/As4.mp3', 'samples/samples/guitar-acoustic/B4.mp3',
+          'samples/samples/guitar-acoustic/C4.mp3','samples/samples/guitar-acoustic/Cs4.mp3', 'samples/samples/guitar-acoustic/D4.mp3', 'samples/samples/guitar-acoustic/Ds4.mp3', 'samples/samples/guitar-acoustic/E4.mp3',
+          'samples/samples/guitar-acoustic/F4.mp3', 'samples/samples/guitar-nylon/Fs4.mp3', 'samples/samples/guitar-nylon/G4.mp3']
   
   var Bstring = ['samples/samples/guitar-acoustic/B4.mp3', 'samples/samples/guitar-acoustic/C4.mp3', 'samples/samples/guitar-acoustic/Cs4.mp3', 'samples/samples/guitar-acoustic/D4.mp3', 'samples/samples/guitar-acoustic/Ds4.mp3',
           'samples/samples/guitar-acoustic/E4.mp3','samples/samples/guitar-acoustic/F4.mp3', 'samples/samples/guitar-acoustic/Fs4.mp3', 'samples/samples/guitar-acoustic/G4.mp3', 'samples/samples/guitar-acoustic/Gs4.mp3',
-          'samples/samples/guitar-acoustic/A5.mp3', 'samples/samples/guitar-acoustic/As5.mp3', 'samples/samples/guitar-acoustic/B5.mp3']
+          'samples/samples/guitar-acoustic/A5.mp3', 'samples/samples/guitar-nylon/As5.mp3', 'samples/samples/guitar-acoustic/B5.mp3']
+  
+  var highE = ['samples/samples/guitar-acoustic/E4.mp3', 'samples/samples/guitar-acoustic/F4.mp3', 'samples/samples/guitar-acoustic/Fs4.mp3', 'samples/samples/guitar-acoustic/G4.mp3', 'samples/samples/guitar-acoustic/Gs4.mp3',
+          'samples/samples/guitar-nylon/A5.mp3','samples/samples/guitar-nylon/As5.mp3', 'samples/samples/guitar-acoustic/B5.mp3', 'samples/samples/guitar-acoustic/C5.mp3', 'samples/samples/guitar-acoustic/Cs5.mp3',
+          'samples/samples/guitar-acoustic/D5.mp3', 'samples/samples/guitar-electric/Ds5.mp3', 'samples/samples/guitar-nylon/E5.mp3']
   
 
   const highEsounds = new Howl({
@@ -826,6 +846,48 @@ export default function Home() {
     console.log("Scale type in Home updated to:", scale);
   }, [scale]);
 
+  function isInScaleOrChordOrInterval (note) {
+    console.log("===========\n\n\n\n==============")
+    console.log("checking if is in scale or chord or interval %s", note)
+    console.log("===========\n\n\n\n==============")
+    if(chosenNotes.length > 0){
+      chosenNotes.forEach((chosenNote) => {
+        console.log("notes scale %s", chosenNote)
+        if(note === chosenNote) return true;
+      })
+    } else if(scale != ''){
+      var sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes
+      sc.forEach((scNote) => {
+        console.log("notes scale %s", scNote)
+        if( scNote === note ) return true;
+      })
+    } else if(chordType != ''){
+      var ch = Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes 
+      ch.forEach((chNote) => {
+        console.log("notes chord %s", chNote)
+        if( chNote === note ) return true;
+      })
+    }
+    return false;
+  }
+
+  function play (note){
+
+    var sounds = []    
+    if(note === 'highE') sounds.push(highE[0])
+    else if(note === 'B') sounds.push(Bstring[0])
+    else if(note === 'G') sounds.push(Gstring[0])
+    else if(note === 'D') sounds.push(Dstring[0])
+    else if(note === 'A') sounds.push(Astring[0])
+    else if(note === 'E') sounds.push(lowE[0])
+
+    var howler = new Howl({
+      src: [sounds[0]], 
+      volume: 1,
+    })
+
+    howler.play();
+  }
 
 
   return (
@@ -833,6 +895,27 @@ export default function Home() {
 
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
       <div className="absolute top-[55%] left-[6%] w-[80%] h-[30%]">
+      </div> 
+      <div className="absolute flex flex-col justify-between top-[55%] left-[5%] rounded-md w-[2%] h-[35%] bg-slate-600">
+        {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
+        <div className={`absolute top-[2%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('highE')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%]">E</div> 
+        </div>
+        <div className={`absolute top-[20%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'B' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('B') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => play('B')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">B</div> 
+        </div>
+        <div className={`absolute top-[38%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'G' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('G') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => play('G')}  >
+          <div className="relative flex flex-row justify-center align-center top-[0%] 2xl:top-[5%] w-full">G</div> 
+        </div>
+        <div className={`absolute top-[56%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'D' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('D') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('D')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">D</div> 
+        </div>
+        <div className={`absolute top-[74%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'A' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('A') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => play('A')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">A</div> 
+        </div>
+        <div className={`absolute top-[91%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('E')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full h-[40px]">E</div> 
+        </div>
       </div> 
       <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
         <div className="absolute top-[5%] left-0 w-[100%] h-[2%] bg-[#D9D9D9] z-1"></div>
@@ -855,15 +938,15 @@ export default function Home() {
         </div>
         <div className="string3"></div>
         <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3} note_rep={noteRep} notes={chosenNotes} sounds={lowE}></String>
+          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3} note_rep={noteRep} notes={chosenNotes} sounds={Gstring}></String>
         </div>
         <div className="string4"></div>
         <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4} note_rep={noteRep}  notes={chosenNotes} sounds={lowE}></String>
+          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4} note_rep={noteRep}  notes={chosenNotes} sounds={Dstring}></String>
         </div>
         <div className="string5"></div>
         <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5} note_rep={noteRep}  notes={chosenNotes} sounds={lowE}></String>
+          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5} note_rep={noteRep}  notes={chosenNotes} sounds={Astring}></String>
         </div>
         <div className="string6"></div>
         <div className="absolute top-[91%] left-0 w-full h-[8%]">
