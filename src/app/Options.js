@@ -21,17 +21,17 @@ export function Keys({pressedKeys, pressedAccs, keyChange, accidentalsChange}){
           
           <div className="relative flex w-[100%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
             <Note note="A" onClick={() => keyChange(0)} color={pressedKeys[0] ? 'blue-700' : '#727777'}></Note>
-            <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <Note note="B" onClick={() => keyChange(1)} color={pressedKeys[1] ? 'blue-700' : '#727777'}></Note>
-            <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <Note note="C" onClick={() => keyChange(2)} color={pressedKeys[2] ? 'blue-700' : '#727777'}></Note>
-            <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <Note note="D" onClick={() => keyChange(3)} color={pressedKeys[3] ? 'blue-700' : '#727777'}></Note>
-            <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <Note note="E" onClick={() => keyChange(4)} color={pressedKeys[4] ? 'blue-700' : '#727777'}></Note>
-            <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <Note note="F" onClick={() => keyChange(5)} color={pressedKeys[5] ? 'blue-700' : '#727777'}></Note>
-            <div className="w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+            <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
             <Note note="G" onClick={() => keyChange(6)} color={pressedKeys[6] ? 'blue-700' : '#727777'}></Note>
           </div>
           {/* Divs with # and b */}
@@ -74,17 +74,17 @@ export function Note({note, onClick, color}) {
 
   return (
     <div className="relative flex basis-1/7 h-[100%] w-full items-center justify-center" onClick={changeColorNote}>
-      {note === "A" ?
-      <div className={`absolute w-[100%] h-full z-1 rounded-l-md bg-${color}`} onClick={onClick}>
-        <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl  font-bold justify-center items-center">{note}</div>
-      </div> : note === "G" ? 
-      <div className={`absolute w-[100%] h-full z-1 rounded-r-md bg-${color}`} onClick={onClick}>
-        <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl  font-bold justify-center items-center">{note}</div>
-      </div> : 
-        <div className={`absolute w-[100%] h-full z-1 bg-${color}`} onClick={onClick}>
-          <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl font-bold justify-center items-center">{note}</div>
-        </div>      
-    },
+      {(note === "A") ?
+        <div className={`absolute w-[100%] h-full z-1 rounded-l-md bg-${color}`} onClick={onClick}>
+          <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl  font-bold justify-center items-center">{note}</div>
+        </div> : (note === "G") ? 
+        <div className={`absolute w-[100%] h-full z-1 rounded-r-md bg-${color}`} onClick={onClick}>
+          <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl  font-bold justify-center items-center">{note}</div>
+        </div> : 
+          <div className={`absolute w-[100%] h-full z-1 bg-${color}`} onClick={onClick}>
+            <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl font-bold justify-center items-center">{note}</div>
+          </div>   
+      },
     </div>
   );
 }
@@ -235,7 +235,7 @@ export default function Key(items){
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
       <Keys pressedKeys={pressedKeys} pressedAccs={pressedAccs} keyChange={keyChange} accidentalsChange={accidentalsChange}></Keys>
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
-        <div className="flex h-1/2 items-center justify-center w-full text-black text-base md:max-lg:text-base lg:max-2xl:text-xl 2xl:text-2xl font-semibold">Note representation</div>
+        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-xl 2xl:text-2xl font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
           <NoteRep text="Intervals" changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
           <NoteRep text="Note name" changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>

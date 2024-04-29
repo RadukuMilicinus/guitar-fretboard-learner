@@ -894,8 +894,6 @@ export default function Home() {
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
 
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
-      <div className="absolute top-[55%] left-[6%] w-[80%] h-[30%]">
-      </div> 
       <div className="absolute flex flex-col justify-between top-[55%] left-[5%] rounded-md w-[2%] h-[35%] bg-slate-600">
         {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
         <div className={`absolute top-[2%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('highE')} >
@@ -917,6 +915,16 @@ export default function Home() {
           <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full h-[40px]">E</div> 
         </div>
       </div> 
+      <Strings></Strings>
+      <Fretboard chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard>
+
+    </div>
+  );
+}
+
+export function Strings() {
+
+  return (
       <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
         <div className="absolute top-[5%] left-0 w-[100%] h-[2%] bg-[#D9D9D9] z-1"></div>
         <div className="string2"></div>
@@ -925,56 +933,43 @@ export default function Home() {
         <div className="string5"></div>
         <div className="string6"></div>
       </div>
-      <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
-        <div className="string1"></div>
-        <div className="absolute top-[2%] left-0 w-full h-[8%] ">
-          {/* TODO: PLAY SOUND FROM NOTES */}
-          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={1} note_rep={noteRep} notes={chosenNotes} sounds={highE}></String>
-          {/* noteRepresentation next !!! */}
-        </div>
-        <div className="string2"></div>
-        <div className="absolute top-[20%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={2} note_rep={noteRep}  notes={chosenNotes} sounds={Bstring}></String>
-        </div>
-        <div className="string3"></div>
-        <div className="absolute top-[38%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes}  chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={3} note_rep={noteRep} notes={chosenNotes} sounds={Gstring}></String>
-        </div>
-        <div className="string4"></div>
-        <div className="absolute top-[56%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={4} note_rep={noteRep}  notes={chosenNotes} sounds={Dstring}></String>
-        </div>
-        <div className="string5"></div>
-        <div className="absolute top-[74%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={5} note_rep={noteRep}  notes={chosenNotes} sounds={Astring}></String>
-        </div>
-        <div className="string6"></div>
-        <div className="absolute top-[91%] left-0 w-full h-[8%]">
-          <String intervals={chosenNotes} chord={ Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes } scale={Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes} keyChosen={keyChosen} accidental={accidental} strNr={6} note_rep={noteRep}  notes={chosenNotes} sounds={lowE}></String>
-        </div>
+  );
+}
 
-        <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
-          {/* <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret>
-          <Fret></Fret> */}
-        </div>
+export function Fretboard(items) {
 
-        {/* <div className="absolute top-[46.5%] left-[27.5%] w-6 h-6"> 
-          <FretMarker></FretMarker>
-        </div>
-        <div className="absolute top-[46.5%] left-[27.5%] w-6 h-6"> 
-          <FretMarker></FretMarker>
-        </div> */}
+  return (    
+    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
+      <div className="string1"></div>
+      <div className="absolute top-[2%] left-0 w-full h-[8%] ">
+        {/* TODO: PLAY SOUND FROM NOTES */}
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.highE}></String>
+        {/* noteRepresentation next !!! */}
+      </div>
+      <div className="string2"></div>
+      <div className="absolute top-[20%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={2} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Bstring}></String>
+      </div>
+      <div className="string3"></div>
+      <div className="absolute top-[38%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={3} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Gstring}></String>
+      </div>
+      <div className="string4"></div>
+      <div className="absolute top-[56%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={4} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Dstring}></String>
+      </div>
+      <div className="string5"></div>
+      <div className="absolute top-[74%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={5} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Astring}></String>
+      </div>
+      <div className="string6"></div>
+      <div className="absolute top-[91%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={6} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.lowE}></String>
       </div>
 
+      <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
+      </div>
     </div>
+
   );
 }
