@@ -553,9 +553,9 @@ export function String(items){
       chScale(sc)
     } else {             // chord is empty
       chScale(intervs)
-      console.log("On string, intervals is now on")
+      // console.log("On string, intervals is now on")
     } 
-    console.log("Scale changed to = %s for string", sc)
+    // console.log("Scale changed to = %s for string", sc)
   }, [sc, chord, intervs])
 
   // commenting this allows scale to be changed
@@ -864,15 +864,21 @@ export default function Home() {
     howler.play();
   }
 
+  const [bgBlur, setBlur] = useState(false);
+
+  function chBlur(){
+    setBlur(!bgBlur)
+    console.log("blur value after being changed = " + bgBlur)
+  }
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
       {/* Below renders on < 768px wide */}
-      <Fretboard2></Fretboard2>      
+      <Fretboard2 blur={bgBlur}></Fretboard2>      
       <Strings2></Strings2>
       <EmptyStrings2 keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
-      <FretsMakerVertical></FretsMakerVertical>
-      <Options2></Options2>
+      <FretsMakerVertical blur={bgBlur}></FretsMakerVertical>
+      <Options2 changeBlur={chBlur}></Options2>
 
       {/* Below renders on > 768px wide */}
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
@@ -1009,28 +1015,75 @@ export function Strings2() {
   )
 }
 
-export function Options2() {
+export function Options2(items) {
+
+  const [represPressed, setRepres] = useState([false, false])
+
+  function pressedRepres(idx){
+    var newRepres = [...represPressed]
+    if(idx == 0) console.log("Pressed representation 1")
+    else {
+      console.log("Pressed representation 2")
+    }
+    if(represPressed[idx] === false) {
+      for(var i = 0; i < represPressed.length; i++){
+        if(newRepres[i] == true) newRepres[i] = !newRepres[i];
+      }
+    }
+    newRepres[idx] = !newRepres[idx];
+    console.log("representation pressed of" + idx + "= " + newRepres[idx])
+    setRepres(newRepres)
+  }
+
+  const [key, setKey] = useState('C');
+
+  function KeyChoice(items) {
+    return (
+      <div className="absolute left-[25%] top-[25%] w-[50%] h-[50%] grid grid-cols-4 bg-yellow-500 z-3">
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('A'); changeKeyPressed()}}>A</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('A#'); changeKeyPressed()}}>A#</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('B'); changeKeyPressed()}} >B</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('C'); changeKeyPressed()}}>C</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('C#'); changeKeyPressed()}}>C#</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('D'); changeKeyPressed()}}>D</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('D#'); changeKeyPressed()}}>D#</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('E'); changeKeyPressed()}}>E</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('F'); changeKeyPressed()}}>F</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('F#'); changeKeyPressed()}}>F#</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('G'); changeKeyPressed()}}>G</div>
+        <div className="hover:bg-gray-600 flex flex-col items-center align-center justify-center" onClick={() => {setKey('G#'); changeKeyPressed()}}>G#</div>
+      </div>
+    );
+  }
+
+  const [keyPressed, setKeyPress] = useState(false);
+
+  function changeKeyPressed(){
+    setKeyPress(!keyPressed);
+  }
+
   return (
-    <div className="absolute left-[20%] w-[60%] top-[5%] h-[20%] visible md:invisible bg-slate-600 grid grid-cols-2 gap-3 h-full">
-      <div className="bg-blue-400 flex flex-col items-center h-full">
+    <div className="absolute left-[20%] w-[60%] top-[5%] h-[20%] visible md:invisible bg-slate-600 grid grid-cols-2 gap-3 ">
+      <div className=" flex flex-col items-center h-full">
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
           Key
         </div>
-        <div className="h-1/2 w-1/2 rounded-md border-2 border-black bg-[#642DBF] font-semibold text-3xl flex items-center justify-center">
-          C
+        <div className="h-1/2 w-1/2 rounded-md border-2 border-black bg-[#642DBF] font-semibold text-3xl flex items-center justify-center" onClick={() => {items.changeBlur(); console.log("Key pressed\n\n\n\n\nKey pressed"); changeKeyPressed()}}>
+          {key}
         </div>
+        {keyPressed && <KeyChoice></KeyChoice>}
       </div>
-      <div className="bg-blue-400 flex flex-col items-center h-full">
+      <div className=" flex flex-col items-center h-full">
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
           Repres.
         </div>
-        <div className="h-1/2 w-4/5 rounded-md border-2 border-black bg-[#642DBF] font-semibold text-3xl flex items-center justify-center">
-          <div className="flex-1 h-full flex items-center justify-center">I</div>
+        <div className="h-1/2 w-4/5 rounded-md border-2 border-black bg-[#642DBF] font-semibold text-3xl flex items-center justify-center z-1">
+          <div className={`relative z-2 flex-1 h-full flex items-center justify-center ${represPressed[0] === true ? 'bg-green-600' : 'bg-[#642DBF]'}`} onClick ={() => pressedRepres(0)}>I</div>
           <div className="w-[4%] h-full bg-black"></div>
-          <div className="flex-1 h-full flex items-center justify-center">NN</div>
+          <div className={`relative z-2 flex-1 h-full flex items-center justify-center ${represPressed[1] === true ? 'bg-green-600' : 'bg-[#642DBF]'}`}  onClick={() => pressedRepres(1)}>NN</div>
         </div>
       </div>
-      <div className="bg-blue-400 flex flex-col items-center h-full">
+      <div className=" flex flex-col items-center h-full">
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
           Scale
         </div>
@@ -1038,7 +1091,7 @@ export function Options2() {
           Ionian
         </div>
       </div>
-      <div className="bg-blue-400 flex flex-col items-center h-full">
+      <div className=" flex flex-col items-center h-full">
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
           Chords
         </div>
@@ -1067,7 +1120,7 @@ export function FretsMakerVertical(){
 
 export function Fretboard2(items) {
   return (    
-    <div className="absolute top-[30%] left-[20%] w-[60%] h-[65%] bg-[#713D6F] opacity-90 visible md:invisible">
+    <div className={`absolute top-[30%] left-[20%] w-[60%] h-[65%] bg-[#713D6F] opacity-90 visible md:invisible ${items.bgBlur === true ? 'blur-sm': 'blur-none'} 'blur-sm'`}>
       {/* <div className="string1"></div>
       <div className="absolute top-[2%] left-0 w-full h-[8%] ">
         <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.highE}></String>
