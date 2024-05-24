@@ -452,7 +452,7 @@ export function GridChordScale(items){
 
 export function Options(items){
     return (
-      <div className="relative top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
+      <div className="relative invisible md:visible top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
             <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
@@ -813,31 +813,6 @@ export default function Home() {
     console.log("Chosen notes are: %s", chosenNotesCpy);
   };
 
-   // Custom function to manage chordType and scale synchronously
-  // const manageChordAndScale = (updatedState) => {
-  //   // updatedState is an object with keys 'chordType' and 'scale', either of which may be undefined
-  //   if (updatedState.chordType !== undefined) {
-  //     setChordType(updatedState.chordType);
-  //     setScale('');
-  //     // Here, implement logic to determine how changing the chordType might affect the scale
-  //     // For simplicity, this example does not implement real music theory logic
-  //     // Example:
-  //     // setScale(chordTypeToScale(updatedState.chordType));
-  //   }
-
-  //   if (updatedState.scale !== undefined) {
-  //     setScale(updatedState.scale);
-  //     setChord('');
-  //     // Similarly, implement logic to adjust chordType based on the new scale, if necessary
-  //     // Example:
-  //     // setChordType(scaleToChordType(updatedState.scale));
-  //   }
-
-  //   // Note: The above implementations of chordTypeToScale and scaleToChordType are placeholders
-  //   // for logic you need to define based on how these properties relate in your application.
-  // };
-
-
   useEffect(() => {
     console.log("Chord type in Home updated to:", chordType);
   }, [chordType]);
@@ -892,29 +867,16 @@ export default function Home() {
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
+      {/* Below renders on < 768px wide */}
+      <Fretboard2></Fretboard2>      
+      <Strings2></Strings2>
+      <EmptyStrings2 keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
+      <FretsMakerVertical></FretsMakerVertical>
+      <Options2></Options2>
 
+      {/* Below renders on > 768px wide */}
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
-      <div className="absolute flex flex-col justify-between top-[55%] left-[5%] rounded-md w-[2%] h-[35%] bg-slate-600">
-        {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
-        <div className={`absolute top-[2%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('highE')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%]">E</div> 
-        </div>
-        <div className={`absolute top-[20%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'B' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('B') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => play('B')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">B</div> 
-        </div>
-        <div className={`absolute top-[38%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'G' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('G') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => play('G')}  >
-          <div className="relative flex flex-row justify-center align-center top-[0%] 2xl:top-[5%] w-full">G</div> 
-        </div>
-        <div className={`absolute top-[56%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'D' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('D') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('D')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">D</div> 
-        </div>
-        <div className={`absolute top-[74%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'A' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('A') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => play('A')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">A</div> 
-        </div>
-        <div className={`absolute top-[91%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === keyChosen + accidental ? 'bg-green-700' : isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => play('E')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full h-[40px]">E</div> 
-        </div>
-      </div> 
+      <EmptyStrings keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings>
       <Strings></Strings>
       <Fretboard chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard>
 
@@ -922,10 +884,38 @@ export default function Home() {
   );
 }
 
+export function EmptyStrings(items) {
+
+  return (
+      <div className="absolute flex flex-col justify-between top-[55%] left-[5%] w-[2%] h-[35%] bg-slate-600 invisible md:visible rounded-t-lg">
+        {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
+        <div className={`absolute top-[2%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%]">E</div> 
+        </div>
+        <div className={`absolute top-[20%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'B' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('B') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">B</div> 
+        </div>
+        <div className={`absolute top-[38%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'G' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('G') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
+          <div className="relative flex flex-row justify-center align-center top-[0%] 2xl:top-[5%] w-full">G</div> 
+        </div>
+        <div className={`absolute top-[56%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'D' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('D') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">D</div> 
+        </div>
+        <div className={`absolute top-[74%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'A' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('A') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">A</div> 
+        </div>
+        <div className={`absolute top-[91%] w-full h-[10%] justify-center text-2xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full h-[40px]">E</div> 
+        </div>
+      </div> 
+
+  );
+}
+
 export function Strings() {
 
   return (
-      <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 "> 
+      <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 invisible md:visible"> 
         <div className="absolute top-[5%] left-0 w-[100%] h-[2%] bg-[#D9D9D9] z-1"></div>
         <div className="string2"></div>
         <div className="string3"></div>
@@ -937,9 +927,8 @@ export function Strings() {
 }
 
 export function Fretboard(items) {
-
   return (    
-    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90">
+    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90 invisible md:visible">
       <div className="string1"></div>
       <div className="absolute top-[2%] left-0 w-full h-[8%] ">
         {/* TODO: PLAY SOUND FROM NOTES */}
@@ -951,7 +940,7 @@ export function Fretboard(items) {
         <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={2} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Bstring}></String>
       </div>
       <div className="string3"></div>
-      <div className="absolute top-[38%] left-0 w-full h-[8%]">
+      <div className="absolute top-[38%] left-0 w-full h-[8%]"> {/* fret */}
         <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={3} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Gstring}></String>
       </div>
       <div className="string4"></div>
@@ -969,6 +958,143 @@ export function Fretboard(items) {
 
       <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
       </div>
+    </div>
+
+  );
+}
+
+
+// export function String1(){
+
+//   return (
+//     <div className=""> </div>
+//   );
+// }
+
+export function EmptyStrings2(items){
+  return (
+    <div className="absolute flex flex-col top-[27%] left-[20%] w-[60%] h-[3%] z-0 visible md:invisible bg-slate-600">
+      <div className={`absolute left-[5%] w-[10%] h-[100%] top-0 justify-center text-2xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
+        <div className="relative flex left-[2%] 2xl:top-[0%]">E</div> 
+      </div>
+      <div className={`absolute left-[20%] w-[10%] h-[100%] justify-center text-2xl font-semibold text-black ${'A' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('B') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
+        <div className="relative flex left-[20%] 2xl:top-[0%] w-full">A</div> 
+      </div>
+      <div className={`absolute left-[37%] w-[10%] h-[100%] justify-center text-2xl font-semibold text-black ${'D' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('G') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
+        <div className="relative flex flex-row justify-center align-center left-[0%] 2xl:top-[5%] w-full">D</div> 
+      </div>
+      <div className={`absolute left-[54%] w-[10%] h-[100%] justify-center text-2xl font-semibold text-black ${'G' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('D') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
+        <div className="relative flex justify-center align-center left-[-2%] 2xl:top-[0%] w-full">G</div> 
+      </div>
+      <div className={`absolute left-[71%] w-[10%] h-[100%] justify-center text-2xl font-semibold text-black ${'B' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('A') ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
+        <div className="relative flex justify-center align-center left-[-2%] 2xl:top-[0%] w-full">B</div> 
+      </div>
+      <div className={`absolute left-[87%] w-[10%] h-[100%] justify-center text-2xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
+        <div className="relative flex justify-center align-center left-[-2%] 2xl:top-[0%] w-full h-[40px]">E</div> 
+      </div>
+    </div>
+  );
+}
+
+export function Strings2() {
+  return (
+    <div className="absolute top-[30%] left-[20%] w-[60%] h-[65%] z-0 visible md:invisible">
+      <div className="absolute left-[6%] w-[3%] h-[100%] top-0 bg-[#D9D9D9] z-1"></div>
+      <div className="absolute left-[23%] w-[3%] h-[100%] bg-[#D9D9D9]"></div>
+      <div className="absolute left-[40%] w-[3%] h-[100%] bg-[#D9D9D9]"></div>
+      <div className="absolute left-[57%] w-[3%] h-[100%] bg-[#D9D9D9]"></div>
+      <div className="absolute left-[74%] w-[3%] h-[100%] bg-[#D9D9D9]"></div>
+      <div className="absolute left-[91%] w-[3%] h-[100%] bg-[#D9D9D9]"></div>
+    </div>
+  )
+}
+
+export function Options2() {
+  return (
+    <div className="absolute left-[20%] w-[60%] top-[5%] h-[20%] visible md:invisible bg-slate-600 grid grid-cols-2 gap-3 h-full">
+      <div className="bg-blue-400 flex flex-col items-center h-full">
+        <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
+          Key
+        </div>
+        <div className="h-1/2 w-1/2 rounded-md border-2 border-black bg-[#642DBF] font-semibold text-3xl flex items-center justify-center">
+          C
+        </div>
+      </div>
+      <div className="bg-blue-400 flex flex-col items-center h-full">
+        <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
+          Repres.
+        </div>
+        <div className="h-1/2 w-4/5 rounded-md border-2 border-black bg-[#642DBF] font-semibold text-3xl flex items-center justify-center">
+          <div className="flex-1 h-full flex items-center justify-center">I</div>
+          <div className="w-[4%] h-full bg-black"></div>
+          <div className="flex-1 h-full flex items-center justify-center">NN</div>
+        </div>
+      </div>
+      <div className="bg-blue-400 flex flex-col items-center h-full">
+        <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
+          Scale
+        </div>
+        <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#642DBF] font-semibold text-xl flex items-center justify-center">
+          Ionian
+        </div>
+      </div>
+      <div className="bg-blue-400 flex flex-col items-center h-full">
+        <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
+          Chords
+        </div>
+        <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#642DBF] font-semibold text-xl flex items-center justify-center">
+          Maj
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function FretsMakerVertical(){
+
+  var notes = [1,2,3,4,5,6,7,8,9,10,11,12]
+
+  return (
+    <div className="absolute flex flex-col justify-between top-[20%] left-[5%] w-[45%] h-[75%] z-1 visible md:invisible">
+      {
+        notes.map((note) => {
+          <div className="relative w-full h-[2%] left-0 bg-black z-2"></div>
+        })
+      }
+    </div>
+  );
+}
+
+export function Fretboard2(items) {
+  return (    
+    <div className="absolute top-[30%] left-[20%] w-[60%] h-[65%] bg-[#713D6F] opacity-90 visible md:invisible">
+      {/* <div className="string1"></div>
+      <div className="absolute top-[2%] left-0 w-full h-[8%] ">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.highE}></String>
+      </div>
+      <div className="string2"></div>
+      <div className="absolute top-[20%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={2} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Bstring}></String>
+      </div>
+      <div className="string3"></div>
+      <div className="absolute top-[38%] left-0 w-full h-[8%]"> 
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={3} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Gstring}></String>
+      </div>
+      <div className="string4"></div>
+      <div className="absolute top-[56%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={4} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Dstring}></String>
+      </div>
+      <div className="string5"></div>
+      <div className="absolute top-[74%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={5} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Astring}></String>
+      </div>
+      <div className="string6"></div>
+      <div className="absolute top-[91%] left-0 w-full h-[8%]">
+        <String intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={6} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.lowE}></String>
+      </div>
+
+      <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
+      </div> */}
     </div>
 
   );
