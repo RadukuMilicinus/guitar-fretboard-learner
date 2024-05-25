@@ -958,6 +958,8 @@ export default function Home() {
     );
   }
 
+
+
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
       {/* Below renders on < 768px wide */}
@@ -967,7 +969,7 @@ export default function Home() {
       <Fretboard2 blur={bgBlur} scaleChanging={scaleChanging} chordChanging={chordChanging}  keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} scaleChanging={scaleChanging} chordChanging={chordChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
       <FretsMakerVertical blur={bgBlur} scaleChanging={scaleChanging} keyChanging={keyChanging} chordChanging={chordChanging}></FretsMakerVertical>
-      <Options2 changeBlur={chBlur} setScaleChanging={changingScaleStatus} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
+      <Options2 changeNoteRep={changeNoteRep} changeBlur={chBlur} setScaleChanging={changingScaleStatus} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
 
       {/* Below renders on > 768px wide */}
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
@@ -1022,7 +1024,7 @@ export function Strings() {
 
 export function Fretboard(items) {
   return (    
-    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90 invisible md:visible">
+    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90 invisible md:visible landscape">
       <div className="string1"></div>
       <div className="absolute top-[2%] left-0 w-full h-[8%] ">
         {/* TODO: PLAY SOUND FROM NOTES */}
@@ -1066,7 +1068,7 @@ export function Fretboard(items) {
 
 export function EmptyStrings2(items){
   return (
-    <div className={`absolute flex flex-col top-[27%] left-[20%] w-[60%] h-[3%] z-0 visible md:invisible bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'}`}>
+    <div className={`absolute flex flex-col top-[27%] left-[20%] w-[60%] h-[3%] z-0 portrait:visible visible landscape:invisible md:invisible bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'}`}>
       <div className={`absolute left-[5%] w-[10%] h-[100%] top-0 justify-center text-2xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
         <div className="relative flex left-[2%] 2xl:top-[0%]">E</div> 
       </div>
@@ -1152,9 +1154,9 @@ export function Options2(items) {
           Repres.
         </div> 
         <div className="h-1/2 w-4/5 rounded-2xl border-2 border-black bg-[#713D6F] font-semibold text-3xl flex items-center justify-center z-1 ">
-          <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-l-2xl ${represPressed[0] === true ? 'bg-green-600' : 'bg-[#713D6F]'}`} onClick ={() => pressedRepres(0)}>I</div>
+          <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-l-2xl ${represPressed[0] === true ? 'bg-green-600' : 'bg-[#713D6F]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
           <div className="w-[4%] h-full bg-black"></div>
-          <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-r-2xl ${represPressed[1] === true ? 'bg-green-600' : 'bg-[#713D6F]'}`}  onClick={() => pressedRepres(1)}>NN</div>
+          <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-r-2xl ${represPressed[1] === true ? 'bg-green-600' : 'bg-[#713D6F]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
         </div>
       </div>
       <div className=" flex flex-col items-center h-full">
@@ -1352,7 +1354,7 @@ export function String2(items) {
 
 export function Fretboard2(items) {
   return (
-    <div className={`absolute top-[30%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${items.bgBlur ? 'blur-sm' : 'blur-none'} ${items.keyChanging || items.scaleChanging || items.chordChanging ? 'invisible' : 'visible'} md:invisible`}>
+    <div className={`absolute top-[30%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${items.bgBlur ? 'blur-sm' : 'blur-none'} ${items.keyChanging || items.scaleChanging || items.chordChanging ? 'invisible' : 'visible'} portrait:visible landscape:invisible md:invisible`}>
       <div className="relative flex flex-col top-0 left-0 w-full h-full">
         {nrs.map((nr) => (
           <div key={nr} className={`absolute left-0 w-full h-[1%] bg-slate-500  ${nr === 12 ? 'hidden' : ''}`} style={{ top: `${(100 - (nr / 12) * 100)}%` }}></div>
