@@ -277,7 +277,7 @@ export function GridChordScale(items){
 
     const setChordPressed = (index) => {
       console.log("============== START SET CHORD PRESSED =============== ")
-      console.log("chord %s has been chosen with index %d", chordNames[index], index);
+      // console.log("chord %s has been chosen with index %d", chordNames[index], index);
       setIndexChordPressed(index);
       console.log("chord %s WITH INDEX %d has been chosen", chordNames[index], indexChordPressed);
       items.changeChordType(chordNames[index]) // this changes chord and passes this value to parent
@@ -299,7 +299,7 @@ export function GridChordScale(items){
 
     const setScalePressed = (index) => {
       console.log("============== START SET SCALE PRESSED ========= ")
-      console.log("scale %s has been chosen with index %d", scaleNames[index], index);
+      // console.log("scale %s has been chosen with index %d", scaleNames[index], index);
       setIndexScalePressed(index);
       console.log("scale %s WITH INDEX %d has been chosen", scaleNames[index], indexScalePressed);
       items.changeScaleType(scaleNames[index])
@@ -455,7 +455,7 @@ export function Options(items){
       <div className="absolute invisible md:visible top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
-            <Key changeKey={items.change_key} key={items.key} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
+            <Key changeKey={items.change_key} key={items.keyChosen} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
           </div>  
           <div className="relative col-span-4">
             <GridChordScale changeChordType={items.change_chord} changeScaleType={items.change_scale}></GridChordScale>
@@ -468,9 +468,9 @@ export function Options(items){
 }
 
 function scaleHasNote(scale, note) {
-  console.log("note = %s", note)
+  // console.log("note = %s", note)
   for (let i = 0 ; i < scale.length ; i++){
-    console.log("scale[%d] = ", i, scale[i])
+    // console.log("scale[%d] = ", i, scale[i])
     if( scale[i] === note ){
       return true;
     }
@@ -520,9 +520,6 @@ export function String(items){
   var intervs = items.notes;
 
   var noteRepres = items.note_rep
-
-  
-  // const [notesString, setNotesString] = useState([]);
     
   const fretboardGeneric = [
       ['F', 'F#/Gb', 'G', 'G#/Ab', 'A', 'A#/Bb', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E'], 
@@ -561,12 +558,6 @@ export function String(items){
   // commenting this allows scale to be changed
 
   const sounds = items.sounds
-  
-  // useEffect(() => {
-  //   setSounds()
-  // })
-
-  // const Howlers = new Howl
 
   function play (note, strNr){
     var idx = -1
@@ -694,16 +685,7 @@ export default function Home() {
   const notes = ['Ab/G#', 'A', 'Bb/A#', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G']
   const [chosenNotes, setChosenNotes] = useState([])
 
-  // var guitar = SampleLibrary.load(
-  //   {
-  //     instruments: "guitar-acoustic",
-  //     ext: ".wav"
-  //   }
-  // )
 
-  // useEffect(() => {
-  //   guitar.toMaster()
-  // }, [])
   var lowE = ['samples/samples/guitar-acoustic/E2.mp3', 'samples/samples/guitar-acoustic/F2.mp3', 'samples/samples/guitar-acoustic/Fs2.mp3', 'samples/samples/guitar-acoustic/G2.mp3', 'samples/samples/guitar-acoustic/Gs2.mp3',
           'samples/samples/guitar-acoustic/A3.mp3','samples/samples/guitar-acoustic/As3.mp3', 'samples/samples/guitar-acoustic/B3.mp3', 'samples/samples/guitar-acoustic/C3.mp3', 'samples/samples/guitar-acoustic/Cs2.mp3',
           'samples/samples/guitar-acoustic/D3.mp3', 'samples/samples/guitar-acoustic/Ds3.mp3', 'samples/samples/guitar-acoustic/E3.mp3']
@@ -766,7 +748,7 @@ export default function Home() {
   const setIntervsToFalse = () => {
     const intervs = [false, false, false, false, false, false, false, false, false, false, false, false]
     setIntervals(intervs)
-    console.log("Intervals are now = %s", intervs)
+    // console.log("Intervals are now = %s", intervs)
     intervs.forEach((elem) => {
       console.log(elem)
     })
@@ -827,7 +809,7 @@ export default function Home() {
     // console.log("===========\n\n\n\n==============")
     if(chosenNotes.length > 0){
       chosenNotes.forEach((chosenNote) => {
-        console.log("notes scale %s", chosenNote)
+        // console.log("notes scale %s", chosenNote)
         if(note === chosenNote) return true;
       })
     } else if(scale != ''){
@@ -903,6 +885,7 @@ export default function Home() {
 
   function changingScaleStatus() {
     setScaleChanging(!scaleChanging);
+    console.log("Scale changing status changed to " + scaleChanging + ",chord changing = " + chordChanging + ",keyChanging = " + keyChanging);
   }
 
   const [chosenScale, setChosenScale] = useState('Major Pentatonic')
@@ -917,7 +900,7 @@ export default function Home() {
         {
           scaleNames.map((scaleName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenScale(scaleName); changingScaleStatus(); setChosenChord('Choose chord..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenScale(scaleName); setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
                 {scaleName}
               </div>
               )
@@ -948,7 +931,7 @@ export default function Home() {
         {
           chordNames.map((chordName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenChord(chordName); changingChordStatus(); setChosenScale('Choose scale..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setChosenScale('Choose scale..')}}>
                 {chordName}
               </div>
               )
@@ -958,6 +941,17 @@ export default function Home() {
     );
   }
 
+  useEffect(() => {
+    console.log("Scale changing set to " + scaleChanging);
+  }, [scaleChanging])
+
+  useEffect(() => {
+    console.log("Chord changing set to " + chordChanging);
+  }, [chordChanging])
+  
+  useEffect(() => {
+    console.log("Key changing set to " + keyChanging);
+  }, [keyChanging])
 
 
   return (
@@ -969,7 +963,7 @@ export default function Home() {
       <Fretboard2 blur={bgBlur} scaleChanging={scaleChanging} chordChanging={chordChanging}  keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} scaleChanging={scaleChanging} chordChanging={chordChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
       <FretsMakerVertical blur={bgBlur} scaleChanging={scaleChanging} keyChanging={keyChanging} chordChanging={chordChanging}></FretsMakerVertical>
-      <Options2 changeNoteRep={changeNoteRep} changeBlur={chBlur} setScaleChanging={changingScaleStatus} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
+      <Options2 changeNoteRep={changeNoteRep} changeBlur={chBlur} scaleChanging={scaleChanging} setScaleChanging={changingScaleStatus} chordChanging={chordChanging} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} keyChosen={keyChosen} accidental={accidental} changeAcc={changeAccidental} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
 
       {/* Below renders on > 768px wide */}
       <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} tuning={tuning} change_chord={changeChord} chord={chordType} change_scale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
@@ -1067,8 +1061,13 @@ export function Fretboard(items) {
 // }
 
 export function EmptyStrings2(items){
+
+  useEffect(() => {
+    console.log("In EmptyStrings2, keyChanging = " + items.keyChanging);
+  }, [items.keyChanging])
+
   return (
-    <div className={`absolute flex flex-col top-[27%] left-[20%] w-[60%] h-[3%] z-0 portrait:visible visible landscape:invisible md:invisible bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'}`}>
+    <div className={`absolute flex flex-col top-[27%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
       <div className={`absolute left-[5%] w-[10%] h-[100%] top-0 justify-center text-2xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
         <div className="relative flex left-[2%] 2xl:top-[0%]">E</div> 
       </div>
@@ -1093,7 +1092,7 @@ export function EmptyStrings2(items){
 
 export function Strings2(items) {
   return (
-    <div className={`absolute top-[0%] left-[0%] w-[100%] h-[100%] visible md:invisible ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'}`}>
+    <div className={`absolute top-[0%] left-[0%] w-[100%] h-[100%] visible ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className="absolute left-[6%] w-[2%] h-[100%] top-0 bg-[#D9D9D9] z-10"></div>
       <div className="absolute left-[23%] w-[2%] h-[100%] top-0 bg-[#D9D9D9] z-10"></div>
       <div className="absolute left-[40%] w-[2%] h-[100%] top-0 bg-[#D9D9D9] z-10"></div>
@@ -1138,14 +1137,23 @@ export function Options2(items) {
     }
   }
 
+  var [scaleChanging, changeScale] = useState(false);
+
+  useEffect(() => {
+    changeScale(items.scaleChanging);    
+    console.log("In effect, scale changing now set to " + items.scaleChanging)
+  }, [items.scaleChanging])
+
+
+
   return (
     <div className="absolute left-[20%] w-[60%] top-[5%] h-[20%] visible md:invisible bg-slate-600 grid grid-cols-2 gap-3 ">
       <div className=" flex flex-col items-center h-full">
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold rounded-2xl">
           Key
         </div>
-        <div className="h-1/2 w-1/2 rounded-md border-2 border-black bg-[#713D6F] font-semibold text-3xl flex items-center justify-center" onClick={() => {items.changeBlur(); console.log("Key pressed" + items.keyChosen + "\n\n\n\n\nKey pressed"); changeKeyPressed(); items.setKeyChanging(); print1000()}}>
-          {items.keyChosen}
+        <div className="h-1/2 w-1/2 rounded-md border-2 border-black bg-[#713D6F] font-semibold text-3xl flex items-center justify-center" onClick={() => {items.changeBlur(); console.log("Key pressed" + items.keyChosen + "\n\n\n\n\nKey pressed"); changeKeyPressed(); items.setKeyChanging(); console.log("Key pressed set to " + items.keyChanging); print1000()}}>
+          {items.keyChosen} 
         </div>
         {/* {keyPressed && <KeyChoice></KeyChoice>} */}
       </div>
@@ -1163,7 +1171,7 @@ export function Options2(items) {
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
           Scale
         </div>
-        <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#713D6F] font-semibold text-xl flex items-center justify-center text-ellipsis" onClick={() => items.setScaleChanging()}>
+        <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#713D6F] font-semibold text-xl flex items-center justify-center text-ellipsis" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
           {items.scaleChosen}
         </div>
       </div>
@@ -1171,7 +1179,7 @@ export function Options2(items) {
         <div className="flex items-center justify-center h-1/2 text-2xl font-semibold">
           Chord
         </div>
-        <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#713D6F] font-semibold text-xl flex items-center justify-center" onClick={() => items.setChordChanging()}>
+        <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#713D6F] font-semibold text-xl flex items-center justify-center" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
           {items.chordChosen}
         </div>
       </div>
@@ -1354,7 +1362,7 @@ export function String2(items) {
 
 export function Fretboard2(items) {
   return (
-    <div className={`absolute top-[30%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${items.bgBlur ? 'blur-sm' : 'blur-none'} ${items.keyChanging || items.scaleChanging || items.chordChanging ? 'invisible' : 'visible'} portrait:visible landscape:invisible md:invisible`}>
+    <div className={`absolute top-[30%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true) ? 'invisible' : 'visible'} landscape:invisible md:invisible`}>
       <div className="relative flex flex-col top-0 left-0 w-full h-full">
         {nrs.map((nr) => (
           <div key={nr} className={`absolute left-0 w-full h-[1%] bg-slate-500  ${nr === 12 ? 'hidden' : ''}`} style={{ top: `${(100 - (nr / 12) * 100)}%` }}></div>
