@@ -684,7 +684,7 @@ export default function Home() {
   const [intervals, setIntervals] = useState([false, false, false, false, false, false, false, false, false, false, false, false])
   const notes = ['Ab/G#', 'A', 'Bb/A#', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G']
   const [chosenNotes, setChosenNotes] = useState([])
-
+  const intervalChoiceRef = useRef(null); 
 
   var lowE = ['samples/samples/guitar-acoustic/E2.mp3', 'samples/samples/guitar-acoustic/F2.mp3', 'samples/samples/guitar-acoustic/Fs2.mp3', 'samples/samples/guitar-acoustic/G2.mp3', 'samples/samples/guitar-acoustic/Gs2.mp3',
           'samples/samples/guitar-acoustic/A3.mp3','samples/samples/guitar-acoustic/As3.mp3', 'samples/samples/guitar-acoustic/B3.mp3', 'samples/samples/guitar-acoustic/C3.mp3', 'samples/samples/guitar-acoustic/Cs2.mp3',
@@ -968,15 +968,31 @@ export default function Home() {
 
   const [tuningChanging, setTuningChanging] = useState(false);
 
+
+  const [intervalChanging, setIntervalChanging] = useState(false);
   var intervalsChoices = ['1', 'b2', '2', 'b3', '3', '4', '#4/b5', '5', '#5/b6', '6', 'b7', '7']
 
-  function IntervalChoice() {
+  useEffect(() => {
+    if (intervalChanging) {
+      const handleClickOutside = (event) => {
+        if (intervalChoiceRef.current && !intervalChoiceRef.current.contains(event.target)) {
+          console.log("Interval changing set to false");
+          setIntervalChanging(false);
+        }
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [intervalChanging]);
+
+  function IntervalChoice(items) {
+   
     return (
-      <div className="fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden">
+      <div ref={intervalChoiceRef} className={`fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden`}>
         {
           intervalsChoices.map((intervalName, idx) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenScale(scaleName); setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
+              <div className={`hover:bg-green-700 flex items-center justify-center text-xl text-black font-semibold z-52 intervals rounded-2xl ${intervals[idx] === true ? 'bg-green-700' : 'bg-[#713D6F]'}`} onClick={() => {console.log("Scale changing now set to false"); changeIntervsAndSetNotes(idx)}}>
                 {intervalName}
               </div>
               )
@@ -985,7 +1001,7 @@ export default function Home() {
       </div>
     );
   }
-  
+
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
@@ -993,10 +1009,15 @@ export default function Home() {
       {keyChanging === true ? <KeyChoice></KeyChoice> : <div></div>}
       {scaleChanging === true ? <ScaleChoice></ScaleChoice> : <div></div>}
       {chordChanging === true ? <ChordChoice></ChordChoice> : <div></div>}
-      <Fretboard2 blur={bgBlur} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chosenChord} scale={chosenScale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
-      <EmptyStrings2 blur={bgBlur} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
+      {intervalChanging === true ? <IntervalChoice></IntervalChoice> : <div></div>}
+      <Fretboard2 blur={bgBlur} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chosenChord} scale={chosenScale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
+      <EmptyStrings2 blur={bgBlur} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
       <FretsMakerVertical blur={bgBlur} scaleChanging={scaleChanging} keyChanging={keyChanging} chordChanging={chordChanging}></FretsMakerVertical>
-      <Options2 changeNoteRep={changeNoteRep} setTuning={changeTuning} setTuningChanging={setTuningChanging} tuningChanging={tuningChanging} tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} chordChanging={chordChanging} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
+      <Options2 changeNoteRep={changeNoteRep} setTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
+        tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} 
+        chordChanging={chordChanging} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
+        keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
+      
       <Logo2></Logo2>
       {/* Below renders on > 768px wide */}
       <Logo></Logo>
@@ -1122,7 +1143,7 @@ export function EmptyStrings2(items){
   }, [items.keyChanging])
 
   return (
-    <div className={`absolute flex flex-col top-[32%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
+    <div className={`absolute flex flex-col top-[32%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
       <div className={`absolute left-[5%] w-[10%] h-[100%] top-0 justify-center text-xl font-semibold text-black ${'E' === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval('E') ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
         <div className="relative flex left-[2%] 2xl:top-[0%]">E</div> 
       </div>
@@ -1147,7 +1168,7 @@ export function EmptyStrings2(items){
 
 export function Strings2(items) {
   return (
-    <div className={`absolute top-[0%] left-[0%] w-[100%] h-[100%] visible ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
+    <div className={`absolute top-[0%] left-[0%] w-[100%] h-[100%] visible ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className="absolute left-[6%] w-[2%] h-[100%] top-0 bg-[#D9D9D9] z-10"></div>
       <div className="absolute left-[23%] w-[2%] h-[100%] top-0 bg-[#D9D9D9] z-10"></div>
       <div className="absolute left-[40%] w-[2%] h-[100%] top-0 bg-[#D9D9D9] z-10"></div>
@@ -1255,7 +1276,7 @@ export function Options2(items) {
           <div className="flex basis-1/2 items-center justify-center h-1/2 text-xl text-[#929292] font-semibold">
             Intervals
           </div> 
-          <div className={`flex basis-1/2 rounded-full ${intervOn === true ? 'bg-blue-700' : 'bg-[#727777]'} w-[20px] h-[20px] font-semibold text-xl items-center justify-center z-2 `} onClick={() => {setIntervs(!intervOn) ; console.log("intervOn is = " + intervOn)}}>
+          <div className={`flex basis-1/2 rounded-full ${intervOn === true ? 'bg-blue-700' : 'bg-[#727777]'} w-[20px] h-[20px] font-semibold text-xl items-center justify-center z-2 `} onClick={() => {setIntervs(!intervOn) ; items.setIntervalChanging(!items.intervalChanging); console.log("intervOn is = " + intervOn)}}>
             <div className="absolute flex items-center align-middle max-w-[100%] max-h-[100%] bg-black rounded-full z-3 border-2 ">
             </div>
           </div>
@@ -1465,12 +1486,12 @@ export function String2(items) {
 
 export function Fretboard2(items) {
   return (
-    <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
+    <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
       <div className="relative flex flex-col top-0 left-0 w-full h-full">
         {nrs.map((nr) => (
           <div key={nr} className={`absolute left-0 w-full h-[1%] bg-slate-500  ${nr === 12 ? 'hidden' : ''}`} style={{ top: `${(100 - (nr / 12) * 100)}%` }}></div>
         ))}
-        <Strings2 blur={items.bgBlur} scaleChanging={items.scaleChanging} chordChanging={items.chordChanging} tuningChanging={items.tuningChanging} keyChanging={items.keyChanging}></Strings2>
+        <Strings2 blur={items.bgBlur} scaleChanging={items.scaleChanging} intervalChanging={items.intervalChanging} chordChanging={items.chordChanging} tuningChanging={items.tuningChanging} keyChanging={items.keyChanging}></Strings2>
         {['3%', '20%', '37%', '54%', '71%', '88%'].map((left, index) => (
           <div key={index} className="absolute top-[0%] w-[8%] h-[100%]" style={{ left }}>
             <String2 intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={index + 1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={index === 0 ? items.lowE : index === 1 ? items.Astring : index === 2 ? items.Dstring : index === 3 ? items.Gstring : index === 4 ? items.Bstring : items.highE}></String2>
