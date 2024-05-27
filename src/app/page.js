@@ -863,18 +863,18 @@ export default function Home() {
   function KeyChoice() {
     return (
       <div className="fixed left-[15%] top-[35%] w-[70%] h-[40%] grid grid-cols-4 bg-[#713D6F] z-50 rounded-2xl">
-        <div className="hover:bg-green-600 flex items-center justify-center text-2xl font-semibold rounded-tl-2xl" onClick={() => {setKey('A'); setKeyChanging(false)}}>A</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('A#'); setKeyChanging(false)}}>A#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('B'); setKeyChanging(false)}}>B</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-tr-2xl" onClick={() => {setKey('C'); setKeyChanging(false)}}>C</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('C#'); changingKeyStatus()}}>C#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('D'); changingKeyStatus()}}>D</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('D#'); changingKeyStatus()}}>D#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('E'); changingKeyStatus()}}>E</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-bl-2xl" onClick={() => {setKey('F'); changingKeyStatus()}}>F</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('F#'); changingKeyStatus()}}>F#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('G'); changingKeyStatus()}}>G</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-br-2xl" onClick={() => {setKey('G#'); changingKeyStatus()}}>G#</div>
+        <div className="hover:bg-green-600 flex items-center justify-center text-2xl font-semibold rounded-tl-2xl" onClick={() => {setKey('A'); setKeyChanging(false); setAccidental("")}}>A</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('A#'); setKeyChanging(false); setAccidental("#")}}>A#</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('B'); setKeyChanging(false); setAccidental("")}}>B</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-tr-2xl" onClick={() => {setKey('C'); setKeyChanging(false); setAccidental("")}}>C</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('C#'); changingKeyStatus(); setAccidental("#")}}>C#</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('D'); changingKeyStatus(); setAccidental("")}}>D</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('D#'); changingKeyStatus(); setAccidental("#")}}>D#</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('E'); changingKeyStatus(); setAccidental("")}}>E</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-bl-2xl" onClick={() => {setKey('F'); changingKeyStatus(); setAccidental("")}}>F</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('F#'); changingKeyStatus(); setAccidental("#")}}>F#</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('G'); changingKeyStatus(); setAccidental("")}}>G</div>
+        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-br-2xl" onClick={() => {setKey('G#'); changingKeyStatus(); setAccidental("#")}}>G#</div>
       </div>
     );
   }
@@ -1507,6 +1507,27 @@ export function String2(items) {
 
 
 export function Fretboard2(items) {
+
+  const [key, setKeyHere] = useState(items.keyChosen);
+  const [accidental, setAccidentalHere] = useState(items.accidental);
+
+  useEffect(() => {
+    if(items.keyChosen.length === 2) {
+      setKeyHere(items.keyChosen[0])
+    } else{
+      setKeyHere(items.keyChosen[0])
+    }
+  }, [items.keyChosen])
+
+   useEffect(() => {
+    if(items.keyChosen.length === 2) {
+      setAccidentalHere(items.accidental)
+    } else{
+      setAccidentalHere(items.accidental)
+    }
+  }, [items.accidental])
+
+
   return (
     <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
       <div className="relative flex flex-col top-0 left-0 w-full h-full">
@@ -1516,12 +1537,12 @@ export function Fretboard2(items) {
         <Strings2 blur={items.bgBlur} scaleChanging={items.scaleChanging} intervalChanging={items.intervalChanging} chordChanging={items.chordChanging} tuningChanging={items.tuningChanging} keyChanging={items.keyChanging}></Strings2>
         {['3%', '20%', '37%', '54%', '71%', '88%'].map((left, index) => (
           <div key={index} className="absolute top-[0%] w-[8%] h-[100%]" style={{ left }}>
-            <String2 intervals={items.chosenNotes}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={index + 1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={index === 0 ? items.lowE : index === 1 ? items.Astring : index === 2 ? items.Dstring : index === 3 ? items.Gstring : index === 4 ? items.Bstring : items.highE}></String2>
+            <String2 intervals={items.chosenNotes}  chord={ Chord.get(key + accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(key + accidental + " " + items.scale.toLowerCase()).notes} keyChosen={key} accidental={accidental} strNr={index + 1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={index === 0 ? items.lowE : index === 1 ? items.Astring : index === 2 ? items.Dstring : index === 3 ? items.Gstring : index === 4 ? items.Bstring : items.highE}></String2>
           </div>
         ))}
       </div>
       {/* <div className="absolute top-[19.5%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
-      
+
       <div className="absolute top-[36%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
       <div className="absolute top-[52.5%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
       <div className="absolute top-[69%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
