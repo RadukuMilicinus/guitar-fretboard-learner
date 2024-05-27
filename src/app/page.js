@@ -677,7 +677,7 @@ export default function Home() {
 
   const [keyChosen, setKey] = useState("C") // initially set to null 
   const [accidental, setAccidental] = useState("") // initially set to null 
-  const [tuning, setTuning] = useState("") // initially set to null 
+  const [tuning, setTuning] = useState("E standard") // initially set to null 
   const [chordType, setChord] = useState("major") // initially set to null 
   const [scale, setScale] = useState("") // initially set to null 
   const [noteRep, setNoteRep] = useState(1);
@@ -685,6 +685,7 @@ export default function Home() {
   const notes = ['Ab/G#', 'A', 'Bb/A#', 'B', 'C', 'C#/Db', 'D', 'D#/Eb', 'E', 'F', 'F#/Gb', 'G']
   const [chosenNotes, setChosenNotes] = useState([])
   const intervalChoiceRef = useRef(null); 
+  const [intervOn, setIntervs] = useState(false);
 
   var lowE = ['samples/samples/guitar-acoustic/E2.mp3', 'samples/samples/guitar-acoustic/F2.mp3', 'samples/samples/guitar-acoustic/Fs2.mp3', 'samples/samples/guitar-acoustic/G2.mp3', 'samples/samples/guitar-acoustic/Gs2.mp3',
           'samples/samples/guitar-acoustic/A3.mp3','samples/samples/guitar-acoustic/As3.mp3', 'samples/samples/guitar-acoustic/B3.mp3', 'samples/samples/guitar-acoustic/C3.mp3', 'samples/samples/guitar-acoustic/Cs2.mp3',
@@ -900,7 +901,7 @@ export default function Home() {
         {
           scaleNames.map((scaleName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenScale(scaleName); setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {setChosenScale(scaleName); setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
                 {scaleName}
               </div>
               )
@@ -925,13 +926,15 @@ export default function Home() {
   //   setChosenScale(scaleName)
   // }
 
+
+
   function ChordChoice() {
     return (
       <div className="fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden">
         {
           chordNames.map((chordName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold z-52 rounded-2xl" onClick={() => {setChosenChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setChosenScale('Choose scale..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {setChosenChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setChosenScale('Choose scale..')}}>
                 {chordName}
               </div>
               )
@@ -966,7 +969,6 @@ export default function Home() {
     setScale(chosenChord);
   }, [chosenChord])
 
-  const [tuningChanging, setTuningChanging] = useState(false);
 
 
   const [intervalChanging, setIntervalChanging] = useState(false);
@@ -978,6 +980,7 @@ export default function Home() {
         if (intervalChoiceRef.current && !intervalChoiceRef.current.contains(event.target)) {
           console.log("Interval changing set to false");
           setIntervalChanging(false);
+          setIntervs(false);
         }
       };
       document.addEventListener('mousedown', handleClickOutside);
@@ -992,7 +995,7 @@ export default function Home() {
         {
           intervalsChoices.map((intervalName, idx) => {
             return (
-              <div className={`hover:bg-green-700 flex items-center justify-center text-xl text-black font-semibold z-52 intervals rounded-2xl ${intervals[idx] === true ? 'bg-green-700' : 'bg-[#713D6F]'}`} onClick={() => {console.log("Scale changing now set to false"); changeIntervsAndSetNotes(idx)}}>
+              <div className={`hover:bg-green-700 flex items-center justify-center text-xl text-black font-semibold intervals rounded-2xl ${intervals[idx] === true ? 'bg-green-700' : 'bg-[#713D6F]'}`} onClick={() => {console.log("Scale changing now set to false"); changeIntervsAndSetNotes(idx)}}>
                 {intervalName}
               </div>
               )
@@ -1002,6 +1005,26 @@ export default function Home() {
     );
   }
 
+  const [tuningChanging, setTuningChanging] = useState(false);
+  var tunings = ['E standard', 'D standard', 'C standard', 'Drop C', 'Drop D', 'B standard', 'A standard']
+
+   function TuningChoice() {
+    return (
+      <div className="fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden">
+        {
+          tunings.map((tuning) => {
+            return (
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {setTuning(tuning); setTuningChanging(false); console.log("Tuning changing now set to false from tuning choice"); }}>
+                {tuning}
+              </div>
+              )
+          })
+        }
+      </div>
+    );
+  }
+
+
 
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
@@ -1010,13 +1033,14 @@ export default function Home() {
       {scaleChanging === true ? <ScaleChoice></ScaleChoice> : <div></div>}
       {chordChanging === true ? <ChordChoice></ChordChoice> : <div></div>}
       {intervalChanging === true ? <IntervalChoice></IntervalChoice> : <div></div>}
+      {tuningChanging === true ? <TuningChoice></TuningChoice> : <div></div>}
       <Fretboard2 blur={bgBlur} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chosenChord} scale={chosenScale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
       <FretsMakerVertical blur={bgBlur} scaleChanging={scaleChanging} keyChanging={keyChanging} chordChanging={chordChanging}></FretsMakerVertical>
       <Options2 changeNoteRep={changeNoteRep} setTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
         tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} 
         chordChanging={chordChanging} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
-        keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord}></Options2>
+        keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord} intervalOn={intervOn} setIntervs={setIntervs}></Options2>
       
       <Logo2></Logo2>
       {/* Below renders on > 768px wide */}
@@ -1228,12 +1252,11 @@ export function Options2(items) {
     console.log("Accidental is now = " + items.accidental)
   }
 
-  const [intervOn, setIntervs] = useState(false);
 
 
   return (
     <div className="absolute left-[0%] w-[100%] top-[10%] h-[20%] visible md:invisible">
-      <div className="absolute left-[0%] w-[100%] top-[10%] h-[50%] visible md:invisible  grid grid-cols-3 gap-3 ">
+      <div className="absolute left-[2%] w-[96%] top-[10%] h-[50%] visible md:invisible  grid grid-cols-3 gap-3 bg-[#3D3D3D] rounded-2xl">
         <div className=" flex flex-col items-center h-[50%]">
           <div className="flex items-center justify-center h-1/2 text-xl font-semibold text-[#929292] rounded-2xl">
             Key
@@ -1255,39 +1278,38 @@ export function Options2(items) {
           <div className="flex items-center justify-center h-1/2 text-xl text-[#929292] font-semibold">
             Chord
           </div>
-          <div className="h-1/2 w-full rounded-md border-2 border-black bg-[#727777] font-semibold text-md flex items-center justify-center text-opacity-70" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
+          <div className="h-1/2 w-[90%] rounded-md border-2 border-black bg-[#727777] font-semibold text-md flex items-center justify-center text-opacity-70" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
             {items.chordChosen}
           </div>
         </div>
 
       </div>
       <div className="absolute left-[2%] w-[96%] top-[50%] h-[50%] visible md:invisible flex basis-3 flex-row bg-[#3D3D3D] rounded-2xl">
-        <div className="relative flex basis-1/3 flex-row items-center h-full">
-          <div className="flex basis-1/2 items-center justify-center h-1/2 text-xl text-[#929292] font-semibold">
-            Repres.
-          </div> 
-          <div className="rounded-xl border-2 border-black bg-[#727777] font-semibold text-xl flex basis-1/2 items-center justify-center z-1 ">
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-l-xl ${represPressed[0] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
-            <div className="relative w-[4%] h-full z-2 bg-black"></div>
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-r-xl ${represPressed[1] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
+        <div className="relative flex basis-1/3 flex-col items-center h-full justify-center">
+          <div className="flex items-center justify-center basis-1/2 text-xl text-[#929292] font-semibold">
+            Tuning
+          </div>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging) }}>
+            {items.tuning === '' ? 'Choose tuning..' : items.tuning}
           </div>
         </div>
         <div className="relative flex basis-1/3 flex-row items-center h-full">
           <div className="flex basis-1/2 items-center justify-center h-1/2 text-xl text-[#929292] font-semibold">
             Intervals
           </div> 
-          <div className={`flex basis-1/2 rounded-full ${intervOn === true ? 'bg-blue-700' : 'bg-[#727777]'} w-[20px] h-[20px] font-semibold text-xl items-center justify-center z-2 `} onClick={() => {setIntervs(!intervOn) ; items.setIntervalChanging(!items.intervalChanging); console.log("intervOn is = " + intervOn)}}>
+          <div className={`flex basis-1/2 rounded-full ${items.intervOn === true ? 'bg-blue-700' : 'bg-[#727777]'} w-[20px] h-[20px] font-semibold text-xl items-center justify-center z-2 `} onClick={() => {items.setIntervs(!items.intervOn) ; items.setIntervalChanging(!items.intervalChanging); console.log("intervOn is = " + items.intervOn)}}>
             <div className="absolute flex items-center align-middle max-w-[100%] max-h-[100%] bg-black rounded-full z-3 border-2 ">
             </div>
           </div>
         </div>
-        <div className="relative flex basis-1/3 flex-col items-center h-full justify-center">
-          <div className="flex items-center justify-center basis-1/2 text-xl text-[#929292] font-semibold">
-            Tuning
-          </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(!items.tuningChanging); console.log("Tuning changing set to " + items.tuningChanging) }}>
-            {items.tuning}
-            {items.tuning != '' ? items.tuning : 'Choose tuning..'}
+        <div className="relative flex basis-1/3 left-0 w-[90%] flex-row items-center h-full">
+          <div className="flex basis-1/2 items-center justify-center h-1/2 text-xl text-[#929292] font-semibold">
+            Repres.
+          </div> 
+          <div className="relative rounded-xl border-2 border-black bg-[#727777] h-[25%] font-semibold text-xl flex basis-1/2 w-[90%] items-center justify-center z-1 ">
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-l-xl ${represPressed[0] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
+            <div className="absolute w-[6%] h-full bg-black"></div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-r-xl ${represPressed[1] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
           </div>
         </div>
 
@@ -1498,6 +1520,13 @@ export function Fretboard2(items) {
           </div>
         ))}
       </div>
+      {/* <div className="absolute top-[19.5%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
+      
+      <div className="absolute top-[36%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
+      <div className="absolute top-[52.5%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
+      <div className="absolute top-[69%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
+      <div className="absolute top-[94%] left-[30%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
+      <div className="absolute top-[94%] right-[30%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div> */}
     </div>
   );
 }
