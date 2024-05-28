@@ -1135,11 +1135,12 @@ export function Logo2() {
 export function EmptyStrings(items) {
 
   useEffect(() => {
-    console.log("In EmptyStrings2, keyChanging = " + items.keyChanging);
+    console.log("In EmptyStrings, keyChanging = " + items.keyChanging);
   }, [items.keyChanging])
 
   const [strings, setStringNotes] = useState(['E','A','D','G','B','E']) 
   
+  const Estandard = ['E','A','D','G','B','E']
   const Dstandard = ['D','G','C','F','A','D']
   const Cstandard = ['C','F','Bb','Eb','G','C']
 
@@ -1155,6 +1156,7 @@ export function EmptyStrings(items) {
       setStringNotes(newStrings)
     }
     else if(items.tuning === "E standard") {
+      newStrings = [...Estandard]
       setStringNotes(newStrings)
     }
     else if(items.tuning === "D standard") {
