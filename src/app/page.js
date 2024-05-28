@@ -1083,6 +1083,24 @@ export default function Home() {
     );
   }
 
+  function AboutBar() {
+    return (
+      <div className="absolute flex flex-row left-[72%] w-[28%] top-[1%] h-[6%] md:top-[1%] md:left-[76%] md:w-[24%] lg:left-[82%] lg:w-[18%] bg-[#3D3D3D] z-1 rounded-l-2xl">
+        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold">HOME</div>
+        {/* <div className="relative top-0 w-[10px] bg-[#3D3D3D] h-[100%] z-2"></div> */}
+        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold">ABOUT</div>
+        <div className="relative top-0 basis-1/3 justify-center items-center flex flex-row gap-1 2xl:gap-0">
+          <div className="flex relative basis-2/5 justify-center items-center">
+            <img src="./Instaguramo.png" alt="Instagram" className="h-full w-full min-w-[30px] min-h-[30px] md:min-w-[40px] md:min-h-[40px] max-w-[50px] max-h-[50px]"/>
+          </div>
+          <div className="relative basis-2/5 justify-center items-center">
+            <img src="./RinkedIn.png" alt="LinkedIn" className="w-full h-full min-w-[30px] min-h-[30px] md:min-w-[40px] md:min-h-[40px] max-w-[50px] max-h-[50px]"/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
 
 
   return (
@@ -1100,6 +1118,7 @@ export default function Home() {
         chordChanging={chordChanging} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
         keyChosen={keyChosen} scaleChosen={chosenScale} chordChosen={chosenChord} intervalOn={intervOn} setIntervs={setIntervs}></Options2>
       <Logo2></Logo2>
+      <AboutBar></AboutBar>
 
       {/* Below renders on > 768px wide */}
       <Logo></Logo>
@@ -1124,8 +1143,8 @@ export function Logo() {
 
 export function Logo2() {
   return (
-    <div className="absolute top-[1%] w-full max-h-[20%] flex visible md:invisible">
-      <div className="relative left-[2%] max-w-[40%] h-[100%]">
+    <div className="absolute top-[2%] left-[2%] w-[50%] max-h-[20%] flex visible md:invisible">
+      <div className="relative left-[0%] max-w-[100%] h-[100%]">
         <img src="./FretboardDojo Logo.png" alt="logo" />
       </div>
     </div>

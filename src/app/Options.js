@@ -14,7 +14,7 @@ export function Keys({ pressedKeys, pressedAccs, keyChange, accidentalsChange })
   return (
     <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
       <div className="flex basis-1/2 h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Key</div>
-      <div className="flex justify-normal flex-row left-[10%] w-[80%] basis-1/2 h-[1/4] md:h-auto">
+      <div className="flex justify-normal flex-row left-[10%] w-[80%] basis-1/3 h-[1/6] md:h-auto">
         <div className="relative flex-row flex basis-6/10 w-[100%]  justify-evenly h-full bg-[#727777] rounded-md">
           {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((note, index) => (
             <React.Fragment key={note}>
