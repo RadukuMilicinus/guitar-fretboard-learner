@@ -410,14 +410,14 @@ export function GridChordScale(items){
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-xl justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={changeDropDownTuning}>
+              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-sm lg:text-base justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={changeDropDownTuning}>
                 { dropDownTuning ? 
                   (
                     <DropdownTuning setPressedTuning={setTuningPressed} setTuning={items.setTuning} />
                   ) : indexTuningPressed > -1 ? 
                   
                   (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-xl bg-[#727777] rounded-lg">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg">
                       {tunings[indexTuningPressed]}
                     </div>
                   ) : (

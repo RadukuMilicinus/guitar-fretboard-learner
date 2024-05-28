@@ -13,20 +13,18 @@ import React, { useState } from 'react';
 export function Keys({ pressedKeys, pressedAccs, keyChange, accidentalsChange }) {
   return (
     <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
-      <div className="flex h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Key</div>
-      <div className="flex justify-normal flex-row left-[10%] w-[80%] h-full md:h-auto">
-        {/* Divs with notes A to G */}
-        <div className="relative flex w-[100%] justify-evenly flex-row left-0 top-0 h-full bg-[#727777] rounded-md">
+      <div className="flex basis-1/2 h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Key</div>
+      <div className="flex justify-normal flex-row left-[10%] w-[80%] basis-1/2 h-[1/4] md:h-auto">
+        <div className="relative flex-row flex basis-6/10 w-[100%]  justify-evenly h-full bg-[#727777] rounded-md">
           {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((note, index) => (
             <React.Fragment key={note}>
               <Note note={note} onClick={() => keyChange(index)} color={pressedKeys[index] ? 'blue-700' : '#727777'} />
               {index < 6 && (
-                <div className="relative w-[5%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
+                <div className="relative w-[6%] h-[100%] top-[0%] bg-[#3D3D3D]"></div>
               )}
             </React.Fragment>
           ))}
         </div>
-        {/* Divs with # and b */}
         <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
           <div className="flex basis-1/5 h-[100%]"></div>
           <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
@@ -39,7 +37,6 @@ export function Keys({ pressedKeys, pressedAccs, keyChange, accidentalsChange })
     </div>
   );
 }
-
 
 
 export function Note({note, onClick, color}) {
@@ -63,20 +60,21 @@ export function Note({note, onClick, color}) {
     }
   }
 
-
   return (
     <div className="relative flex basis-1/7 h-[100%] w-full items-center justify-center" onClick={changeColorNote}>
-      {(note === "A") ?
+      {note === "A" ? (
         <div className={`absolute w-[100%] h-full z-1 rounded-l-md bg-${color}`} onClick={onClick}>
-          <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl  font-bold justify-center items-center">{note}</div>
-        </div> : (note === "G") ? 
+          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center font-semibold">{note}</div>
+        </div>
+      ) : note === "G" ? (
         <div className={`absolute w-[100%] h-full z-1 rounded-r-md bg-${color}`} onClick={onClick}>
-          <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl  font-bold justify-center items-center">{note}</div>
-        </div> : 
-          <div className={`absolute w-[100%] h-full z-1 bg-${color}`} onClick={onClick}>
-            <div className="relative flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl font-bold justify-center items-center">{note}</div>
-          </div>   
-      },
+          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center font-semibold">{note}</div>
+        </div>
+      ) : (
+        <div className={`absolute w-[100%] h-full z-1 bg-${color}`} onClick={onClick}>
+          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center font-semibold">{note}</div>
+        </div>
+      )}
     </div>
   );
 }
