@@ -351,12 +351,14 @@ export function GridChordScale(items){
     };
 
   useEffect(() => {
+    console.log("Scale chosen has changed in GridChordScale horizontal layout")
     for(var i = 0; i < scaleNames.length ; i++){
       if(items.scaleChosen === scaleNames[i]){
         setIndexScalePressed(i)
         setIndexChordPressed(-1)
       }
     }
+    console.log("Scale chosen has changed in GridChordScale horizontal layout")
   }, [items.scaleChosen])
   
   useEffect(() => {
@@ -366,6 +368,7 @@ export function GridChordScale(items){
         setIndexScalePressed(-1)
       }
     }
+    console.log("Chord chosen has changed in GridChordScale horizontal layout")
   }, [items.chordChosen])
 
 
@@ -486,7 +489,7 @@ export function Options(items){
             <Key changeKey={items.change_key} key={items.keyChosen} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
           </div>  
           <div className="relative col-span-4">
-            <GridChordScale changeChordType={items.changeChord} chosenChord={items.chosenChord} chosenScale={items.chosenScale} chosenTuning={items.chosenTuning} changeScaleType={items.changeScale} setTuning={items.setTuning}></GridChordScale>
+            <GridChordScale changeChordType={items.changeChord} chordChosen={items.chosenChord} scaleChosen={items.chosenScale} chosenTuning={items.chosenTuning} changeScaleType={items.changeScale} setTuning={items.setTuning}></GridChordScale>
           </div>  
           <div className="relative col-span-3"></div>  
         </div>
@@ -994,7 +997,7 @@ export default function Home() {
         {
           scaleNames.map((scaleName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName);  setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
                 {scaleName}
               </div>
               )
@@ -1027,7 +1030,7 @@ export default function Home() {
         {
           chordNames.map((chordName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {setChosenChord(chordName); changeChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setChosenScale('Choose scale..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setChosenScale('Choose scale..')}}>
                 {chordName}
               </div>
               )
