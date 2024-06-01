@@ -330,6 +330,7 @@ export function GridChordScale(items){
     const setTuningPressed = (index) => {
       console.log("tuning %s has been chosen with index %d", tunings[index], index);
       setIndexTuningPressed(index);
+      items.setTuning(tunings[index])
       console.log("tuning %s WITH INDEX %d has been chosen", tunings[index], indexTuningPressed);
     }
 
@@ -370,6 +371,15 @@ export function GridChordScale(items){
     }
     console.log("Chord chosen has changed in GridChordScale horizontal layout")
   }, [items.chordChosen])
+  
+  useEffect(() => {
+    for(var i = 0; i < tunings.length ; i++){
+      if(items.tuning === tunings[i]){
+        setIndexTuningPressed(i)
+      }
+    }
+    console.log("Tuning chosen has changed in GridChordScale horizontal layout")
+  }, [items.tuning])
 
 
   ///////////////////////////////////////////////////////
@@ -489,7 +499,7 @@ export function Options(items){
             <Key changeKey={items.change_key} key={items.keyChosen} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
           </div>  
           <div className="relative col-span-4">
-            <GridChordScale changeChordType={items.changeChord} chordChosen={items.chosenChord} scaleChosen={items.chosenScale} chosenTuning={items.chosenTuning} changeScaleType={items.changeScale} setTuning={items.setTuning}></GridChordScale>
+            <GridChordScale changeChordType={items.changeChord} chordChosen={items.chosenChord} scaleChosen={items.chosenScale} tuning={items.tuning} changeScaleType={items.changeScale} setTuning={items.changeTuning}></GridChordScale>
           </div>  
           <div className="relative col-span-3"></div>  
         </div>
@@ -997,7 +1007,7 @@ export default function Home() {
         {
           scaleNames.map((scaleName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName);  setScaleChanging(false); console.log("Scale changing now set to false"); setChosenChord('Choose chord..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName);  setScaleChanging(false); console.log("Scale changing now set to false"); setChord('Choose chord..')}}>
                 {scaleName}
               </div>
               )
@@ -1030,7 +1040,7 @@ export default function Home() {
         {
           chordNames.map((chordName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setChosenScale('Choose scale..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setScale('Choose scale..')}}>
                 {chordName}
               </div>
               )
@@ -1150,9 +1160,9 @@ export default function Home() {
       {chordChanging === true ? <ChordChoice></ChordChoice> : <div></div>}
       {intervalChanging === true ? <IntervalChoice></IntervalChoice> : <div></div>}
       {tuningChanging === true ? <TuningChoice></TuningChoice> : <div></div>}
-      <Fretboard2 blur={bgBlur} tuning={tuning} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chosenChord} scale={chosenScale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
+      <Fretboard2 blur={bgBlur} tuning={tuning} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} tuning={tuning} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
-      <Options2 changeNoteRep={changeNoteRep} setTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
+      <Options2 changeNoteRep={changeNoteRep} changeTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
         tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} 
         chordChanging={chordChanging} changeChord={changeChord} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
         keyChosen={keyChosen} scaleChosen={scale} chordChosen={chordType} intervalOn={intervOn} setIntervs={setIntervs}></Options2>
@@ -1161,7 +1171,7 @@ export default function Home() {
 
       {/* Below renders on > 768px wide */}
       <Logo></Logo>
-      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} change_tuning={changeTuning} setTuning={setTuning} tuning={tuning} changeChord={changeChord} chosenChord={chordType} chosenScale={scale} changeScale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
+      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} changeTuning={changeTuning} setTuning={setTuning} tuning={tuning} changeChord={changeChord} chosenChord={chordType} chosenScale={scale} changeScale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
       <EmptyStrings keyChosen={keyChosen} tuning={tuning} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings>
       <Strings></Strings>
       <Fretboard tuning={tuning} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard>
