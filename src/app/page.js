@@ -10,8 +10,11 @@ import {
   dropdown
 } from "@nextui-org/react";
 import Key from "./Options";
-import React, { useState , useEffect, useRef } from 'react';
+import Link from 'next/link';
+import {useRouter} from 'next/navigation'
+import React, { useState , useEffect, useRef} from 'react';
 import {Scale, Interval, Note, Chord, transpose} from "tonal";
+import About from './about/page';
 import {Howl, Howler} from 'howler';
 // import {SampleLibrary} from '../../tonejs-instruments/Tonejs-Instruments';
 
@@ -492,11 +495,19 @@ export function Options(items){
       console.log("\n\n\nIn Options - chosen chord = " + items.chosenChord + "\n\n\n")
     }, [items.chosenChord])
 
+    useEffect(() => {
+      console.log("\n\n\nIn Options - chosen key = " + items.key + "\n\n\n")
+    }, [items.key])
+    
+    useEffect(() => {
+      console.log("\n\n\nIn Options - chosen accidental = " + items.accidental + "\n\n\n")
+    }, [items.accidental])
+
     return (
       <div className="absolute invisible md:visible top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
-            <Key changeKey={items.change_key} key={items.keyChosen} accidental={items.accidental} changeAccidental={items.changeAcc} changeNoteRepres={items.changeRepNotes}></Key>
+            <Key changeKey={items.change_key} keyChosen={items.keyChosen} accidental={items.accidental} changeAccidental={items.changeAcc} noteRep={items.noteRep} changeNoteRepres={items.changeNoteRep}></Key>
           </div>  
           <div className="relative col-span-4">
             <GridChordScale changeChordType={items.changeChord} chordChosen={items.chosenChord} scaleChosen={items.chosenScale} tuning={items.tuning} changeScaleType={items.changeScale} setTuning={items.changeTuning}></GridChordScale>
@@ -752,7 +763,6 @@ export function String(items){
                       <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
                     :
                       <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden"> {getInterval(items.keyChosen, note)} </div>
-                  
             }
           </div>
         )         
@@ -1133,11 +1143,20 @@ export default function Home() {
   }
 
   function AboutBar() {
+
+    const router = useRouter()
+
     return (
       <div className="absolute flex flex-row left-[72%] w-[28%] top-[1%] h-[6%] md:top-[1%] md:left-[76%] md:w-[24%] lg:left-[82%] lg:w-[18%] bg-[#3D3D3D] z-1 rounded-l-2xl">
-        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold">HOME</div>
+        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("BACK HOME!"); router.push('/')}}>
+          {/* HOME */}
+          HOME
+        </div>
         {/* <div className="relative top-0 w-[10px] bg-[#3D3D3D] h-[100%] z-2"></div> */}
-        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold">ABOUT</div>
+        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("Now should be in the about route"); router.push('/about')}}>
+          {/* ABOUT */}
+          ABOUT
+        </div>
         <div className="relative top-0 basis-1/3 justify-center items-center flex flex-row gap-1 2xl:gap-0">
           <div className="flex relative basis-2/5 justify-center items-center">
             <img src="./Instaguramo.png" alt="Instagram" className="h-full w-full min-w-[30px] min-h-[30px] md:min-w-[40px] md:min-h-[40px] max-w-[50px] max-h-[50px]"/>
@@ -1150,8 +1169,6 @@ export default function Home() {
     );
   }
 
-
-
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
       {/* Below renders on < 768px wide */}
@@ -1162,7 +1179,7 @@ export default function Home() {
       {tuningChanging === true ? <TuningChoice></TuningChoice> : <div></div>}
       <Fretboard2 blur={bgBlur} tuning={tuning} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} tuning={tuning} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
-      <Options2 changeNoteRep={changeNoteRep} changeTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
+      <Options2 changeNoteRep={changeNoteRep} noteRep={noteRep} changeTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
         tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} 
         chordChanging={chordChanging} changeChord={changeChord} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
         keyChosen={keyChosen} scaleChosen={scale} chordChosen={chordType} intervalOn={intervOn} setIntervs={setIntervs}></Options2>
@@ -1171,7 +1188,7 @@ export default function Home() {
 
       {/* Below renders on > 768px wide */}
       <Logo></Logo>
-      <Options change_key={changeKey} key={keyChosen} accidental={accidental} changeAcc={changeAccidental} changeTuning={changeTuning} setTuning={setTuning} tuning={tuning} changeChord={changeChord} chosenChord={chordType} chosenScale={scale} changeScale={changeScale} scale={scale} changeRepNotes={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
+      <Options change_key={changeKey} noteRep={noteRep} keyChosen={keyChosen} accidental={accidental} changeAcc={changeAccidental} changeTuning={changeTuning} setTuning={setTuning} tuning={tuning} changeChord={changeChord} chosenChord={chordType} chosenScale={scale} changeScale={changeScale} scale={scale} changeNoteRep={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
       <EmptyStrings keyChosen={keyChosen} tuning={tuning} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings>
       <Strings></Strings>
       <Fretboard tuning={tuning} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard>
@@ -1458,6 +1475,14 @@ export function Options2(items) {
   useEffect(() => {
     console.log("In options2 scale chosen has changed")
   }, [items.scaleChosen])
+
+  useEffect(() => {
+    if(items.noteRep === 0) {
+      pressedRepres(0)
+    } else {
+      pressedRepres(1)
+    }
+  }, [items.noteRep])
 
   return (
     <div className="absolute left-[0%] w-[100%] top-[10%] h-[20%] visible md:invisible">
@@ -1816,4 +1841,4 @@ export function Fretboard2(items) {
   );
 }
      
-   
+  

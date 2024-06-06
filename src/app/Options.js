@@ -1,6 +1,6 @@
 import { color } from 'framer-motion';
 import react from 'react';
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 // import Interval from './page.js';
 
 // export default function Options(){
@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 // }
 
 
-export function Keys({ pressedKeys, pressedAccs, keyChange, accidentalsChange }) {
+export function Keys( items ) {
   return (
     <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
       <div className="flex basis-1/2 h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Key</div>
@@ -18,7 +18,7 @@ export function Keys({ pressedKeys, pressedAccs, keyChange, accidentalsChange })
         <div className="relative flex-row flex basis-6/10 w-[100%]  justify-evenly h-full bg-[#727777] rounded-md">
           {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((note, index) => (
             <React.Fragment key={note}>
-              <Note note={note} onClick={() => keyChange(index)} color={pressedKeys[index] ? 'blue-700' : '#727777'} />
+              <Note note={note} onClick={() => items.keyChange(index)} color={(items.pressedKeys[index] === true) ? 'blue-700' : '#727777'} />
               {index < 6 && (
                 <div className="relative w-[6%] h-[100%] top-[0%] bg-[#3D3D3D]"></div>
               )}
@@ -28,9 +28,9 @@ export function Keys({ pressedKeys, pressedAccs, keyChange, accidentalsChange })
         <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
           <div className="flex basis-1/5 h-[100%]"></div>
           <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
-            <SharpFlat accidental="#" onClick={() => accidentalsChange(0)} color={pressedAccs[0] ? 'blue-700' : "#727777"} />
+            <SharpFlat accidental="#" onClick={() => items.accidentalsChange(0)} color={(items.pressedAccs[0] === true) ? 'blue-700' : "#727777"} />
             <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <SharpFlat accidental="b" onClick={() => accidentalsChange(1)} color={pressedAccs[1] ? 'blue-700' : "#727777"} />
+            <SharpFlat accidental="b" onClick={() => items.accidentalsChange(1)} color={(items.pressedAccs[1] === true) ? 'blue-700' : "#727777"} />
           </div>
         </div>
       </div>
@@ -123,6 +123,8 @@ export function NoteRep(items){
     console.log("Note representation changed to ..")
   };
 
+
+
   return (
     <div className="relative flex flex-row items-center h-full w-full cursor-pointer" onClick={handleClick}>
       <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-semibold text-xs lg:max-xl:text-lg xl:text-xl">
@@ -175,6 +177,9 @@ export default function Key(items){
     // Update the state with the new array
     setPressedKeys(updatedKeys);
   };
+    
+  var keys = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+  var accidentals = ['#', 'b']
 
   const accidentalsChange = (idx) => {
     // Create a new array to update the pressed keys
@@ -220,6 +225,56 @@ export default function Key(items){
     changeNoteRep(updatedNoteReps);
   }
 
+  useEffect(() => {
+    if(items.noteRep === 0) changeNotesRep(0)
+    else changeNotesRep(1)
+  }, [items.noteRep])
+
+  useEffect(() => {
+    for(let i = 0 ; i < keys.length ; i++){
+      if(items.keyChosen === keys[i]) {
+         // Create a new array to update the pressed keys
+        const updatedKeys = [...pressedKeys];
+
+       
+        // Reset all keys to false (not pressed)
+        for (let idx = 0; idx < updatedKeys.length; idx++) {
+          updatedKeys[idx] = false;
+        }
+
+        updatedKeys[i] = true
+
+        // Set the currently pressed key to true
+        setPressedKeys(updatedKeys)
+        break
+      }
+    }
+    console.log("In Key - horizontal layout key set to " + items.keyChosen)
+  }, [items.keyChosen])
+  
+  useEffect(() => {
+    for(let i = 0 ; i < accidentals.length ; i++){
+      if(items.accidental === accidentals[i]) {
+        const updatedAccs = [...pressedAccs];
+
+        const Accs = ['#', 'b']
+
+        // Reset all keys to false (not pressed)
+        for (let idx = 0; idx < updatedAccs.length; idx++) {
+          updatedAccs[idx] = false;
+        }
+
+        // Set the currently pressed key to true
+        updatedAccs[i] = true;
+
+        // Update the state with the new array
+        setAccidentals(updatedAccs);
+        break
+      }
+    }
+    console.log("In Key - horizontal layout accidental set to " + items.accidental)
+  }, [items.accidental])
+
 
   return (
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
@@ -227,8 +282,8 @@ export default function Key(items){
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
         <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-xl 2xl:text-2xl font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
-          <NoteRep text="Intervals" changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
-          <NoteRep text="Note name" changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>
+          <NoteRep text="Intervals" noteRepParent={items.noteRep} changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
+          <NoteRep text="Note name" noteRepParent={items.noteRep} changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>
         </div>
       </div>
     </div>
