@@ -16,3 +16,45 @@
   75% { top: 10%; }
   100% { top: 0%; }
 }
+
+@media (max-height: 600px) {
+  .name {
+    font-size: 24px
+  }
+
+  .profession {
+    font-size: 20px
+  }
+
+  .greetings {
+    font-size: 24px
+  }
+
+  .img-height {
+    height: 70%;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+}
+
+@media (max-height:  900px) {
+  .descriptionVertical {
+    font-size: 12px;
+    top: 20%;
+  }
+}
+
+@keyframes textBlink {
+  0%, 100% {
+    opacity: 75%
+  }
+  50% {
+    opacity: 10% 
+  }
+}
+
+.greetingAnimation {
+  animation: 3s linear 1s infinite textBlink
+}

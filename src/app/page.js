@@ -71,10 +71,10 @@ export function Intervals(items){
                                                                                             if(items.switchVal === true){
                                                                                               changeState(); 
                                                                                               items.setInterv();
-                                                                                           }
+                                                                                           } 
                                                                                           }}>
         {color === "bg-blue-700" && items.switchVal ?
-          <div className="relative rounded-full w-5 h-5 bg-blue-700"></div>
+          <div className="relative rounded-full w-4 h-4 xl:w-5 xl:h-5 bg-blue-700"></div>
           :
           <React.Fragment>
             <div className="absolute justify-center items-center w-4 h-4 xl:w-5 xl:h-5 bg-[#727777] rounded-full z-0"></div>
@@ -1017,7 +1017,7 @@ export default function Home() {
         {
           scaleNames.map((scaleName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName);  setScaleChanging(false); console.log("Scale changing now set to false"); setChord('Choose chord..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-sm text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName);  setScaleChanging(false); console.log("Scale changing now set to false"); setChord('Choose chord..')}}>
                 {scaleName}
               </div>
               )
@@ -1050,7 +1050,7 @@ export default function Home() {
         {
           chordNames.map((chordName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setScale('Choose scale..')}}>
+              <div className="hover:bg-green-600 flex items-center justify-center text-sm text-black font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setScale('Choose scale..')}}>
                 {chordName}
               </div>
               )
@@ -1113,7 +1113,7 @@ export default function Home() {
         {
           intervalsChoices.map((intervalName, idx) => {
             return (
-              <div className={`hover:bg-green-700 flex items-center justify-center text-xl text-black font-semibold rounded-xl ${intervals[idx] === true ? 'bg-green-700' : 'bg-[#713D6F]'}`} onClick={() => {console.log("Scale changing now set to false"); changeIntervsAndSetNotes(idx)}}>
+              <div className={`hover:bg-green-700 flex items-center justify-center text-sm text-black font-semibold rounded-xl ${intervals[idx] === true ? 'bg-green-700' : 'bg-[#713D6F]'}`} onClick={() => {console.log("Scale changing now set to false"); changeIntervsAndSetNotes(idx)}}>
                 {intervalName}
               </div>
               )
@@ -1132,7 +1132,7 @@ export default function Home() {
         {
           tunings.map((tuning) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-xl text-black font-semibold" onClick={() => {setTuning(tuning); setTuningChanging(false); console.log("Tuning changing now set to false from tuning choice"); }}>
+              <div className="hover:bg-green-600 flex flex-col items-center justify-center text-sm text-black font-semibold" onClick={() => {setTuning(tuning); setTuningChanging(false); console.log("Tuning changing now set to false from tuning choice"); }}>
                 {tuning}
               </div>
               )
@@ -1147,24 +1147,24 @@ export default function Home() {
     const router = useRouter()
 
     return (
-      <div className="absolute flex flex-row left-[68%] w-[32%] top-[1%] h-[6%] md:top-[1%] md:left-[76%] md:w-[24%] lg:left-[82%] lg:w-[18%] bg-[#3D3D3D] z-1 rounded-l-2xl">
-        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/3 justify-center items-center text-[#929292] text-xs md:text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("BACK HOME!"); router.push('/')}}>
+      <div className="absolute flex flex-row left-[70%] w-[30%] top-[1%] h-[6%] md:top-[1%] md:left-[80%] md:w-[20%] lg:left-[82%] lg:w-[18%] bg-[#3D3D3D] z-1 rounded-l-2xl">
+        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/2 justify-center items-center text-[#929292] text-xs md:text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("BACK HOME!"); router.push('/')}}>
           {/* HOME */}
           HOME
         </div>
         {/* <div className="relative top-0 w-[10px] bg-[#3D3D3D] h-[100%] z-2"></div> */}
-        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/3 justify-center items-center text-[#929292] text-xs font-bold md:text-sm lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("Now should be in the about route"); router.push('/about')}}>
+        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/2 justify-center items-center text-[#929292] text-xs font-bold md:text-sm lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("Now should be in the about route"); router.push('/about')}}>
           {/* ABOUT */}
           ABOUT
         </div>
-        <div className="relative top-0 basis-1/3 justify-center items-center flex flex-row gap-1 2xl:gap-0">
+        {/* <div className="relative top-0 basis-1/3 justify-center items-center flex flex-row gap-1 2xl:gap-0">
           <div className="flex flex-col relative basis-2/5 justify-center items-center">
             <img src="./Instaguramo.png" alt="Instagram" className="max-w-[30px] max-h-[30px] md:max-w-[40px] md:max-h-[40px]"/>
           </div>
           <div className="flex flex-col relative basis-2/5 justify-center items-center">
             <img src="./RinkedIn.png" alt="LinkedIn" className="max-w-[30px] max-h-[30px] md:max-w-[40px] md:max-h-[40px]"/>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
