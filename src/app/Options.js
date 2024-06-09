@@ -18,7 +18,7 @@ export function Keys( items ) {
         <div className="relative flex-row flex basis-6/10 w-[100%]  justify-evenly h-full bg-[#727777] rounded-md">
           {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((note, index) => (
             <React.Fragment key={note}>
-              <Note note={note} onClick={() => items.keyChange(index)} color={(items.pressedKeys[index] === true) ? 'blue-700' : '#727777'} />
+              <Note note={note} onClick={() => items.keyChange(index)} color={(items.pressedKeys[index] === true || items.prevKey === note) ? 'blue-700' : '#727777'} />
               {index < 6 && (
                 <div className="relative w-[6%] h-[100%] top-[0%] bg-[#3D3D3D]"></div>
               )}
@@ -28,9 +28,9 @@ export function Keys( items ) {
         <div className="flex flex-row basis-3/10 w-[30%] h-[100%] justify-evenly">
           <div className="flex basis-1/5 h-[100%]"></div>
           <div className="flex basis-4/5 h-full bg-[#727777] rounded-md">
-            <SharpFlat accidental="#" onClick={() => items.accidentalsChange(0)} color={(items.pressedAccs[0] === true) ? 'blue-700' : "#727777"} />
+            <SharpFlat accidental="#" onClick={() => items.accidentalsChange(0)} color={(items.pressedAccs[0] || items.prevAccidental === '#') ? 'blue-700' : "#727777"} />
             <div className="w-[4%] h-[100%] top-[10%] bg-[#3D3D3D]"></div>
-            <SharpFlat accidental="b" onClick={() => items.accidentalsChange(1)} color={(items.pressedAccs[1] === true) ? 'blue-700' : "#727777"} />
+            <SharpFlat accidental="b" onClick={() => items.accidentalsChange(1)} color={(items.pressedAccs[1] || items.prevAccidental === 'b') ? 'blue-700' : "#727777"} />
           </div>
         </div>
       </div>
@@ -232,7 +232,7 @@ export default function Key(items){
 
   useEffect(() => {
     for(let i = 0 ; i < keys.length ; i++){
-      if(items.keyChosen === keys[i]) {
+      if(items.key === keys[i]) {
          // Create a new array to update the pressed keys
         const updatedKeys = [...pressedKeys];
 
@@ -242,15 +242,15 @@ export default function Key(items){
           updatedKeys[idx] = false;
         }
 
-        updatedKeys[i] = true
+        updatesKeys[i] = true
 
         // Set the currently pressed key to true
         setPressedKeys(updatedKeys)
         break
       }
     }
-    console.log("In Key - horizontal layout key set to " + items.keyChosen)
-  }, [items.keyChosen])
+    console.log("In Key - horizontal layout key set to " + items.key)
+  }, [items.key])
   
   useEffect(() => {
     for(let i = 0 ; i < accidentals.length ; i++){
@@ -278,7 +278,7 @@ export default function Key(items){
 
   return (
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
-      <Keys pressedKeys={pressedKeys} pressedAccs={pressedAccs} keyChange={keyChange} accidentalsChange={accidentalsChange}></Keys>
+      <Keys pressedKeys={pressedKeys} pressedAccs={pressedAccs} prevKey={items.keyChosen} prevAccidental={items.accidental} keyChange={keyChange} accidentalsChange={accidentalsChange}></Keys>
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
         <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-xl 2xl:text-2xl font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">

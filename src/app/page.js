@@ -180,20 +180,20 @@ export function Instrument({instrName, onChange, isActive}) {
           {
             instrName === "Guitar" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-l-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-xl font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md font-bold text-black">
                 {instrName}
               </div>
             </div> 
               :
             instrName === "Piano" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-r-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-xl font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md font-bold text-black">
                 {instrName}
               </div>
             </div> 
               :
             <div className={`absolute flex w-[100%] items-center justify-center h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-xl font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md font-bold text-black">
                 {instrName}
               </div>
             </div> 
@@ -212,7 +212,7 @@ export function DropdownChord(items){
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
       {chordNames.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] font-medium text-opacity-70 text-black text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedChord(index)}>
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] font-medium text-opacity-70 text-black text-sm hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedChord(index)}>
             {chord}
           </div> 
       ))}
@@ -228,7 +228,7 @@ export function DropdownScale(items){
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
       {scaleNames.map((chord, index) => (
-          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-sm lg:text-xl hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
+          <div key={index} className="relative flex justify-center align-middle items-center w-full max-h-[20%] min-h-[20%] text-opacity-70 text-black text-sm hover:bg-gray-200 cursor-pointer z-auto" onClick={() => items.setPressedScale(index)}>
             {chord}
           </div> 
       ))}
@@ -1147,22 +1147,22 @@ export default function Home() {
     const router = useRouter()
 
     return (
-      <div className="absolute flex flex-row left-[72%] w-[28%] top-[1%] h-[6%] md:top-[1%] md:left-[76%] md:w-[24%] lg:left-[82%] lg:w-[18%] bg-[#3D3D3D] z-1 rounded-l-2xl">
-        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("BACK HOME!"); router.push('/')}}>
+      <div className="absolute flex flex-row left-[68%] w-[32%] top-[1%] h-[6%] md:top-[1%] md:left-[76%] md:w-[24%] lg:left-[82%] lg:w-[18%] bg-[#3D3D3D] z-1 rounded-l-2xl">
+        <div className="relative h-[100%] w-[100%] hover:bg-[#727272] hover:rounded-l-2xl flex top-0 basis-1/3 justify-center items-center text-[#929292] text-xs md:text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("BACK HOME!"); router.push('/')}}>
           {/* HOME */}
           HOME
         </div>
         {/* <div className="relative top-0 w-[10px] bg-[#3D3D3D] h-[100%] z-2"></div> */}
-        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/3 justify-center items-center text-[#929292] text-sm font-bold lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("Now should be in the about route"); router.push('/about')}}>
+        <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/3 justify-center items-center text-[#929292] text-xs font-bold md:text-sm lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("Now should be in the about route"); router.push('/about')}}>
           {/* ABOUT */}
           ABOUT
         </div>
         <div className="relative top-0 basis-1/3 justify-center items-center flex flex-row gap-1 2xl:gap-0">
-          <div className="flex relative basis-2/5 justify-center items-center">
-            <img src="./Instaguramo.png" alt="Instagram" className="h-full w-full min-w-[30px] min-h-[30px] md:min-w-[40px] md:min-h-[40px] max-w-[50px] max-h-[50px]"/>
+          <div className="flex flex-col relative basis-2/5 justify-center items-center">
+            <img src="./Instaguramo.png" alt="Instagram" className="max-w-[30px] max-h-[30px] md:max-w-[40px] md:max-h-[40px]"/>
           </div>
-          <div className="relative basis-2/5 justify-center items-center">
-            <img src="./RinkedIn.png" alt="LinkedIn" className="w-full h-full min-w-[30px] min-h-[30px] md:min-w-[40px] md:min-h-[40px] max-w-[50px] max-h-[50px]"/>
+          <div className="flex flex-col relative basis-2/5 justify-center items-center">
+            <img src="./RinkedIn.png" alt="LinkedIn" className="max-w-[30px] max-h-[30px] md:max-w-[40px] md:max-h-[40px]"/>
           </div>
         </div>
       </div>
@@ -1486,7 +1486,7 @@ export function Options2(items) {
 
   return (
     <div className="absolute left-[0%] w-[100%] top-[10%] h-[20%] visible md:invisible">
-      <div className="absolute left-[2%] w-[96%] top-[0%] h-[50%] visible md:invisible flex basis-3 flex-row bg-[#3D3D3D] rounded-t-2xl">
+      <div className="absolute left-[2%] w-[96%] top-[0%] h-[50%] flex basis-3 flex-row bg-[#3D3D3D] rounded-t-2xl">
         <div className="relative flex basis-1/3 flex-col items-center h-full justify-center">
           <div className="flex items-center justify-center basis-1/2 text-xl text-[#929292] font-semibold">
             Key
@@ -1500,8 +1500,8 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-xl text-[#929292] font-semibold">
             Scale
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-sm items-center justify-center text-opacity-70" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
-            {items.scaleChosen === '' ? 'Choose chord..' : items.scaleChosen}
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs items-center justify-center text-opacity-70 truncate" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
+            {items.scaleChosen === '' ? 'Choose scale..' : items.scaleChosen}
           </div>
         </div>
         <div className="relative flex basis-1/3 left-0 w-[90%] flex-row items-center h-full">
@@ -1509,9 +1509,9 @@ export function Options2(items) {
             Repres.
           </div> 
           <div className="relative rounded-xl border-2 border-black bg-[#727777] h-[25%] font-semibold text-xl flex basis-2/5 items-center justify-center z-1 ">
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-l-xl ${represPressed[0] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-sm rounded-l-xl ${represPressed[0] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
             <div className="absolute w-[6%] h-full bg-black"></div>
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center rounded-r-xl ${represPressed[1] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-sm rounded-r-xl ${represPressed[1] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
           </div>
         </div>
       </div>
@@ -1520,7 +1520,7 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-xl text-[#929292] font-semibold">
             Tuning
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging);  }}>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging);  }}>
             {items.tuning === '' ? 'Choose tuning..' : items.tuning}
           </div>
         </div>
@@ -1528,7 +1528,7 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-xl text-[#929292] font-semibold">
             Chord
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md items-center justify-center text-opacity-70" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs items-center justify-center text-opacity-70 truncate" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
             {items.chordChosen === '' ? 'Choose chord..' : items.chordChosen}
           </div>
         </div>
@@ -1724,15 +1724,15 @@ export function String2(items) {
                   (items.note_rep === 1) ? 
                   (
                     (note == key) ?
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                   ) :
                   (
                     (note == key) ?
-                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-md font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(key, note)}</div>
                     :
-                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(key, note)}</div>
                   ) 
                 ) :
                 (scaleHasNote(scale, note.split("/")[0]) || scaleHasNote(scale, note.split("/")[1])) ?
@@ -1743,16 +1743,16 @@ export function String2(items) {
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[0] === key + accidental) ?
-                        <div className="absolute top-[30%] max-j-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                        <div className="absolute top-[30%] max-j-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                         :
-                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[0] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-green-700 rounded-full z-20"  onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20"  onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
                       :
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
                     ) 
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
@@ -1761,29 +1761,29 @@ export function String2(items) {
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[1] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
                         :
-                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
+                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[1] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
                       :
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
                     )
 
                   ) :
                   (items.note_rep === 1) ? 
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{getInterval(key, note)}</div>
                 )
                   :
                     (items.note_rep === 1) ? 
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-md font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-md  font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden"> {getInterval(key, note)} </div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm  font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden"> {getInterval(key, note)} </div>
                   
             }
           </div>

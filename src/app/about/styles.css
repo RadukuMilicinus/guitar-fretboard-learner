@@ -1,0 +1,18 @@
+/* Apply the animation to the #readMore element */
+#readMore {
+  position: relative; /* Ensure the element is positioned relative for animation */
+  animation: upDown 1s infinite; /* Apply the animation with a 4-second duration, looping infinitely */
+  display: flex;
+  justify-content: center; 
+  align-items: middle;
+  width : 100px;
+  height: 100px;
+}
+
+@keyframes upDown {
+  0% { top: 0%; }
+  25% { top: 10%; }
+  50% { top: 20%; }
+  75% { top: 10%; }
+  100% { top: 0%; }
+}
