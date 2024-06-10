@@ -84,3 +84,11 @@ var key = "C"
 var interval = Interval.fromSemitones(6)
 var newNote = transpose(key, interval)
 console.log("newNote = %s", newNote)
+
+
+console.log("\n\n\n")
+
+// Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes 
+
+console.log(Chord.get('A#' + " minor").notes)
+console.log(Scale.get('B' + " Ionian").notes)
