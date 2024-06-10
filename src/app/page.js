@@ -66,7 +66,7 @@ export function Intervals(items){
   }, [items.switchVal])
 
   return (
-    <div className="relative flex flex-row items-center h-full w-full">
+    <div className="relative flex basis-1/12 flex-row items-center h-full w-[1/4]">
       <div className="flex break-words justify-center items-center relative basis-3/5 h-full text-xs lg:max-xl:text-sm xl:max-2xl:text-lg 2xl:text-base text-black intervalNames font-medium">{items.text}</div>
       <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={() => 
                                                                                           {
@@ -122,33 +122,36 @@ export function Intervs(items){
 
     return (
         <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
-          <div className="relative flex flex-row items-center justify-center top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D]">
-            <div className="flex items-center h-full w-[70%] basis-1/2">
-              <div className="text-lg lg:text-xl  xl:text-2xl  2xl:text-3xl titles font-semibold font-roboto mx-auto text-black">Intervals</div>
-            </div>
-            <div className="flex basis-1/2 left-[50%] items-center justify-center top-0 h-[100%] w-[50%]">
-              <div className="relative w-[70%] lg:w-[50%] h-[40%] rounded-full bg-black z-0" onClick={() => changeSwitch()}>
-                <Switch switchVal={switchVal} changeSwitch={changeSwitch}></Switch>
+            <div className="relative flex flex-row items-center justify-center top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D] z-2">
+              <div className="flex items-center h-full w-[70%] basis-1/2">
+                <div className="text-lg lg:text-xl  xl:text-2xl  2xl:text-3xl titles font-semibold font-roboto mx-auto text-black">Intervals</div>
               </div>
-              {/* <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div> */}
+              <div className="flex basis-1/2 left-[50%] items-center justify-center top-0 h-[100%] w-[50%]">
+                <div className="relative w-[70%] lg:w-[50%] h-[40%] rounded-full bg-black z-0" onClick={() => changeSwitch()}>
+                  <Switch switchVal={switchVal} changeSwitch={changeSwitch}></Switch>
+                </div>
+                {/* <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div> */}
+              </div>
             </div>
+            <div className="relative grid grid-cols-3 top-[0%] left-0 h-[70%] w-full bg-[#3D3D3D] z-2">
+              {/* here ch intervals is a function and changes the intervals in the Home function */} 
+              <Intervals text="Root" switchVal={switchVal} setInterv={() => {items.chIntervals(0); console.log("root interval chosen")}} key={items.key}></Intervals>             
+              <Intervals text="3" switchVal={switchVal}  setInterv={() => {items.chIntervals(4); console.log("3rd interval chosen")}} key={items.key} ></Intervals>
+              <Intervals text="#5/b6" switchVal={switchVal} setInterv={() => {items.chIntervals(8); console.log("#5/b6 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="b2" switchVal={switchVal} setInterv={() => {items.chIntervals(1); console.log("b2 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="4" switchVal={switchVal} setInterv={() => {items.chIntervals(5); console.log("4 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="6" switchVal={switchVal} setInterv={() => {items.chIntervals(9); console.log("6 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="2" switchVal={switchVal} setInterv={() => {items.chIntervals(2); console.log("2 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="#4/b5" switchVal={switchVal} setInterv={() => {items.chIntervals(6); console.log("#4/b5 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="b7" switchVal={switchVal} setInterv={() => {items.chIntervals(10); console.log("b7 chosen")}} key={items.key} > </Intervals>
+              <Intervals text="b3" switchVal={switchVal} setInterv={() => {items.chIntervals(3); console.log("b3 chosen")}} key={items.key}  ></Intervals>
+              <Intervals text="5" switchVal={switchVal} setInterv={() => {items.chIntervals(7); console.log("5 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="7" switchVal={switchVal} setInterv={() => {items.chIntervals(11); console.log("7 chosen")}} key={items.key}></Intervals>
+            </div>
+          
+
+
           </div>
-          <div className="relative grid grid-cols-3 top-0 left-0 h-[70%] w-[100%] bg-[#3D3D3D]">
-            {/* here ch intervals is a function and changes the intervals in the Home function */} 
-            <Intervals text="Root" switchVal={switchVal} setInterv={() => {items.chIntervals(0); console.log("root interval chosen")}} key={items.key}></Intervals>             
-            <Intervals text="3" switchVal={switchVal}  setInterv={() => {items.chIntervals(4); console.log("3rd interval chosen")}} key={items.key} ></Intervals>
-            <Intervals text="#5/b6" switchVal={switchVal} setInterv={() => {items.chIntervals(8); console.log("#5/b6 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="b2" switchVal={switchVal} setInterv={() => {items.chIntervals(1); console.log("b2 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="4" switchVal={switchVal} setInterv={() => {items.chIntervals(5); console.log("4 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="6" switchVal={switchVal} setInterv={() => {items.chIntervals(9); console.log("6 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="2" switchVal={switchVal} setInterv={() => {items.chIntervals(2); console.log("2 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="#4/b5" switchVal={switchVal} setInterv={() => {items.chIntervals(6); console.log("#4/b5 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="b7" switchVal={switchVal} setInterv={() => {items.chIntervals(10); console.log("b7 chosen")}} key={items.key} > </Intervals>
-            <Intervals text="b3" switchVal={switchVal} setInterv={() => {items.chIntervals(3); console.log("b3 chosen")}} key={items.key}  ></Intervals>
-            <Intervals text="5" switchVal={switchVal} setInterv={() => {items.chIntervals(7); console.log("5 chosen")}} key={items.key} ></Intervals>
-            <Intervals text="7" switchVal={switchVal} setInterv={() => {items.chIntervals(11); console.log("7 chosen")}} key={items.key}></Intervals>
-          </div>
-        </div> 
     );
 }
 
@@ -1262,22 +1265,22 @@ export function EmptyStrings(items) {
       <div className="absolute flex flex-col justify-between top-[55%] left-[5%] w-[2%] h-[35%] bg-slate-600 invisible md:visible rounded-2xl">
         {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
         <div className={`absolute top-[2%] w-full h-[10%] justify-center font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[5]}</div> 
+          <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">{strings[5]}</div> 
         </div>
         <div className={`absolute top-[20%] w-full h-[10%] justify-center font-semibold text-black ${strings[4] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[4]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[4]}</div> 
+          <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">{strings[4]}</div> 
         </div>
         <div className={`absolute top-[38%] w-full h-[10%] justify-center font-semibold text-black ${strings[3] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[3]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[3]}</div> 
+          <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">{strings[3]}</div> 
         </div>
         <div className={`absolute top-[56%] w-full h-[10%] justify-center font-semibold text-black ${strings[2] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[2]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base  lg:text-2xl sizeEmptyStr w-full">{strings[2]}</div> 
+          <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">{strings[2]}</div> 
         </div>
         <div className={`absolute top-[74%] w-full h-[10%] justify-center font-semibold text-black ${strings[1] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[1]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base  lg:text-2xl sizeEmptyStr w-full">{strings[1]}</div> 
+          <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">{strings[1]}</div> 
         </div>
         <div className={`absolute top-[91%] w-full h-[10%] justify-center font-semibold text-black ${strings[0] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[0]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[0]}</div> 
+          <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">{strings[0]}</div> 
         </div>
       </div> 
 
