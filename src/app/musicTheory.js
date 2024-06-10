@@ -92,3 +92,45 @@ console.log("\n\n\n")
 
 console.log(Chord.get('A#' + " minor").notes)
 console.log(Scale.get('B' + " Ionian").notes)
+
+function isInScaleOrChordOrInterval(note, chosenNotes, keyChosen, accidental, scale, chordType) {
+  console.log("checking if is in scale or chord or interval %s", note);
+  console.log("Note is = " + note + ", chosenNotes = " + chosenNotes + ", keyChosen " + keyChosen + accidental + ", scale = " + scale + ", chordType = " + chordType);
+
+  if (chosenNotes.length > 0) {
+    console.log("chosenNotes = " + chosenNotes);
+    return chosenNotes.some((chosenNote) => {
+      console.log(note + " is from the scale");
+      if (note === chosenNote) {
+        console.log(note + " is from the chosen notes");
+        return true;
+      }
+      return false;
+    });
+  } else if (scale !== '') {
+    const sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes;
+    console.log("scale = " + sc);
+    return sc.some((scNote) => {
+      console.log("Looking in scale");
+      if (scNote === note) {
+        console.log(note + " is from the scale");
+        return true;
+      }
+      return false;
+    });
+  } else if (chordType !== '') {
+    const ch = Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes;
+    console.log("chord = " + ch);
+    return ch.some((chNote) => {
+      console.log("Looking in chord");
+      if (chNote === note) {
+        console.log(note + " is from the chord");
+        return true;
+      }
+      return false;
+    });
+  }
+  return false;
+}
+
+console.log("is G from C major = " + isInScaleOrChordOrInterval('G', '', 'C', '', '', 'major'))

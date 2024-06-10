@@ -920,44 +920,42 @@ export default function Home() {
     // console.log("Scale type in Home updated to:", scale);
   }, [scale]);
 
-  function isInScaleOrChordOrInterval (note, chosenNotes, keyChosen, accidental, scale, chordType) {
-    // console.log("===========\n\n\n\n==============")
-    console.log("checking if is in scale or chord or interval %s", note)
+  function isInScaleOrChordOrInterval(note, chosenNotes, keyChosen, accidental, scale, chordType) {
+    console.log("checking if is in scale or chord or interval %s", note);
+    console.log("Note is = " + note + ", chosenNotes = " + chosenNotes + ", keyChosen " + keyChosen + accidental + ", scale = " + scale + ", chordType = " + chordType);
 
-    console.log("Note is = " + note + ", chosenNotes = " + chosenNotes + ", keyChosen " + keyChosen + accidental + ", scale = " + scale + ", chordType = " + chordType)
-    // console.log("===========\n\n\n\n==============")
-    if(chosenNotes.length > 0){
-      console.log("chosenNotes = " + chosenNotes)
-      chosenNotes.forEach((chosenNote) => {
-        // console.log("notes scale %s", chosenNote)
-          console.log(note + " is from the scale")
-        if(note === chosenNote) {
-          console.log(note + "is form the chosen notes")
+    if (chosenNotes.length > 0) {
+      console.log("chosenNotes = " + chosenNotes);
+      return chosenNotes.some((chosenNote) => {
+        console.log(note + " is from the scale");
+        if (note === chosenNote) {
+          console.log(note + " is from the chosen notes");
           return true;
         }
-      })
-    } else if(scale != ''){
-      var sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes
-      console.log("scale = " + sc)
-      sc.forEach((scNote) => {
-        console.log("Looking in scale")
-        // console.log("notes scale %s", scNote)
-        if( scNote === note ) {
-          console.log(note + " is from the scale")
+        return false;
+      });
+    } else if (scale !== '') {
+      const sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes;
+      console.log("scale = " + sc);
+      return sc.some((scNote) => {
+        console.log("Looking in scale");
+        if (scNote === note) {
+          console.log(note + " is from the scale");
           return true;
         }
-      })
-    } else if(chordType != ''){
-      var ch = Chord.get(keyChosen + accidental + " " +  changeName(chordType.toLowerCase())).notes 
-      console.log("chord = " + ch)
-      ch.forEach((chNote) => {
-        // console.log("notes chord %s", chNote)
-        console.log("Looking in chord")
-        if( chNote === note ) {
-          console.log(note + " is from the chord")
+        return false;
+      });
+    } else if (chordType !== '') {
+      const ch = Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes;
+      console.log("chord = " + ch);
+      return ch.some((chNote) => {
+        console.log("Looking in chord");
+        if (chNote === note) {
+          console.log(note + " is from the chord");
           return true;
         }
-      })
+        return false;
+      });
     }
     return false;
   }
