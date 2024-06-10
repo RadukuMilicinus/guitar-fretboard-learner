@@ -134,3 +134,12 @@ function isInScaleOrChordOrInterval(note, chosenNotes, keyChosen, accidental, sc
 }
 
 console.log("is G from C major = " + isInScaleOrChordOrInterval('G', '', 'C', '', '', 'major'))
+
+console.log("C major 7 notes = " + Chord.chord('C maj7').notes)
+console.log("C major 9 notes = " + Chord.chord('C maj7').notes)
+
+
+
+console.log("C7 notes = " + Chord.chord('C7').notes)
+console.log("Cm7b5 notes = " + Chord.chord('Cm7b5').notes)
+console.log("Cmaj7#11 notes = " + Chord.chord('Cmaj7#11').notes)

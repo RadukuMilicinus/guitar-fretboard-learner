@@ -212,7 +212,7 @@ export function Instrument({instrName, onChange, isActive}) {
 export function DropdownChord(items){
 
 
-  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus4']
+  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
 
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
@@ -228,7 +228,8 @@ export function DropdownChord(items){
 export function DropdownScale(items){
 
 
-  const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
+  const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Blues scale', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 
+    'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor', 'Locrian Nat. 6', 'Ionian #5', 'Dorian #11', 'Phrygian Dominant', 'Lydian #2', 'Super Locrian bb7']
 
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
@@ -279,7 +280,7 @@ export function GridChordScale(items){
       setDropDownScale(!dropDownScale)
     }
 
-    const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Sus 2', 'Sus 4']
+    const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
     const [indexChordPressed, setIndexChordPressed] = useState(-1);
     const [indexScalePressed, setIndexScalePressed] = useState(-1);
 
@@ -303,7 +304,9 @@ export function GridChordScale(items){
     //////////////////////////////////////
 
     
-    const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor']
+    
+    const scaleNames = ['Major Pentatonic', 'Minor Pentatonic', 'Blues scale', 'Ionian', 'Dorian', 'Phrygian', 'Lydian', 
+    'Mixolydian', 'Aeolian', 'Locrian', 'Harmonic Minor', 'Locrian Nat. 6', 'Ionian #5', 'Dorian #11', 'Phrygian Dominant', 'Lydian #2', 'Super Locrian bb7']
 
     const setScalePressed = (index) => {
       console.log("============== START SET SCALE PRESSED ========= ")
@@ -778,15 +781,45 @@ export function String(items){
 
 function changeName(chordType){
 
-  if(chordType == "major 7"){
+  if(chordType === "major 7"){
     return "maj7"
-  } else if(chordType == "minor 7"){
+  } else if(chordType === "minor 7"){
     return "min7"
-  } else if(chordType == "Sus 2"){
+  } else if(chordType === "sus 2"){
     return "sus2"
-  } else if(chordType == "Sus 4"){
+  } else if(chordType === "sus 4"){
     return "sus4"
-  } else return chordType
+  } else if(chordType === "major 9"){
+    return "maj9"
+  } else if(chordType === "major 11"){
+    return "maj11"
+  } else if(chordType === "major 13"){
+    return "maj13"
+  } else if(chordType === "minor 9"){
+    return "min9"
+  } else if(chordType === "minor 11"){
+    return "min11"
+  } else if(chordType === "minor 13"){
+    return "min13"
+  } else if(chordType === "dominant 7"){
+    return "7"
+  } else if(chordType === "Dominant 9"){
+    return "9"
+  } else if(chordType === "dominant 11"){
+    return "11"
+  } else if(chordType === "dominant 13"){
+    return "13"
+  } else if(chordType === "dominant 7b9"){
+    return "7b9"
+  } else if(chordType === "dominant 7b6"){
+    return "7b6"
+  } else if(chordType === "dominant 7#11"){
+    return "7#11"
+  } else if(chordType === "minor 7b5"){
+    return "m7b5"
+  } else if(chordType === "major 7#11"){
+    return "maj7#11"
+  }else return chordType
 }
 
 export default function Home() {
@@ -946,7 +979,18 @@ export default function Home() {
         return false;
       });
     } else if (chordType !== '') {
-      const ch = Chord.get(keyChosen + accidental + " " + chordType.toLowerCase()).notes;
+
+      var chord = ''
+      if(chordType === 'Major 7') {
+        chord = 'maj7'
+      } else if(chordType === "Minor 7") {
+        chord = 'min7'
+      } else if(chordType === "Sus 4"){
+        chord = 'sus4'
+      } else if(chordType === "Sus 2"){
+        chord = 'sus2'
+      }
+      const ch = Chord.get(keyChosen + accidental + " " + chord.toLowerCase()).notes;
       // console.log("chord = " + ch);
       return ch.some((chNote) => {
         // console.log("Looking in chord");
@@ -1047,8 +1091,7 @@ export default function Home() {
     );
   }
   
-  const chordNames = ['Major', 'Minor', 'Sus2', 'Sus4', 'Diminished', 'Augmented', 'Major 7', 
-    'Minor 7', 'Minor 7b5', 'Dominant 7', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', '']
+  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
 
   const [chordChanging, setChordChanging] = useState(false);
 
@@ -1176,15 +1219,7 @@ export default function Home() {
         <div className="relative flex h-[100%] w-[100%] hover:bg-[#727272] top-0 basis-1/2 justify-center items-center text-[#929292] text-xs font-bold md:text-sm lg:text-md xl:text-xl 2xl:text-2xl md:font-semibold" onClick={() => {console.log("Now should be in the about route"); router.push('/about')}}>
           {/* ABOUT */}
           ABOUT
-        </div>
-        {/* <div className="relative top-0 basis-1/3 justify-center items-center flex flex-row gap-1 2xl:gap-0">
-          <div className="flex flex-col relative basis-2/5 justify-center items-center">
-            <img src="./Instaguramo.png" alt="Instagram" className="max-w-[30px] max-h-[30px] md:max-w-[40px] md:max-h-[40px]"/>
-          </div>
-          <div className="flex flex-col relative basis-2/5 justify-center items-center">
-            <img src="./RinkedIn.png" alt="LinkedIn" className="max-w-[30px] max-h-[30px] md:max-w-[40px] md:max-h-[40px]"/>
-          </div>
-        </div> */}
+        </div> 
       </div>
     );
   }
@@ -1197,7 +1232,7 @@ export default function Home() {
       {chordChanging === true ? <ChordChoice></ChordChoice> : <div></div>}
       {intervalChanging === true ? <IntervalChoice></IntervalChoice> : <div></div>}
       {tuningChanging === true ? <TuningChoice></TuningChoice> : <div></div>}
-      <Fretboard2 blur={bgBlur} tuning={tuning} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
+      <Fretboard2 blur={bgBlur} tuning={tuning} changeName={changeName} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} tuning={tuning} chosenNotes={chosenNotes} noteRep={noteRep} scale={scale} chordType={chordType} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
       <Options2 changeNoteRep={changeNoteRep} noteRep={noteRep} changeTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
         tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} 
@@ -1354,7 +1389,7 @@ export function EmptyStrings(items) {
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
                 {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[5])
+                    ? getInterval(items.keyChosen + items.accidental, strings[5])
                     : '')
                   : strings[5]}      
           </div>
@@ -1363,7 +1398,7 @@ export function EmptyStrings(items) {
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[4], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[4])
+                    ? getInterval(items.keyChosen + items.accidental, strings[4])
                     : '')
                   : strings[4]}      
           </div> 
@@ -1372,7 +1407,7 @@ export function EmptyStrings(items) {
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[3], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[3])
+                    ? getInterval(items.keyChosen + items.accidental, strings[3])
                     : '')
                   : strings[3]}      
           </div> 
@@ -1381,7 +1416,7 @@ export function EmptyStrings(items) {
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
               {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[2], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[2])
+                    ? getInterval(items.keyChosen + items.accidental, strings[2])
                     : '')
                   : strings[2]}      
           </div> 
@@ -1390,7 +1425,7 @@ export function EmptyStrings(items) {
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[1], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[1])
+                    ? getInterval(items.keyChosen + items.accidental, strings[1])
                     : '')
                   : strings[1]}  
           </div> 
@@ -1399,7 +1434,7 @@ export function EmptyStrings(items) {
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[0], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[0])
+                    ? getInterval(items.keyChosen + items.accidental, strings[0])
                     : '')
                   : strings[0]}  
           </div> 
@@ -1429,27 +1464,27 @@ export function Fretboard(items) {
       <div className="string1"></div>
       <div className="absolute top-[2%] left-0 w-full h-[8%] ">
         {/* TODO: PLAY SOUND FROM NOTES */}
-        <String intervals={items.chosenNotes} tuning={items.tuning}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.highE}></String>
+        <String intervals={items.chosenNotes} tuning={items.tuning}  chord={ Chord.get(items.keyChosen + items.accidental + changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.highE}></String>
       </div>
       <div className="string2"></div>
       <div className="absolute top-[20%] left-0 w-full h-[8%]">
-        <String intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={2} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Bstring}></String>
+        <String intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(items.keyChosen + items.accidental + changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={2} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Bstring}></String>
       </div>
       <div className="string3"></div>
       <div className="absolute top-[38%] left-0 w-full h-[8%]"> {/* fret */}
-        <String intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={3} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Gstring}></String>
+        <String intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(items.keyChosen + items.accidental + changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={3} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Gstring}></String>
       </div>
       <div className="string4"></div>
       <div className="absolute top-[56%] left-0 w-full h-[8%]">
-        <String intervals={items.chosenNotes} tuning={items.tuning}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={4} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Dstring}></String>
+        <String intervals={items.chosenNotes} tuning={items.tuning}  chord={ Chord.get(items.keyChosen + items.accidental + changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={4} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Dstring}></String>
       </div>
       <div className="string5"></div>
       <div className="absolute top-[74%] left-0 w-full h-[8%]">
-        <String intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={5} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Astring}></String>
+        <String intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(items.keyChosen + items.accidental + changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={5} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.Astring}></String>
       </div>
       <div className="string6"></div>
       <div className="absolute top-[91%] left-0 w-full h-[8%]">
-        <String intervals={items.chosenNotes} tuning={items.tuning}  chord={ Chord.get(items.keyChosen + items.accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={6} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.lowE}></String>
+        <String intervals={items.chosenNotes} tuning={items.tuning}  chord={ Chord.get(items.keyChosen + items.accidental + changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(items.keyChosen + items.accidental + " " + items.scale.toLowerCase()).notes} keyChosen={items.keyChosen} accidental={items.accidental} strNr={6} note_rep={items.noteRep} notes={items.chosenNotes} sounds={items.lowE}></String>
       </div>
 
       <div className="relative flex flex-row justify-evenly top-0 w-[100%] h-[100%]">
@@ -1536,7 +1571,7 @@ export function EmptyStrings2(items){
         <div className="relative flex flex-row justify-center align-center text-base left-[-0%] top-[0px] 2xl:top-[0%] w-full">
           {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[0], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[0])
+                    ? getInterval(items.keyChosen + items.accidental, strings[0])
                     : '')
                   : strings[0]}        
         </div> 
@@ -1545,7 +1580,7 @@ export function EmptyStrings2(items){
         <div className="relative flex flex-row justify-center align-center text-base left-[-0%] top-[0px] 2xl:top-[0%] w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[1], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[1])
+                    ? getInterval(items.keyChosen + items.accidental , strings[1])
                     : '')
                   : strings[1]}      
         </div> 
@@ -1554,7 +1589,7 @@ export function EmptyStrings2(items){
         <div className="relative flex flex-row justify-center align-center text-base left-[0%] top-[0px] w-full">
           {items.noteRep === 0
               ? (items.isInScaleOrChordOrInterval(strings[2], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                ? getInterval(items.keyChosen, strings[2])
+                ? getInterval(items.keyChosen + items.accidental, strings[2])
                 : '')
               : strings[2]}      
         </div> 
@@ -1563,7 +1598,7 @@ export function EmptyStrings2(items){
         <div className="relative flex justify-center align-center text-base left-[0%] top-[0px] w-full">
           {items.noteRep === 0
                 ? (items.isInScaleOrChordOrInterval(strings[3], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                  ? getInterval(items.keyChosen, strings[3])
+                  ? getInterval(items.keyChosen + items.accidental , strings[3])
                   : '')
                 : strings[3]}      
         </div> 
@@ -1572,7 +1607,7 @@ export function EmptyStrings2(items){
         <div className="relative flex justify-center align-center text-base left-[0%] top-[0px] w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[4], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[4])
+                    ? getInterval(items.keyChosen + items.accidental , strings[4])
                     : '')
                   : strings[4]}      
         </div> 
@@ -1581,7 +1616,7 @@ export function EmptyStrings2(items){
         <div className="relative flex justify-center align-center text-base left-[0%] top-[0px] w-full h-[40px]">
               {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
-                    ? getInterval(items.keyChosen, strings[5])
+                    ? getInterval(items.keyChosen + items.accidental, strings[5])
                     : '')
                   : strings[5]}      
         </div> 
@@ -2007,7 +2042,7 @@ export function Fretboard2(items) {
         <Strings2 blur={items.bgBlur} scaleChanging={items.scaleChanging} intervalChanging={items.intervalChanging} chordChanging={items.chordChanging} tuningChanging={items.tuningChanging} keyChanging={items.keyChanging}></Strings2>
         {['3%', '20%', '37%', '54%', '71%', '88%'].map((left, index) => (
           <div key={index} className="absolute top-[0%] w-[8%] h-[100%]" style={{ left }}>
-            <String2 intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(key + accidental + " " +  changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(key + accidental + " " + items.scale.toLowerCase()).notes} keyChosen={key} accidental={accidental} strNr={index + 1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={index === 0 ? items.lowE : index === 1 ? items.Astring : index === 2 ? items.Dstring : index === 3 ? items.Gstring : index === 4 ? items.Bstring : items.highE}></String2>
+            <String2 intervals={items.chosenNotes} tuning={items.tuning} chord={ Chord.get(key + accidental + items.changeName(items.chordType.toLowerCase())).notes } scale={ Scale.get(key + accidental + " " + items.scale.toLowerCase()).notes} keyChosen={key} accidental={accidental} strNr={index + 1} note_rep={items.noteRep} notes={items.chosenNotes} sounds={index === 0 ? items.lowE : index === 1 ? items.Astring : index === 2 ? items.Dstring : index === 3 ? items.Gstring : index === 4 ? items.Bstring : items.highE}></String2>
           </div>
         ))}
       </div>
