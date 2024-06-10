@@ -1,6 +1,7 @@
 import { color } from 'framer-motion';
 import react from 'react';
 import React, { useState , useEffect } from 'react';
+import './styles.css'
 // import Interval from './page.js';
 
 // export default function Options(){
@@ -13,7 +14,7 @@ import React, { useState , useEffect } from 'react';
 export function Keys( items ) {
   return (
     <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto">
-      <div className="flex basis-1/2 h-1/2 items-center justify-center w-full text-black text-2xl font-semibold">Key</div>
+      <div className="flex basis-1/2 top-0 h-1/2 items-center justify-center w-full text-black text-lg lg:text-xl subtitles font-semibold">Key</div>
       <div className="flex justify-normal flex-row left-[10%] w-[80%] basis-1/3 h-[1/6] md:h-auto">
         <div className="relative flex-row flex basis-6/10 w-[100%]  justify-evenly h-full bg-[#727777] rounded-md">
           {['A', 'B', 'C', 'D', 'E', 'F', 'G'].map((note, index) => (
@@ -64,15 +65,15 @@ export function Note({note, onClick, color}) {
     <div className="relative flex basis-1/7 h-[100%] w-full items-center justify-center" onClick={changeColorNote}>
       {note === "A" ? (
         <div className={`absolute w-[100%] h-full z-1 rounded-l-md bg-${color}`} onClick={onClick}>
-          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center font-semibold">{note}</div>
+          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl intervalNames justify-center items-center font-semibold">{note}</div>
         </div>
       ) : note === "G" ? (
         <div className={`absolute w-[100%] h-full z-1 rounded-r-md bg-${color}`} onClick={onClick}>
-          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center font-semibold">{note}</div>
+          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl intervalNames justify-center items-center font-semibold">{note}</div>
         </div>
       ) : (
         <div className={`absolute w-[100%] h-full z-1 bg-${color}`} onClick={onClick}>
-          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center font-semibold">{note}</div>
+          <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl intervalNames justify-center items-center font-semibold">{note}</div>
         </div>
       )}
     </div>
@@ -98,14 +99,14 @@ export function SharpFlat({accidental, onClick, color}) {
    return (
       <div className="relative flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">
           <div className={"absolute w-full h-full rounded-l-md z-1" + ( " bg-" + color)} onClick={onClick}>
-            <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center">{accidental}</div>
+            <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl intervalNames justify-center items-center">{accidental}</div>
           </div>
         </div>);
   }
   return (
         <div className="relative flex basis-1/2 h-[100%] items-center justify-center text-xl font-bold">
           <div className={"absolute w-full h-full rounded-r-md z-1" + ( " bg-" + color)} onClick={onClick}>
-            <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl justify-center items-center">{accidental}</div>
+            <div className="relative w-full h-full flex text-sm lg:max-xl:text-base xl:max-2xl:text-lg 2xl:text-xl intervalNames justify-center items-center">{accidental}</div>
           </div>
         </div> 
   );
@@ -127,16 +128,16 @@ export function NoteRep(items){
 
   return (
     <div className="relative flex flex-row items-center h-full w-full cursor-pointer" onClick={handleClick}>
-      <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-semibold text-xs lg:max-xl:text-lg xl:text-xl">
+      <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-medium text-xs lg:max-xl:text-base xl:text-lg intervalNames">
         {items.text}
       </div>
       <div className="relative basis-2/5 h-full flex justify-center items-center">
-        <div className={`relative rounded-full w-5 h-5 ${className} flex justify-center items-center`}>
+        <div className={`relative rounded-full w-3 h-3 xl:w-4 xl:h-4 checkBox  ${className} flex justify-center items-center`}>
           {!items.noteRep && (
             <React.Fragment>
               {/* These elements are only shown when noteRep is false (inactive) */}
-              <div className="absolute rounded-full w-4 h-4 xl:w-5 xl:h-5  bg-[#727777]"></div>
-              <div className="absolute rounded-full w-3 h-3 xl:w-3 xl:h-3  bg-[#3D3D3D]"></div>
+              <div className="absolute rounded-full w-3 h-3 xl:w-4 xl:h-4 checkBox bg-[#727777]"></div>
+              <div className="absolute rounded-full w-2 h-2 xl:w-3 xl:h-3 innerCheckBox bg-[#3D3D3D]"></div>
             </React.Fragment>
           )}
         </div>
@@ -280,7 +281,7 @@ export default function Key(items){
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
       <Keys pressedKeys={pressedKeys} pressedAccs={pressedAccs} prevKey={items.keyChosen} prevAccidental={items.accidental} keyChange={keyChange} accidentalsChange={accidentalsChange}></Keys>
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
-        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-xl 2xl:text-2xl font-semibold">Note representation</div>
+        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-lg 2xl:text-xl subtitles font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
           <NoteRep text="Intervals" noteRepParent={items.noteRep} changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
           <NoteRep text="Note name" noteRepParent={items.noteRep} changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>

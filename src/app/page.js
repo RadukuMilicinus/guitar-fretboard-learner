@@ -16,6 +16,8 @@ import React, { useState , useEffect, useRef} from 'react';
 import {Scale, Interval, Note, Chord, transpose} from "tonal";
 import About from './about/page';
 import {Howl, Howler} from 'howler';
+import './styles.css'
+// import './globals.css'
 // import {SampleLibrary} from '../../tonejs-instruments/Tonejs-Instruments';
 
 export function Fret() {
@@ -65,7 +67,7 @@ export function Intervals(items){
 
   return (
     <div className="relative flex flex-row items-center h-full w-full">
-      <div className="flex break-words justify-center items-center relative basis-3/5 h-full text-xs lg:max-xl:text-sm xl:max-2xl:text-lg  2xl:text-xl font-semibold">{items.text}</div>
+      <div className="flex break-words justify-center items-center relative basis-3/5 h-full text-xs lg:max-xl:text-sm xl:max-2xl:text-lg 2xl:text-base text-black intervalNames font-medium">{items.text}</div>
       <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={() => 
                                                                                           {
                                                                                             if(items.switchVal === true){
@@ -74,11 +76,11 @@ export function Intervals(items){
                                                                                            } 
                                                                                           }}>
         {color === "bg-blue-700" && items.switchVal ?
-          <div className="relative rounded-full w-4 h-4 xl:w-5 xl:h-5 bg-blue-700"></div>
+          <div className="relative rounded-full w-3 h-3 xl:w-4 xl:h-4 bg-blue-700"></div>
           :
           <React.Fragment>
-            <div className="absolute justify-center items-center w-4 h-4 xl:w-5 xl:h-5 bg-[#727777] rounded-full z-0"></div>
-            <div className="absolute justify-center items-center w-2 h-2 xl:w-3 xl:h-3 bg-[#3D3D3D] rounded-full z-1"></div>
+            <div className="absolute justify-center items-center w-3 h-3 xl:w-4 xl:h-4 checkBox  bg-[#727777] rounded-full z-0"></div>
+            <div className="absolute justify-center items-center w-2 h-2 xl:w-3 xl:h-3 innerCheckBox bg-[#3D3D3D] rounded-full z-1"></div>
           </React.Fragment>
         }
       </div>
@@ -122,7 +124,7 @@ export function Intervs(items){
         <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
           <div className="relative flex flex-row items-center justify-center top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D]">
             <div className="flex items-center h-full w-[70%] basis-1/2">
-              <div className="text-lg lg:text-xl  xl:text-2xl  2xl:text-3xl font-semibold font-roboto mx-auto text-black">Intervals</div>
+              <div className="text-lg lg:text-xl  xl:text-2xl  2xl:text-3xl titles font-semibold font-roboto mx-auto text-black">Intervals</div>
             </div>
             <div className="flex basis-1/2 left-[50%] items-center justify-center top-0 h-[100%] w-[50%]">
               <div className="relative w-[70%] lg:w-[50%] h-[40%] rounded-full bg-black z-0" onClick={() => changeSwitch()}>
@@ -180,20 +182,20 @@ export function Instrument({instrName, onChange, isActive}) {
           {
             instrName === "Guitar" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-l-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold text-black">
                 {instrName}
               </div>
             </div> 
               :
             instrName === "Piano" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-r-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold text-black">
                 {instrName}
               </div>
             </div> 
               :
             <div className={`absolute flex w-[100%] items-center justify-center h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold text-black">
                 {instrName}
               </div>
             </div> 
@@ -393,7 +395,7 @@ export function GridChordScale(items){
      <div className="relative grid grid-cols-2 gap-[10%] left-0 top-[5%] h-[90%] bg-[#3D3D3D]"> 
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full">
-              <div className="flex relative text-xl lg:max-2xl:text-2xl 2xl:text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Chord</div>
+              <div className="flex relative text-xl lg:max-2xl:text-xl 2xl:text-2xl titles items-center justify-center font-semibold font-roboto w-[100%] text-black">Chord</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-xl text-center flex justify-center items-center text-opacity-70 font-medium text-black bg-[#727777] rounded-lg" onClick={() => {changeDropDownChord()}}>
@@ -403,11 +405,11 @@ export function GridChordScale(items){
                   ) : indexChordPressed > -1 ? 
                   
                   (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-base lg:text-lg bg-[#727777] rounded-lg">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-base lg:text-lg subtitles  bg-[#727777] rounded-lg">
                       {chordNames[indexChordPressed]}
                     </div>
                   ) : (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base subtitles bg-[#727777] rounded-lg">
                       Select a chord...
                     </div>
                 )}
@@ -417,7 +419,7 @@ export function GridChordScale(items){
           </div>
           <div className="relative flex justify-center w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute flex flex-row items-center justify-center h-[50%] w-full z-0">
-              <div className="flex relative text-xl lg:max-2xl:text-2xl 2xl:text-3xl items-center justify-center font-semibold font-roboto w-[100%] text-black">Scale</div>
+              <div className="flex relative text-xl lg:max-2xl:text-xl 2xl:text-2xl titles items-center justify-center font-semibold font-roboto w-[100%] text-black">Scale</div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%] z-2">
               <div className="relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-xl flex items-center justify-center text-opacity-70 font-medium  text-black bg-[#727777] rounded-lg" onClick={() => {changeDropDownScale()}}>
@@ -427,11 +429,11 @@ export function GridChordScale(items){
                   ) : indexScalePressed > -1 ? 
 
                   (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-base lg:text-lg bg-[#727777] rounded-lg overflow-hidden">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base subtitles bg-[#727777] rounded-lg overflow-hidden">
                       {scaleNames[indexScalePressed]}
                     </div>
                   ) : (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg overflow-hidden">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base subtitles bg-[#727777] rounded-lg overflow-hidden">
                       Choose scale...
                     </div>
                 )}
@@ -441,22 +443,22 @@ export function GridChordScale(items){
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full z-0">
               <div className="flex items-center justify-center h-full w-full">
-                <div className="text-xl lg:max-2xl:text-2xl 2xl:text-2xl font-semibold font-roboto mx-auto text-black">Tuning</div>
+                <div className="text-xl lg:max-2xl:text-xl 2xl:text-2xl titles font-semibold font-roboto mx-auto text-black">Tuning</div>
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
-              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-sm lg:text-base justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={() => {changeDropDownTuning()}}>
+              <div className="flex relative left-[0%] top-[25%] w-[100%] h-[75%] text-center text-sm lg:text-base titles justify-center items-center font-medium text-opacity-70 text-black bg-[#727777] rounded-lg" onClick={() => {changeDropDownTuning()}}>
                 { dropDownTuning ? 
                   (
                     <DropdownTuning setPressedTuning={setTuningPressed} setTuning={items.setTuning} />
                   ) : indexTuningPressed > -1 ? 
                   
                   (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base subtitles bg-[#727777] rounded-lg">
                       {tunings[indexTuningPressed]}
                     </div>
                   ) : (
-                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base bg-[#727777] rounded-lg overflow-hidden">
+                    <div className="absolute top-0 left-0 flex justify-center items-center w-full h-full text-sm lg:text-base subtitles bg-[#727777] rounded-lg overflow-hidden">
                       Choose tuning...
                     </div>
                 )}
@@ -467,7 +469,7 @@ export function GridChordScale(items){
           <div className="relative w-[100%] h-[100%] bg-[#3D3D3D] rounded-lg">
             <div className="absolute left-0 top-0 h-[50%] w-full">
               <div className="flex items-center justify-center h-full w-full">
-                <div className="text-xl lg:max-2xl:text-2xl 2xl:text-2xl font-semibold font-roboto mx-auto text-black">Instrument</div>
+                <div className="text-xl lg:max-2xl:text-xl 2xl:text-2xl titles font-semibold font-roboto mx-auto text-black">Instrument</div>
               </div>
             </div>
             <div className="absolute top-[50%] left-[0%] h-[50%] w-[100%]">
@@ -703,15 +705,15 @@ export function String(items){
                   (items.note_rep === 1) ? 
                   (
                     (note == items.keyChosen) ?
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                     :
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                   ) :
                   (
                     (note == items.keyChosen) ?
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(items.keyChosen, note)}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(items.keyChosen, note)}</div>
                     :
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(items.keyChosen, note)}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(items.keyChosen, note)}</div>
                   ) 
                 ) :
                 (scaleHasNote(scale, note.split("/")[0]) || scaleHasNote(scale, note.split("/")[1])) ?
@@ -722,16 +724,16 @@ export function String(items){
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[0] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                         :
-                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[0] == items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50"  onClick={() => { play(note, strNr) }} >{getInterval(items.keyChosen + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-green-700 rounded-full z-50"  onClick={() => { play(note, strNr) }} >{getInterval(items.keyChosen + accidental, note.split("/")[0])}</div>
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[0])}</div>
                     ) 
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
@@ -740,29 +742,29 @@ export function String(items){
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[1] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{note.split("/")[1]}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{note.split("/")[1]}</div>
                         :
-                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{note.split("/")[1]}</div>
+                          <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{note.split("/")[1]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[1] === items.keyChosen + accidental) ?
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-green-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
                       :
-                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] flex justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50" onClick={() => { play(note, strNr) }}  >{getInterval(items.keyChosen + accidental, note.split("/")[1])}</div>
                     )
 
                   ) :
                     (items.note_rep === 1) ? 
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
                     :
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{getInterval(items.keyChosen, note)}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{getInterval(items.keyChosen, note)}</div>
                 )
                   :
                     (items.note_rep === 1) ? 
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden">{note}</div>
                     :
-                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden"> {getInterval(items.keyChosen, note)} </div>
+                      <div className="absolute top-0 min-w-[40%] max-h-[100%] min-h-[100%] justify-center items-center text-sm lg:text-xl sizeNote font-semibold basis-1/12 bg-blue-700 rounded-full z-50 hidden"> {getInterval(items.keyChosen, note)} </div>
             }
           </div>
         )         
@@ -1259,23 +1261,23 @@ export function EmptyStrings(items) {
   return (
       <div className="absolute flex flex-col justify-between top-[55%] left-[5%] w-[2%] h-[35%] bg-slate-600 invisible md:visible rounded-2xl">
         {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
-        <div className={`absolute top-[2%] w-full h-[10%] justify-center text-sm md:text-md lg:text-2xl font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%]">{strings[5]}</div> 
+        <div className={`absolute top-[2%] w-full h-[10%] justify-center font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[5]}</div> 
         </div>
-        <div className={`absolute top-[20%] w-full h-[10%] justify-center text-sm md:text-md lg:text-2xl font-semibold text-black ${strings[4] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[4]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">{strings[4]}</div> 
+        <div className={`absolute top-[20%] w-full h-[10%] justify-center font-semibold text-black ${strings[4] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[4]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[4]}</div> 
         </div>
-        <div className={`absolute top-[38%] w-full h-[10%] justify-center text-sm md:text-md lg:text-2xl font-semibold text-black ${strings[3] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[3]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
-          <div className="relative flex flex-row justify-center align-center top-[0%] 2xl:top-[5%] w-full">{strings[3]}</div> 
+        <div className={`absolute top-[38%] w-full h-[10%] justify-center font-semibold text-black ${strings[3] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[3]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[3]}</div> 
         </div>
-        <div className={`absolute top-[56%] w-full h-[10%] justify-center text-sm md:text-md lg:text-2xl font-semibold text-black ${strings[2] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[2]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">{strings[2]}</div> 
+        <div className={`absolute top-[56%] w-full h-[10%] justify-center font-semibold text-black ${strings[2] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[2]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base  lg:text-2xl sizeEmptyStr w-full">{strings[2]}</div> 
         </div>
-        <div className={`absolute top-[74%] w-full h-[10%] justify-center text-sm md:text-md lg:text-2xl font-semibold text-black ${strings[1] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[1]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full">{strings[1]}</div> 
+        <div className={`absolute top-[74%] w-full h-[10%] justify-center font-semibold text-black ${strings[1] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[1]) ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base  lg:text-2xl sizeEmptyStr w-full">{strings[1]}</div> 
         </div>
-        <div className={`absolute top-[91%] w-full h-[10%] justify-center text-sm md:text-md lg:text-2xl font-semibold text-black ${strings[0] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[0]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
-          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[0%] w-full h-[40px]">{strings[0]}</div> 
+        <div className={`absolute top-[91%] w-full h-[10%] justify-center font-semibold text-black ${strings[0] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[0]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
+          <div className="relative flex justify-center align-center top-[-2%] 2xl:top-[-5%] text-sm md:text-base lg:text-2xl sizeEmptyStr w-full">{strings[0]}</div> 
         </div>
       </div> 
 
@@ -1377,7 +1379,7 @@ export function EmptyStrings2(items){
   }, [items.tuning])
 
   return (
-    <div className={`absolute flex flex-col top-[32%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
+    <div className={`absolute flex flex-col top-[32%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className={`absolute left-[5%] w-[10%] h-[100%] top-0 justify-center text-xl font-semibold text-black ${strings[0] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[0]) ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
         <div className="relative flex left-[2%] 2xl:top-[0%]">{strings[0]}</div> 
       </div>
@@ -1818,7 +1820,7 @@ export function Fretboard2(items) {
 
 
   return (
-    <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible landscape:invisible`}>
+    <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className="relative flex flex-col top-0 left-0 w-full h-full">
         {nrs.map((nr) => (
           <div key={nr} className={`absolute left-0 w-full h-[1%] bg-slate-500  ${nr === 12 ? 'hidden' : ''}`} style={{ top: `${(100 - (nr / 12) * 100)}%` }}></div>
