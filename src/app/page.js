@@ -1204,7 +1204,7 @@ export default function Home() {
         chordChanging={chordChanging} changeChord={changeChord} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
         keyChosen={keyChosen} scaleChosen={scale} chordChosen={chordType} intervalOn={intervOn} setIntervs={setIntervs}></Options2>
       <Logo2></Logo2>
-      <Dots2></Dots2>
+      <Dots2 keyChanging={keyChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></Dots2>
       <AboutBar></AboutBar>
 
       {/* Below renders on > 768px wide */}
@@ -1222,14 +1222,14 @@ export function Dots() {
   const nrs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
-    <div className="absolute top-[92%] left-[10%] w-[80%] h-[1%] z-3">
+    <div className="absolute top-[91%] left-[10%] w-[80%] h-[1%] z-3">
       <div className="relative flex flex-row top-0 w-full h-full">
         {
           nrs.map((nr) => 
             (<div 
               key={nr} 
               className="flex basis-1/12 justify-center items-center">
-                <div className={`w-[15px] h-[15px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'invisible md:visible' : 'invisible'}`}>
+                <div className={`md:w-[10px] md:h-[10px] lg:w-[15px] lg:h-[15px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'invisible md:visible' : 'invisible'}`}>
                 </div>
             </div>)
           )
@@ -1239,18 +1239,18 @@ export function Dots() {
   );
 }
 
-export function Dots2() {
+export function Dots2(items) {
   const nrs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
-    <div className="absolute top-[35%] left-[17%] w-[2%] h-[65%] z-3">
+    <div className={`absolute top-[35%] left-[16%] w-[3%] h-[65%] z-3 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} `}>
       <div className="relative flex flex-col top-0 w-full h-full">
         {
           nrs.map((nr) => 
             (<div 
               key={nr} 
               className="flex basis-1/12 justify-center items-center">
-                <div className={`w-[15px] h-[15px] max-w-[100%] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'visible md:invisible' : 'invisible md:invisible'}`}>
+                <div className={`w-[12px] h-[12px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'visible md:invisible' : 'invisible md:invisible'} ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} `}>
                 </div>
             </div>)
           )
@@ -1666,14 +1666,6 @@ export function Options2(items) {
     console.log("In options2 scale chosen has changed")
   }, [items.scaleChosen])
 
-  useEffect(() => {
-    if(items.noteRep === 0) {
-      pressedRepres(0)
-    } else {
-      pressedRepres(1)
-    }
-  }, [items.noteRep])
-
   return (
     <div className="absolute left-[0%] w-[100%] top-[10%] h-[20%] visible md:invisible">
       <div className="absolute left-[2%] w-[96%] top-[0%] h-[50%] flex basis-3 flex-row bg-[#3D3D3D] rounded-t-2xl">
@@ -1699,9 +1691,9 @@ export function Options2(items) {
             Repres.
           </div> 
           <div className="relative rounded-xl border-2 border-black bg-[#727777] h-[25%] font-semibold text-xl flex basis-2/5 items-center justify-center z-1 ">
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs rounded-l-xl ${represPressed[0] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs rounded-l-xl ${items.noteRep === 0 ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
             <div className="absolute w-[6%] h-full bg-black"></div>
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs rounded-r-xl ${represPressed[1] === true ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs rounded-r-xl ${items.noteRep === 1 ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
           </div>
         </div>
       </div>

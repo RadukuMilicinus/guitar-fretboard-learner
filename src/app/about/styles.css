@@ -17,13 +17,13 @@
   100% { top: 0%; }
 }
 
-@media (max-height: 600px) {
+@media (max-height: 599px) {
   .name {
-    font-size: 24px
+    font-size: 20px
   }
 
   .profession {
-    font-size: 20px
+    font-size: 16px
   }
 
   .greetings {
@@ -35,11 +35,16 @@
   }
 
   .description {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .descriptionVertical {
+    font-size: 10px;
+    top:20px;
   }
 }
 
-@media (max-height:  900px) {
+@media (min-height: 600px) {
   .descriptionVertical {
     font-size: 12px;
     top: 20%;
@@ -57,4 +62,8 @@
 
 .greetingAnimation {
   animation: 3s linear 1s infinite textBlink
+}
+
+@media (max-height: 900px) {
+
 }

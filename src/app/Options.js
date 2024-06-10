@@ -227,11 +227,6 @@ export default function Key(items){
   }
 
   useEffect(() => {
-    if(items.noteRep === 0) changeNotesRep(0)
-    else changeNotesRep(1)
-  }, [items.noteRep])
-
-  useEffect(() => {
     for(let i = 0 ; i < keys.length ; i++){
       if(items.key === keys[i]) {
          // Create a new array to update the pressed keys

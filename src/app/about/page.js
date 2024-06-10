@@ -17,11 +17,11 @@ export default function About() {
             <img src="/pozaEuSuparatSquare.png" className="rounded-full border-solid border-3 border-blue-500" alt="Profile"></img>
           </div>
           <div className="absolute top-[65%] h-[20%] left-[0%] w-[100%]  z-2">
-            <div className="relative top-0 flex justify-center align-middle font-semibold md:text-3xl name md:font-bold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text h-[30%]">
+            <div className="relative top-0 flex justify-center align-middle font-semibold md:text-3xl name md:font-bold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text h-[50%]">
               Radu Milicin
             </div>
             {/* <br></br> */}
-            <div className="relative top-[20%] flex justify-center align-middle font-medium md:text-2xl profession md:font-semibold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text h-[50%]">
+            <div className="relative top-[0%] flex justify-center align-middle font-medium md:text-2xl profession md:font-semibold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text h-[30%]">
               Software developer
             </div>
           </div>
@@ -44,7 +44,7 @@ export default function About() {
         <div className="relative top-[20%] h-[8%] w-full text-3xl greetings font-bold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text greetingAnimation">
           Hi, I'm Radu! <br></br>
         </div>  
-        <div className="relative top-[28%] h-[60%] w-full text-sm font-medium  md:text-md lg:text-xl description lg:font-medium text-blue-700 ">
+        <div className="relative top-[28%] h-[60%] w-full text-sm font-medium  md:text-base description lg:font-medium text-blue-700 ">
           I have a BSc in Computer Science at Radboud University. I decided to create this app to fuse my 2 passions: music and programming. Being a guitar player for more than 10 years alongside the constant strive to become better at the instrument made me understand the importance of music theory from composition to improvisation. I hope this app will help you in your journey.
         </div>
       </div>  
