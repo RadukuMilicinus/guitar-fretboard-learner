@@ -1489,22 +1489,58 @@ export function EmptyStrings2(items){
   return (
     <div className={`absolute flex flex-col top-[32%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className={`absolute left-[2%] w-[10%] h-[100%] top-0 justify-center text-xl font-semibold text-black ${strings[0] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[0], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
-        <div className="relative flex flex-row justify-center align-center text-lg left-[-0%] top-[0px] 2xl:top-[0%] w-full">{items.noteRep === 0 ? getInterval(items.keyChosen, strings[0]) : strings[0]}</div> 
+        <div className="relative flex flex-row justify-center align-center text-lg left-[-0%] top-[0px] 2xl:top-[0%] w-full">
+          {items.noteRep === 0
+                  ? (items.isInScaleOrChordOrInterval(strings[0], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
+                    ? getInterval(items.keyChosen, strings[0])
+                    : '')
+                  : strings[0]}        
+        </div> 
       </div>
       <div className={`absolute left-[19%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[1] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[1], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
-        <div className="relative flex flex-row justify-center align-center text-lg left-[-0%] top-[0px] 2xl:top-[0%] w-full">{items.noteRep === 0 ? getInterval(items.keyChosen, strings[1]) : strings[1] }</div> 
+        <div className="relative flex flex-row justify-center align-center text-lg left-[-0%] top-[0px] 2xl:top-[0%] w-full">
+            {items.noteRep === 0
+                  ? (items.isInScaleOrChordOrInterval(strings[1], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
+                    ? getInterval(items.keyChosen, strings[1])
+                    : '')
+                  : strings[1]}      
+        </div> 
       </div>
     <div className={`absolute left-[36%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[2] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[2], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
-        <div className="relative flex flex-row justify-center align-center text-lg left-[0%] top-[0px] w-full">{items.noteRep === 0 ? getInterval(items.keyChosen, strings[2]) : strings[2] }</div> 
+        <div className="relative flex flex-row justify-center align-center text-lg left-[0%] top-[0px] w-full">
+          {items.noteRep === 0
+              ? (items.isInScaleOrChordOrInterval(strings[2], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
+                ? getInterval(items.keyChosen, strings[2])
+                : '')
+              : strings[2]}      
+        </div> 
       </div>
       <div className={`absolute left-[53%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[3] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[3], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
-        <div className="relative flex justify-center align-center text-lg left-[0%] top-[0px] w-full">{ items.noteRep === 0 ? getInterval(items.keyChosen, strings[3]) : strings[3] }</div> 
+        <div className="relative flex justify-center align-center text-lg left-[0%] top-[0px] w-full">
+          {items.noteRep === 0
+                ? (items.isInScaleOrChordOrInterval(strings[3], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
+                  ? getInterval(items.keyChosen, strings[3])
+                  : '')
+                : strings[3]}      
+        </div> 
       </div>
       <div className={`absolute left-[70%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[4] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[4], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
-        <div className="relative flex justify-center align-center text-lg left-[0%] top-[0px] w-full">{ items.noteRep === 0 ? getInterval(items.keyChosen, strings[4]) : strings[4] } </div> 
+        <div className="relative flex justify-center align-center text-lg left-[0%] top-[0px] w-full">
+            {items.noteRep === 0
+                  ? (items.isInScaleOrChordOrInterval(strings[4], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
+                    ? getInterval(items.keyChosen, strings[4])
+                    : '')
+                  : strings[4]}      
+        </div> 
       </div>
       <div className={`absolute left-[87%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
-        <div className="relative flex justify-center align-center text-lg left-[0%] top-[0px] w-full h-[40px]">{ items.noteRep === 0 ? getInterval(items.keyChosen, strings[5]) : strings[5] }</div> 
+        <div className="relative flex justify-center align-center text-lg left-[0%] top-[0px] w-full h-[40px]">
+              {items.noteRep === 0
+                  ? (items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
+                    ? getInterval(items.keyChosen, strings[5])
+                    : '')
+                  : strings[5]}      
+        </div> 
       </div>
     </div>
   );
@@ -1939,13 +1975,6 @@ export function Fretboard2(items) {
           </div>
         ))}
       </div>
-      {/* <div className="absolute top-[19.5%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
-
-      <div className="absolute top-[36%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
-      <div className="absolute top-[52.5%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
-      <div className="absolute top-[69%] left-[47%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
-      <div className="absolute top-[94%] left-[30%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div>
-      <div className="absolute top-[94%] right-[30%] w-[25px] h-[25px] rounded-full bg-[#cb2a2a] z-30"></div> */}
     </div>
   );
 }
