@@ -114,17 +114,15 @@ export function SharpFlat({accidental, onClick, color}) {
 
 export function NoteRep(items){
   // Determine the className based on the noteRep prop.
-  const className = items.noteRep
+  const className = items.noteRep1 === items.nr 
     ? "bg-blue-700" // Active state
-    : "bg-[#727777]"; // Inactive state with gray background
+    : "bg-[#3D3D3D]"; // Inactive state with gray background
 
   const handleClick = () => {
-    items.changeRep(); // Call the function passed from the parent to change the representation
+    // items.changeRep(); // Call the function passed from the parent to change the representation
     items.chRepNotes();
     console.log("Note representation changed to ..")
   };
-
-
 
   return (
     <div className="relative flex flex-row items-center h-full w-full cursor-pointer" onClick={handleClick}>
@@ -132,8 +130,8 @@ export function NoteRep(items){
         {items.text}
       </div>
       <div className="relative basis-2/5 h-full flex justify-center items-center">
-        <div className={`relative rounded-full w-3 h-3 xl:w-4 xl:h-4 checkBox  ${className} flex justify-center items-center`}>
-          {!items.noteRep && (
+        <div className={`relative rounded-full w-3 h-3 xl:w-4 xl:h-4 checkBox ${className} flex justify-center items-center`}>
+          {items.noteRep1 !== items.nr && (
             <React.Fragment>
               {/* These elements are only shown when noteRep is false (inactive) */}
               <div className="absolute rounded-full w-3 h-3 xl:w-4 xl:h-4 checkBox bg-[#727777]"></div>
@@ -271,6 +269,12 @@ export default function Key(items){
     console.log("In Key - horizontal layout accidental set to " + items.accidental)
   }, [items.accidental])
 
+  // useEffect(() => {
+  //   if(items.noteRep === 0){
+  //     changeNotesRep(0)
+  //   } else changeNotesRep(1)
+  // }, [items.noteRep])
+
 
   return (
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
@@ -278,8 +282,8 @@ export default function Key(items){
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
         <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-lg 2xl:text-xl subtitles font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
-          <NoteRep text="Intervals" noteRepParent={items.noteRep} changeRep={() => changeNotesRep(0)} noteRep={noteRep[0]} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
-          <NoteRep text="Note name" noteRepParent={items.noteRep} changeRep={() => changeNotesRep(1)} noteRep={noteRep[1]} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>
+          <NoteRep nr={0} text="Intervals" noteRep1={items.noteRep} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
+          <NoteRep nr={1} text="Note name" noteRep1={items.noteRep} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>
         </div>
       </div>
     </div>
