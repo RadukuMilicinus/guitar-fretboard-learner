@@ -23,13 +23,29 @@
   }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 600px) {
   .name2 {
     font-size: 18px
   }
 
   .profession2 {
-    font-size: 14px
+    font-size: 16px
+  }
+
+}
+
+
+@media (max-height: 699px) {
+  .name2 {
+    font-size: 20px
+  }
+
+  .profession2 {
+    font-size: 18px
+  }
+
+   .descriptionVertical {
+    font-size: 10px;
   }
 
 }

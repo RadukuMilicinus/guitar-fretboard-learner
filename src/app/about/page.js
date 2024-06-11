@@ -16,7 +16,7 @@ export default function About() {
           <div className="relative top-[25%] justify-center align-middle flex rounded-2xl h-[35%]">
             <img src="/pozaEuSuparatSquare.png" className="rounded-full border-solid border-3 border-blue-500" alt="Profile"></img>
           </div>
-          <div className="absolute top-[65%] h-[20%] left-[0%] w-[100%]  z-2">
+          <div className="absolute top-[65%] h-[15%] left-[0%] w-[100%]  z-2">
             <div className="relative top-0 flex justify-center align-middle font-semibold md:text-3xl name md:font-bold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text h-[50%]">
               Radu Milicin
             </div>
@@ -98,7 +98,7 @@ function PhoneViewAbout(){
         <div className="flex basis-1/3 items-center justify-center text-2xl font-semibold bg-gradient-to-r from-green-600 name2 to-blue-700 text-transparent bg-clip-text">Radu Milicin</div>
         <div className="flex basis-1/3 items-center justify-center text-xl font-semibold bg-gradient-to-r from-green-600 profession2 to-blue-700 text-transparent bg-clip-text">Software Developer</div>
       </div>
-      <div className="relative top-[0%] basis-1/8 flex justify-center items-center flex-row text-2xl font-bold text-blue-700 h-[10%] gap-4">
+      <div className="relative top-[0%] basis-1/9 flex justify-center items-center flex-row text-2xl font-bold text-blue-700 h-[10%] gap-4">
         <div className="relative flex flex-col basis-1/3 h-full w-[80px] items-center justify-center hover:border-2 hover:border-[#7D7D7D] rounded-xl visible md:invisible" 
           onClick={() => { console.log("Clicked on LinkedIn"); window.location.href = "https://www.linkedin.com/in/radu-milicin/"; }}>
           <img src="./RinkedIn.png" className="relative flex items-center justify-center min-w-[40px] min-h-[40px] md:min-w-[50px] md:min-h-[50px]" alt="LinkedIn"></img>
