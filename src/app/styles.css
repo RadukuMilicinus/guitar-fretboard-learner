@@ -1,13 +1,8 @@
 @media (min-height: 300px) and (max-height: 499px) {
   .sizeNote {
-    font-size: 12px;
+    font-size: 11px;
   }
 
-  .sizeEmptyStr {
-    font-size: 12px;
-    /* position: relative;
-    top: -20%; */
-  }
 
   .titles {
     font-size: 14px;
@@ -25,7 +20,7 @@
   
   .sizeEmptyStr {
     font-size: 12px;
-    top: -50%;
+    top: -30%;
   }
 
   .checkBox {
@@ -62,9 +57,10 @@
 
 }
 
+
 @media (min-height: 500px) and (max-height: 699px ) {
   .sizeNote {
-    font-size: 14px;
+    font-size: 12px;
   }
   
   .sizeEmptyStr {
@@ -87,7 +83,6 @@
   
   .sizeEmptyStr {
     font-size: 16px;
-    top: -20%;
   }
   
   .intervalNames {
@@ -128,32 +123,28 @@
 
 }
 
-@media (min-height: 700px) and (max-height: 900px) {
+@media (min-height: 500px) and (max-height: 600px) {
+  .sizeEmptyStr {
+    font-size: 12px;
+    top: -10%;
+  }
+}
+/* @media (min-height: 500px) and (max-height: 600px) {
+  .sizeEmptyStr {
+    font-size: 12px;
+  }
+} */
+
+@media (min-height: 700px) and (max-height: 899px) {
 
   .sizeEmptyStr2 {
     font-size: 14px;
-    top: 0px;
+    top: 00%;
   }
 
   .sizeNote {
     font-size: 16px;
   }
-
-  .sizeEmptyStr {
-    font-size: 18px;
-    top: 0%;
-  }
-
-
-  @media (min-width: 1024px) {
-    .sizeEmptyStr {
-      font-size: 18px;
-      top: -10%;
-    }
-
-  }
-
-
 
   .titles {
     font-size: 20px;
@@ -165,6 +156,11 @@
 
   .intervalNames {
     font-size: 12px;
+  }
+
+  .sizeEmptyStr {
+    font-size: 14px;
+    top:10%;
   }
     
   @media (max-width: 900px) {
@@ -193,41 +189,23 @@
     }
 }
 
-@media (min-height: 901px) {
+@media (min-height: 900px) {
   .sizeEmptyStr {
-    top: 20%;
-  } 
-
-  @media (max-height: 1200px) {
-    
-
-    @media (max-width : 1024px) {
-      .sizeEmptyStr {
-        font-size: 18px;
-        top: 0%;
-      }
-
-    }
-    
-    @media (max-width : 1290px) {
-      .sizeEmptyStr {
-        font-size: 20px;
-        top: 0%;
-      }
-
-    }
-    
-    .sizeEmptyStr {
-      font-size: 18px;
-      top: 0%;
-    }
-
+    font-size: 20px;
+    top: 15%;
   }
+}
 
-  @media (min-height: 1200px) {
-    .sizeEmptyStr {
-      top: 10%;
+@media (min-height: 1050px) {
+  .sizeEmptyStr {
+    font-size: 24px;
+    top: 20%;
+  }
+}
 
-    }
+@media (min-height: 1200px) {
+  .sizeEmptyStr {
+    font-size: 26px;
+    top: 10%;
   }
 }
