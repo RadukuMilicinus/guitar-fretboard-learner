@@ -967,7 +967,7 @@ export default function Home() {
         }
         return false;
       });
-    } else if (scale !== '') {
+    } else if (scale !== '' && scale !== 'Choose scale..') {
       const sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes;
       // console.log("scale = " + sc);
       return sc.some((scNote) => {
@@ -978,7 +978,7 @@ export default function Home() {
         }
         return false;
       });
-    } else if (chordType !== '') {
+    } else if (chordType !== '' && chordType !== 'Choose chord..') {
 
       const ch = Chord.get(keyChosen + accidental + changeName(chordType.toLowerCase())).notes;
       console.log("chord = " + ch + "\n\n\n");
@@ -1008,7 +1008,7 @@ export default function Home() {
         }
         return false;
       });
-    } else if (scale !== 'Choose scale..') {
+    } else if (scale !== "Choose scale.." && scale !== '') {
       const sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes;
       // console.log("scale = " + sc);
       return sc.some((scNote) => {
@@ -1019,7 +1019,7 @@ export default function Home() {
         }
         return false;
       });
-    } else if (chordType !== '') {
+    } else if (chordType !== "Choose chord.." && chordType !== '') {
 
       const ch = Chord.get(keyChosen + accidental + changeName(chordType.toLowerCase())).notes;
       console.log("chord = " + ch + "\n\n\n");
