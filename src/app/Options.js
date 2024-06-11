@@ -280,7 +280,7 @@ export default function Key(items){
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
       <Keys pressedKeys={pressedKeys} pressedAccs={pressedAccs} prevKey={items.keyChosen} prevAccidental={items.accidental} keyChange={keyChange} accidentalsChange={accidentalsChange}></Keys>
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
-        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-lg 2xl:text-xl subtitles font-semibold">Note representation</div>
+        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-lg 2xl:text-xl titles font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
           <NoteRep nr={0} text="Intervals" noteRep1={items.noteRep} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
           <NoteRep nr={1} text="Note name" noteRep1={items.noteRep} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>

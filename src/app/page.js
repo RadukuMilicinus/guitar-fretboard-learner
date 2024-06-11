@@ -509,7 +509,7 @@ export function Options(items){
     }, [items.accidental])
 
     return (
-      <div className="absolute invisible md:visible top-[20%] left-[8%] h-[25%] w-[82%] rounded-3xl bg-[#3D3D3D]">
+      <div className="absolute invisible md:visible top-[10%] left-[8%] h-[35%] w-[82%] rounded-3xl bg-[#3D3D3D]">
         <div className="absolute grid grid-cols-10 left-0 top-0 h-[100%] w-[100%]">
           <div className="relative col-span-3">
             <Key changeKey={items.change_key} keyChosen={items.keyChosen} accidental={items.accidental} changeAccidental={items.changeAcc} noteRep={items.noteRep} changeNoteRepres={items.changeNoteRep}></Key>
@@ -1295,7 +1295,7 @@ export default function Home() {
       <EndFretboardVertical keyChanging={keyChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></EndFretboardVertical>
 
       {/* Below renders on > 768px wide */}
-      <Logo></Logo>
+      <Logo2></Logo2>
       <Options change_key={changeKey} noteRep={noteRep} keyChosen={keyChosen} accidental={accidental} changeAcc={changeAccidental} changeTuning={changeTuning} setTuning={setTuning} tuning={tuning} changeChord={changeChord} chosenChord={chordType} chosenScale={scale} changeScale={changeScale} scale={scale} changeNoteRep={changeNoteRep} defaultIntervs={setIntervsToFalse} changeIntervals={changeIntervsAndSetNotes}></Options>
       <EmptyStrings keyChosen={keyChosen} tuning={tuning} chosenNotes={chosenNotes} noteRep={noteRep} chordType={chordType} scale={scale} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings>
       <Strings></Strings>
@@ -1369,7 +1369,7 @@ export function Logo() {
 
 export function Logo2() {
   return (
-    <div className="absolute top-[2%] left-[2%] w-[50%] max-h-[20%] flex visible md:invisible">
+    <div className="absolute top-[2%] left-[2%] w-[50%] max-h-[20%] flex visible md:top-[1%] md:max-h-[6%] md:min-h-[5%] md:min-w-[10%] md:max-w-[20%]">
       <div className="relative left-[0%] max-w-[100%] h-[100%]">
         <img src="./FretboardDojo Logo.png" alt="logo" />
       </div>
