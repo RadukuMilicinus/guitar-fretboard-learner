@@ -49,17 +49,37 @@
 
 }
 
-@media (max-height: 599px) {
-  .name {
-    font-size: 20px
+@media (max-height: 399px) {
+  .description {
+    font-size: 9px;
+  }
+
+   .name {
+    font-size: 16px;
   }
 
   .profession {
-    font-size: 16px
+    font-size: 12px;
   }
 
   .greetings {
-    font-size: 24px
+    font-size: 18px;
+  }
+
+}
+
+@media (min-height: 400px) and (max-height: 599px) {
+
+  .name {
+    font-size: 18px;
+  }
+
+  .profession {
+    font-size: 16px;
+  }
+
+  .greetings {
+    font-size: 22px;
   }
 
   .img-height {
@@ -94,8 +114,4 @@
 
 .greetingAnimation {
   animation: 3s linear 1s infinite textBlink
-}
-
-@media (max-height: 900px) {
-
 }

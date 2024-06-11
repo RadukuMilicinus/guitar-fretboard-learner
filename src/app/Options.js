@@ -126,7 +126,7 @@ export function NoteRep(items){
 
   return (
     <div className="relative flex flex-row items-center h-full w-full cursor-pointer" onClick={handleClick}>
-      <div className="flex justify-center items-center relative basis-4/5 h-full text-black font-medium text-xs lg:max-xl:text-base xl:text-lg intervalNames">
+      <div className="flex justify-center items-center relative basis-4/5 h-full text-black text-xs lg:max-xl:text-base xl:text-lg font-medium subtitles">
         {items.text}
       </div>
       <div className="relative basis-2/5 h-full flex justify-center items-center">
@@ -280,7 +280,7 @@ export default function Key(items){
     <div className="relative left-0 top-[10%] w-full h-[80%] flex flex-col">
       <Keys pressedKeys={pressedKeys} pressedAccs={pressedAccs} prevKey={items.keyChosen} prevAccidental={items.accidental} keyChange={keyChange} accidentalsChange={accidentalsChange}></Keys>
       <div className="relative flex flex-col basis-1/2 items-center justify-center w-full md:h-auto ">
-        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-lg 2xl:text-xl intervalNrs font-semibold">Note representation</div>
+        <div className="flex h-1/2 items-center justify-center w-full text-black text-sm lg:max-2xl:text-lg 2xl:text-xl titles font-semibold">Note representation</div>
         <div className="flex flex-row left-[10%] w-[80%] h-1/2">
           <NoteRep nr={0} text="Intervals" noteRep1={items.noteRep} chRepNotes={() => items.changeNoteRepres(0)}></NoteRep>
           <NoteRep nr={1} text="Note name" noteRep1={items.noteRep} chRepNotes={() => items.changeNoteRepres(1)}></NoteRep>

@@ -23,10 +23,17 @@
     top: -20%;
   }
 
-  @media (min-height: 300px) and (max-height: 399px ) {
+  @media (min-height: 300px) and (max-height: 349px ) {
+    .sizeEmptyStr {
+      font-size: 11px;
+      top: -45%;
+    }
+  }
+
+  @media (min-height: 350px) and (max-height: 399px ) {
     .sizeEmptyStr {
       font-size: 12px;
-      top: -30%;
+      top: -35%;
     }
   }
 
@@ -42,7 +49,7 @@
     }
   
   .textInBoxOpt2 {
-    font-size: 9px;
+    font-size: 10px;
   }
   
   .sizeEmptyStr2 {
@@ -254,8 +261,14 @@
   }
 }
 
-@media (min-width: 600px) and(max-width: 600px) {
+@media (min-width: 600px) and (max-width: 900px) {
   .sizeNoteTxtVert {
     font-size: 12px;
+  }
+}
+
+@media (min-width: 756px) and (max-width: 1024px) {
+  .subtitles {
+    font-size: 10px;
   }
 }

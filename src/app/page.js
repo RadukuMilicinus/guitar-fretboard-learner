@@ -1772,7 +1772,7 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Key
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md textInBoxOpt2 items-center justify-center text-opacity-70" onClick={() => {items.changeBlur(); console.log("Key pressed" + items.keyChosen + "\n\n\n\n\nKey pressed"); changeKeyPressed(); items.setKeyChanging(); console.log("Key pressed set to " + items.keyChanging); chAcc()}}>
+          <div className="flex left-[30%] w-[50%] h-1/3 rounded-md border-2 border-black  bg-[#727777] font-bold text-md textInBoxOpt2 items-center justify-center text-opacity-70" onClick={() => {items.changeBlur(); console.log("Key pressed" + items.keyChosen + "\n\n\n\n\nKey pressed"); changeKeyPressed(); items.setKeyChanging(); console.log("Key pressed set to " + items.keyChanging); chAcc()}}>
             {items.keyChosen} 
           </div>
           {/* {keyPressed && <KeyChoice></KeyChoice>} */}
@@ -1781,7 +1781,7 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Scale
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70 truncate" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
+          <div className="flex left-[10%] w-[80%] h-1/3 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70 truncate" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
             {items.scaleChosen === '' ? 'Choose scale..' : items.scaleChosen}
           </div>
         </div>
@@ -1801,7 +1801,7 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Tuning
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging);  }}>
+          <div className="flex left-[10%] w-[80%] h-1/3 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging);  }}>
             {items.tuning === '' ? 'Choose tuning..' : items.tuning}
           </div>
         </div>
@@ -1809,7 +1809,7 @@ export function Options2(items) {
           <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Chord
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70 truncate" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
+          <div className="flex left-[10%] w-[80%] h-1/3 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70 truncate" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
             {items.chordChosen === '' ? 'Choose chord..' : items.chordChosen}
           </div>
         </div>
