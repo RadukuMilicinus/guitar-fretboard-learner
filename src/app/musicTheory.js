@@ -143,3 +143,5 @@ console.log("C major 9 notes = " + Chord.chord('C maj7').notes)
 console.log("C7 notes = " + Chord.chord('C7').notes)
 console.log("Cm7b5 notes = " + Chord.chord('Cm7b5').notes)
 console.log("Cmaj7#11 notes = " + Chord.chord('Cmaj7#11').notes)
+
+console.log("Cmin9 notes = " + Chord.chord('Cmin9').notes)

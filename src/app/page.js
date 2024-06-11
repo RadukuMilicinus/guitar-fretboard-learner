@@ -212,7 +212,7 @@ export function Instrument({instrName, onChange, isActive}) {
 export function DropdownChord(items){
 
 
-  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
+  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
 
   return (
    <div className="absolute top-0 left-0 flex flex-col w-full overflow-y-scroll no-scrollbar h-[500%] z-50 bg-[#727777]"> {/* Set a fixed maximum height */}
@@ -280,7 +280,7 @@ export function GridChordScale(items){
       setDropDownScale(!dropDownScale)
     }
 
-    const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
+    const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
     const [indexChordPressed, setIndexChordPressed] = useState(-1);
     const [indexScalePressed, setIndexScalePressed] = useState(-1);
 
@@ -819,7 +819,7 @@ function changeName(chordType){
     return "m7b5"
   } else if(chordType === "major 7#11"){
     return "maj7#11"
-  }else return chordType
+  } else return chordType
 }
 
 export default function Home() {
@@ -953,16 +953,16 @@ export default function Home() {
     // console.log("Scale type in Home updated to:", scale);
   }, [scale]);
 
-  function isInScaleOrChordOrInterval(note, chosenNotes, keyChosen, accidental, scale, chordType) {
+  function isInScaleOrChordOrInterval( note, chosenNotes, keyChosen, accidental, scale, chordType) {
     console.log("checking if is in scale or chord or interval %s", note);
     console.log("Note is = " + note + ", chosenNotes = " + chosenNotes + ", keyChosen " + keyChosen + accidental + ", scale = " + scale + ", chordType = " + chordType);
 
     if (chosenNotes.length > 0) {
-      // console.log("chosenNotes = " + chosenNotes);
+      console.log("chosenNotes = " + chosenNotes);
       return chosenNotes.some((chosenNote) => {
-        // console.log(note + " is from the scale");
+        console.log(note + " is from the scale");
         if (note === chosenNote) {
-          // console.log(note + " is from the chosen notes");
+          console.log(note + " is from the chosen notes");
           return true;
         }
         return false;
@@ -980,22 +980,53 @@ export default function Home() {
       });
     } else if (chordType !== '') {
 
-      var chord = ''
-      if(chordType === 'Major 7') {
-        chord = 'maj7'
-      } else if(chordType === "Minor 7") {
-        chord = 'min7'
-      } else if(chordType === "Sus 4"){
-        chord = 'sus4'
-      } else if(chordType === "Sus 2"){
-        chord = 'sus2'
-      }
-      const ch = Chord.get(keyChosen + accidental + " " + chord.toLowerCase()).notes;
-      // console.log("chord = " + ch);
+      const ch = Chord.get(keyChosen + accidental + changeName(chordType.toLowerCase())).notes;
+      console.log("chord = " + ch + "\n\n\n");
       return ch.some((chNote) => {
-        // console.log("Looking in chord");
+        console.log("Looking in chord");
         if (chNote === note) {
-          // console.log(note + " is from the chord");
+          console.log(note + " is from the chord \n\n\n\n");
+          return true;
+        }
+        return false;
+      });
+    }
+    return false;
+  }
+
+  function isInScaleOrChordOrInterval2( note, chosenNotes, keyChosen, accidental, scale, chordType) {
+    console.log("checking if is in scale or chord or interval %s", note);
+    console.log("Note is = " + note + ", chosenNotes = " + chosenNotes + ", keyChosen " + keyChosen + accidental + ", scale = " + scale + ", chordType = " + chordType);
+
+    if (chosenNotes.length > 0) {
+      console.log("chosenNotes = " + chosenNotes);
+      return chosenNotes.some((chosenNote) => {
+        console.log(note + " is from the scale");
+        if (note === chosenNote) {
+          console.log(note + " is from the chosen notes");
+          return true;
+        }
+        return false;
+      });
+    } else if (scale !== 'Choose scale..') {
+      const sc = Scale.get(keyChosen + accidental + " " + scale.toLowerCase()).notes;
+      // console.log("scale = " + sc);
+      return sc.some((scNote) => {
+        // console.log("Looking in scale");
+        if (scNote === note) {
+          // console.log(note + " is from the scale");
+          return true;
+        }
+        return false;
+      });
+    } else if (chordType !== '') {
+
+      const ch = Chord.get(keyChosen + accidental + changeName(chordType.toLowerCase())).notes;
+      console.log("chord = " + ch + "\n\n\n");
+      return ch.some((chNote) => {
+        console.log("Looking in chord");
+        if (chNote === note) {
+          console.log(note + " is from the chord \n\n\n\n");
           return true;
         }
         return false;
@@ -1091,7 +1122,7 @@ export default function Home() {
     );
   }
   
-  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Minor 9', 'Minor 11', 'Minor 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
+  const chordNames = ['Major', 'Minor', 'Diminished', 'Augmented', 'Major 7', 'Minor 7', 'Minor 7b5', 'Major 7#11', 'Major 9', 'Major 11', 'Major 13', 'Dominant 7', 'Dominant 9', 'Dominant 11', 'Dominant 7b9', 'Dominant 7b6', 'Dominant 7#11', 'Sus 2', 'Sus 4']
 
   const [chordChanging, setChordChanging] = useState(false);
 
@@ -1233,7 +1264,7 @@ export default function Home() {
       {intervalChanging === true ? <IntervalChoice></IntervalChoice> : <div></div>}
       {tuningChanging === true ? <TuningChoice></TuningChoice> : <div></div>}
       <Fretboard2 blur={bgBlur} tuning={tuning} changeName={changeName} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
-      <EmptyStrings2 blur={bgBlur} tuning={tuning} chosenNotes={chosenNotes} noteRep={noteRep} scale={scale} chordType={chordType} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval} play={play}></EmptyStrings2>
+      <EmptyStrings2 blur={bgBlur} tuning={tuning} changeName={changeName} chosenNotes={chosenNotes} noteRep={noteRep} scale={scale} chordType={chordType} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval2} play={play}></EmptyStrings2>
       <Options2 changeNoteRep={changeNoteRep} noteRep={noteRep} changeTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
         tuning={tuning} changeBlur={chBlur} scaleChanging={scaleChanging} accidental={accidental} changeAcc={changeAccidental} setScaleChanging={changingScaleStatus} 
         chordChanging={chordChanging} changeChord={changeChord} setChordChanging={changingChordStatus} keyChanging={keyChanging} setKeyChanging={changingKeyStatus} 
@@ -1940,15 +1971,15 @@ export function String2(items) {
                   (items.note_rep === 1) ? 
                   (
                     (note == key) ?
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                   ) :
                   (
                     (note == key) ?
-                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(key, note)}</div>
                     :
-                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(key, note)}</div>
                   ) 
                 ) :
                 (scaleHasNote(scale, note.split("/")[0]) || scaleHasNote(scale, note.split("/")[1])) ?
@@ -1959,16 +1990,16 @@ export function String2(items) {
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[0] === key + accidental) ?
-                        <div className="absolute top-[30%] max-j-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                        <div className="absolute top-[30%] max-j-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                         :
-                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[0] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20"  onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20"  onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
                       :
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
                     ) 
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
@@ -1977,29 +2008,29 @@ export function String2(items) {
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[1] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
                         :
-                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
+                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[1] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
                       :
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
                     )
 
                   ) :
                   (items.note_rep === 1) ? 
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{getInterval(key, note)}</div>
                 )
                   :
                     (items.note_rep === 1) ? 
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-sm  font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden"> {getInterval(key, note)} </div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs  font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden"> {getInterval(key, note)} </div>
                   
             }
           </div>
