@@ -40,7 +40,7 @@ export default function About() {
           </div>
         </div>
       </div>
-      <div className="absolute top-[15%] left-[55%] w-[35%] h-[85%] invisible md:visible">
+      <div className="absolute top-[15%] left-[55%] w-[35%] h-[80%] invisible md:visible">
         <div className="relative top-[20%] h-[8%] w-full text-3xl greetings font-bold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text greetingAnimation">
           Hi, I'm Radu! <br></br>
         </div>  
@@ -88,15 +88,15 @@ export function Logo2() {
 
 function PhoneViewAbout(){
   return (
-    <div className="relative flex flex-col items-center justify-start w-full top-[15%] h-[80%] visible md:invisible">
+    <div className="relative flex flex-col items-center justify-start w-full top-[12%] h-[80%] visible md:invisible">
       <div className="flex flex-row basis-1/3 justify-center items-center top-0 max-w-[40%] max-h-[40%] border-3 border-blue-700 rounded-full">
         <div className="w-full h-full top-0 flex flex-row items-center justify-center">
           <img src="/pozaEuSuparatSquare.png" className="top-0 w-full h-full rounded-full"></img>
         </div>
       </div>
       <div className="flex flex-col basis-1/4 justify-center items-center">
-        <div className="flex basis-1/3 items-center justify-center text-2xl font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text">Radu Milicin</div>
-        <div className="flex basis-1/3 items-center justify-center text-xl font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text">Software Developer</div>
+        <div className="flex basis-1/3 items-center justify-center text-2xl font-semibold bg-gradient-to-r from-green-600 name2 to-blue-700 text-transparent bg-clip-text">Radu Milicin</div>
+        <div className="flex basis-1/3 items-center justify-center text-xl font-semibold bg-gradient-to-r from-green-600 profession2 to-blue-700 text-transparent bg-clip-text">Software Developer</div>
       </div>
       <div className="relative top-[0%] basis-1/8 flex justify-center items-center flex-row text-2xl font-bold text-blue-700 h-[10%] gap-4">
         <div className="relative flex flex-col basis-1/3 h-full w-[80px] items-center justify-center hover:border-2 hover:border-[#7D7D7D] rounded-xl visible md:invisible" 
@@ -113,7 +113,7 @@ function PhoneViewAbout(){
         </div>
       </div>
       <div className="relative flex flex-col font-medium text-blue-700 left-0 w-[60%] h-[20%]"> 
-        <div className="relative top-[10%] text-md descriptionVertical left-0 flex items-center justify-center text-center">
+        <div className="relative top-[10%] text-md left-0 flex items-center descriptionVertical justify-center text-center">
           I decided to create this app to fuse my 2 passions: music and programming. Being a guitar player for more than 10 years alongside the constant strive to be better made me understand the importance of music theory from composition to improvisation. I hope this app will help you in your journey.
         </div>
       </div>

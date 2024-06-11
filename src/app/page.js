@@ -121,7 +121,7 @@ export function Intervs(items){
     }, [items.scale, items.chord])
 
     return (
-        <div className="absolute top-[5%] left-[75%] w-[20%] h-[90%] bg-[#3D3D3D] z-1">
+        <div className="absolute top-[5%] left-[75%] w-[20%] h-[95%] bg-[#3D3D3D] z-1">
             <div className="relative flex flex-row items-center justify-center top-0 left-0 h-[30%] w-[100%] bg-[#3D3D3D] z-2">
               <div className="flex items-center h-full w-[70%] basis-1/2">
                 <div className="text-lg lg:text-xl  xl:text-2xl  2xl:text-3xl titles font-semibold font-roboto mx-auto text-black">Intervals</div>
@@ -133,24 +133,21 @@ export function Intervs(items){
                 {/* <div className="absolute top-[15%] left-[20%] w-[30%] h-[60%] rounded-full bg-[#cb2a2a]"></div> */}
               </div>
             </div>
-            <div className="relative grid grid-cols-3 top-[0%] left-0 h-[70%] w-full bg-[#3D3D3D] z-2">
+            <div className="relative grid grid-cols-3 top-[0%] left-0 h-[65%] w-full bg-[#3D3D3D] z-2 overflow-scroll scrollbar-hide">
               {/* here ch intervals is a function and changes the intervals in the Home function */} 
               <Intervals text="Root" switchVal={switchVal} setInterv={() => {items.chIntervals(0); console.log("root interval chosen")}} key={items.key}></Intervals>             
-              <Intervals text="3" switchVal={switchVal}  setInterv={() => {items.chIntervals(4); console.log("3rd interval chosen")}} key={items.key} ></Intervals>
-              <Intervals text="#5/b6" switchVal={switchVal} setInterv={() => {items.chIntervals(8); console.log("#5/b6 chosen")}} key={items.key} ></Intervals>
-              <Intervals text="b2" switchVal={switchVal} setInterv={() => {items.chIntervals(1); console.log("b2 chosen")}} key={items.key} ></Intervals>
-              <Intervals text="4" switchVal={switchVal} setInterv={() => {items.chIntervals(5); console.log("4 chosen")}} key={items.key} ></Intervals>
-              <Intervals text="6" switchVal={switchVal} setInterv={() => {items.chIntervals(9); console.log("6 chosen")}} key={items.key} ></Intervals>
-              <Intervals text="2" switchVal={switchVal} setInterv={() => {items.chIntervals(2); console.log("2 chosen")}} key={items.key} ></Intervals>
-              <Intervals text="#4/b5" switchVal={switchVal} setInterv={() => {items.chIntervals(6); console.log("#4/b5 chosen")}} key={items.key} ></Intervals>
-              <Intervals text="b7" switchVal={switchVal} setInterv={() => {items.chIntervals(10); console.log("b7 chosen")}} key={items.key} > </Intervals>
-              <Intervals text="b3" switchVal={switchVal} setInterv={() => {items.chIntervals(3); console.log("b3 chosen")}} key={items.key}  ></Intervals>
-              <Intervals text="5" switchVal={switchVal} setInterv={() => {items.chIntervals(7); console.log("5 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="b2" switchVal={switchVal}  setInterv={() => {items.chIntervals(1); console.log("3rd interval chosen")}} key={items.key} ></Intervals>
+              <Intervals text="2" switchVal={switchVal} setInterv={() => {items.chIntervals(2); console.log("#5/b6 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="#2/b3" switchVal={switchVal} setInterv={() => {items.chIntervals(3); console.log("b2 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="3" switchVal={switchVal} setInterv={() => {items.chIntervals(4); console.log("4 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="4" switchVal={switchVal} setInterv={() => {items.chIntervals(5); console.log("6 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="#4/b5" switchVal={switchVal} setInterv={() => {items.chIntervals(6); console.log("2 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="5" switchVal={switchVal} setInterv={() => {items.chIntervals(7); console.log("#4/b5 chosen")}} key={items.key} ></Intervals>
+              <Intervals text="#5/b6" switchVal={switchVal} setInterv={() => {items.chIntervals(8); console.log("b7 chosen")}} key={items.key} > </Intervals>
+              <Intervals text="6" switchVal={switchVal} setInterv={() => {items.chIntervals(9); console.log("b3 chosen")}} key={items.key}  ></Intervals>
+              <Intervals text="b7" switchVal={switchVal} setInterv={() => {items.chIntervals(10); console.log("5 chosen")}} key={items.key} ></Intervals>
               <Intervals text="7" switchVal={switchVal} setInterv={() => {items.chIntervals(11); console.log("7 chosen")}} key={items.key}></Intervals>
             </div>
-          
-
-
           </div>
     );
 }
@@ -185,20 +182,20 @@ export function Instrument({instrName, onChange, isActive}) {
           {
             instrName === "Guitar" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-l-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold instruments text-black">
                 {instrName}
               </div>
             </div> 
               :
             instrName === "Piano" ?
             <div className={`absolute flex w-[100%] items-center justify-center rounded-r-md h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold instruments text-black">
                 {instrName}
               </div>
             </div> 
               :
             <div className={`absolute flex w-[100%] items-center justify-center h-[100%] z-1 ${bgColor}`}>
-              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold text-black">
+              <div className="relative flex items-center justify-center text-xs md:text-sm lg:text-md subtitles font-bold instruments text-black">
                 {instrName}
               </div>
             </div> 
@@ -1328,7 +1325,7 @@ export function Dots() {
             (<div 
               key={nr} 
               className="flex basis-1/12 justify-center items-center">
-                <div className={`md:w-[10px] md:h-[10px] lg:w-[12px] lg:h-[12px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'invisible md:visible' : 'invisible'}`}>
+                <div className={`md:w-[10px] md:h-[10px] lg:w-[12px] lg:h-[12px] fretMarkers2 bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'invisible md:visible' : 'invisible'}`}>
                 </div>
             </div>)
           )

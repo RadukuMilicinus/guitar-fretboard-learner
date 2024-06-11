@@ -50,6 +50,16 @@
       width: 8px;
       height: 8px;
     }
+
+    .fretMarkers2 {
+      width: 8px;
+      height: 8px;
+    }
+
+  .instruments {
+    font-size: 10px;
+    font: medium;
+  }
     
   .intervalNrs {
       font-size: 8px;
@@ -117,6 +127,11 @@
       height: 9px;
     }
     
+    .fretMarkers2 {
+      width: 10px;
+      height:10px;
+    }
+    
   .intervalNrs {
       font-size: 10px;
     }
@@ -162,6 +177,11 @@
     font-size: 14px;
     top:10%;
   }
+  
+  .fretMarkers2 {
+      width: 12px;
+      height: 12px;
+    }
     
   @media (max-width: 900px) {
       .titles {

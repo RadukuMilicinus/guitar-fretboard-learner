@@ -17,6 +17,38 @@
   100% { top: 0%; }
 }
 
+@media (max-width: 450px) {
+  .descriptionVertical {
+    font-size: 10;
+  }
+}
+
+@media (max-height: 700px) {
+  .name2 {
+    font-size: 18px
+  }
+
+  .profession2 {
+    font-size: 14px
+  }
+
+}
+
+@media (min-height: 700px) {
+  .name2 {
+    font-size: 24px
+  }
+
+  .profession2 {
+    font-size: 20px
+  }
+
+  .descriptionVertical {
+    font-size: 14px;
+  }
+
+}
+
 @media (max-height: 599px) {
   .name {
     font-size: 20px
