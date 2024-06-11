@@ -1444,7 +1444,7 @@ export function EmptyStrings(items) {
 
 
   return (
-      <div className={`absolute flex flex-col justify-between top-[55%] left-[5%] w-[2%] h-[35%] bg-slate-600 ${items.noteRep === 0 ? 'bg-opacity-0' : 'bg-opacity-30'} invisible md:visible rounded-lg`}>
+      <div className={`absolute flex flex-col justify-between top-[50%] left-[5%] w-[2%] h-[40%] bg-slate-600 ${items.noteRep === 0 ? 'bg-opacity-0' : 'bg-opacity-30'} invisible md:visible rounded-lg`}>
         {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
         <div className={`absolute top-[2%] w-full h-[10%] justify-center font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
           <div className="relative flex flex-col justify-center align-center text-sm md:text-base lg:text-md text-center sizeEmptyStr">
@@ -1508,7 +1508,7 @@ export function EmptyStrings(items) {
 export function Strings() {
 
   return (
-      <div className="absolute top-[55%] left-[8%] rounded-l-lg  w-[2%] h-[35%] bg-slate-600 invisible md:visible"> 
+      <div className="absolute top-[50%] left-[8%] rounded-l-lg  w-[2%] h-[40%] bg-slate-600 invisible md:visible"> 
         <div className="absolute top-[5%] left-0 w-[100%] h-[2%] bg-[#D9D9D9] z-1"></div>
         <div className="string2"></div>
         <div className="string3"></div>
@@ -1524,7 +1524,7 @@ export function Strings() {
 // #009DDC - Celestial blue 
 export function Fretboard(items) {
   return (    
-    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-slate-600 bg-opacity-10 invisible md:visible landscape">
+    <div className="absolute top-[50%] left-[10%] w-[80%] h-[40%] bg-slate-600 bg-opacity-10 invisible md:visible landscape">
       <div className="string1"></div>
       <div className="absolute top-[2%] left-0 w-full h-[8%] ">
         {/* TODO: PLAY SOUND FROM NOTES */}
@@ -2004,15 +2004,15 @@ export function String2(items) {
                   (items.note_rep === 1) ? 
                   (
                     (note == key) ?
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12  bg-green-700 rounded-full sizeNoteTxtVert z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full sizeNoteTxtVert z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{note}</div>
                   ) :
                   (
                     (note == key) ?
-                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full sizeNoteTxtVert z-20" onClick={() => {console.log("%s pressed", note); play(note, strNr)}}>{getInterval(key, note)}</div>
                     :
-                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%]  max-h-[40%] max-w-[100%] min-w-[100%]  flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full sizeNoteTxtVert z-20" onClick={() => {console.log("%s pressed", note);  play(note, strNr)}}>{getInterval(key, note)}</div>
                   ) 
                 ) :
                 (scaleHasNote(scale, note.split("/")[0]) || scaleHasNote(scale, note.split("/")[1])) ?
@@ -2023,16 +2023,16 @@ export function String2(items) {
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[0] === key + accidental) ?
-                        <div className="absolute top-[30%] max-j-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                        <div className="absolute top-[30%] max-j-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                         :
-                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
+                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }} >{note.split("/")[0]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[0] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20"  onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full sizeNoteTxtVert z-20"  onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
                       :
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }} >{getInterval(key + accidental, note.split("/")[0])}</div>
                     ) 
                   ) : 
                   scaleHasNote(scale, note.split("/")[1]) ?
@@ -2041,29 +2041,29 @@ export function String2(items) {
                     (items.note_rep === 1) ? 
                     (
                       (note.split("/")[1] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
                         :
-                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
+                          <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }}>{note.split("/")[1]}</div>
                     ) 
                       :
                     (
                       (note.split("/")[1] === key + accidental) ?
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-green-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
                       :
-                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
+                        <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] flex justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full sizeNoteTxtVert z-20" onClick={() => { play(note, strNr) }}  >{getInterval(key + accidental, note.split("/")[1])}</div>
                     )
 
                   ) :
                   (items.note_rep === 1) ? 
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 sizeNoteTxtVert hidden">{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{getInterval(key, note)}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 sizeNoteTxtVert hidden">{getInterval(key, note)}</div>
                 )
                   :
                     (items.note_rep === 1) ? 
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden">{note}</div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs font-semibold basis-1/12 bg-blue-700 rounded-full z-20 sizeNoteTxtVert hidden">{note}</div>
                     :
-                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs  font-semibold basis-1/12 bg-blue-700 rounded-full z-20 hidden"> {getInterval(key, note)} </div>
+                      <div className="absolute top-[30%] max-h-[40%] max-w-[100%] min-w-[100%] justify-center items-center text-xs  font-semibold basis-1/12 bg-blue-700 rounded-full z-20 sizeNoteTxtVert hidden"> {getInterval(key, note)} </div>
                   
             }
           </div>

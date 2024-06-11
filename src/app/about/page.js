@@ -21,7 +21,7 @@ export default function About() {
               Radu Milicin
             </div>
             {/* <br></br> */}
-            <div className="relative top-[0%] flex justify-center align-middle font-medium md:text-2xl profession md:font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text h-[30%]">
+            <div className="relative top-[0%] flex justify-center align-middle font-medium md:text-2xl profession md:font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text h-[50%]">
               Software developer
             </div>
           </div>
@@ -113,7 +113,7 @@ function PhoneViewAbout(){
         </div>
       </div>
       <div className="relative flex flex-col font-medium text-blue-700 left-0 w-[60%] h-[20%]"> 
-        <div className="relative top-[10%] text-md left-0 flex items-center descriptionVertical justify-center text-center">
+        <div className="relative top-[10%] text-md left-0 flex items-center descriptionVertical justify-center text-center overflow-ellipsis">
           I decided to create this app to fuse my 2 passions: music and programming. Being a guitar player for more than 10 years alongside the constant strive to be better made me understand the importance of music theory from composition to improvisation. I hope this app will help you in your journey.
         </div>
       </div>

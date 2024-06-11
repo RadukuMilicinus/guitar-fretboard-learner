@@ -20,8 +20,16 @@
   
   .sizeEmptyStr {
     font-size: 12px;
-    top: -30%;
+    top: -20%;
   }
+
+  @media (min-height: 300px) and (max-height: 399px ) {
+    .sizeEmptyStr {
+      font-size: 12px;
+      top: -30%;
+    }
+  }
+
 
   .checkBox {
         width: 10px;
@@ -133,7 +141,7 @@
     }
     
   .intervalNrs {
-      font-size: 12px;
+      font-size: 11px;
     }
 
 }
@@ -174,7 +182,7 @@
   }
 
   .intervalNrs {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .sizeEmptyStr {
@@ -209,7 +217,7 @@
     }
 
     .intervalNrs {
-      font-size: 16px;
+      font-size: 12px;
     }
 }
 
@@ -231,5 +239,23 @@
   .sizeEmptyStr {
     font-size: 26px;
     top: 10%;
+  }
+}
+
+@media (min-width: 300px) and (max-width: 399px) {
+  .sizeNoteTxtVert {
+    font-size: 9px;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 499px) {
+  .sizeNoteTxtVert {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 600px) and(max-width: 600px) {
+  .sizeNoteTxtVert {
+    font-size: 12px;
   }
 }
