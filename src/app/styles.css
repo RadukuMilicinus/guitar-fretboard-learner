@@ -37,6 +37,28 @@
         width: 6px;
         height: 6px;
     }
+  
+  .textInBoxOpt2 {
+    font-size: 9px;
+  }
+  
+  .sizeEmptyStr2 {
+    font-size: 10px;
+    top: -5px;
+  }
+  
+  .titlesVertical {
+    font-size: 12px;
+  }
+    
+  .fretMarkers {
+      width: 8px;
+      height: 8px;
+    }
+    
+  .intervalNrs {
+      font-size: 8px;
+    }
 
 }
 
@@ -46,7 +68,7 @@
   }
   
   .sizeEmptyStr {
-    font-size: 16px;
+    font-size: 14px;
   }
   
   .titles {
@@ -81,10 +103,37 @@
         width: 7px;
         height: 7px;
     }
+
+  .titlesVertical {
+    font-size: 14px;
+  }
+
+  .textInBoxOpt2 {
+    font-size: 10px;
+  }
+  
+  .sizeEmptyStr2 {
+    font-size: 12px;
+    top: -3px;
+  }
+    
+  .fretMarkers {
+      width: 9px;
+      height: 9px;
+    }
+    
+  .intervalNrs {
+      font-size: 10px;
+    }
+
 }
 
 @media (min-height: 700px) and (max-height: 900px) {
 
+  .sizeEmptyStr2 {
+    font-size: 14px;
+    top: 0px;
+  }
 
   .sizeNote {
     font-size: 16px;
@@ -123,5 +172,19 @@
         height: 8px;
     }
 
+    .fretMarkers {
+      width: 10px;
+      height: 10px;
+    }
 
+    .intervalNrs {
+      font-size: 12px;
+    }
+}
+
+@media (min-height: 901px) {
+  .sizeEmptyStr {
+    font-size: 20px;
+    top: -10%;
+  }
 }

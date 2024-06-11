@@ -17,11 +17,11 @@ export default function About() {
             <img src="/pozaEuSuparatSquare.png" className="rounded-full border-solid border-3 border-blue-500" alt="Profile"></img>
           </div>
           <div className="absolute top-[65%] h-[20%] left-[0%] w-[100%]  z-2">
-            <div className="relative top-0 flex justify-center align-middle font-semibold md:text-3xl name md:font-bold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text h-[50%]">
+            <div className="relative top-0 flex justify-center align-middle font-semibold md:text-3xl name md:font-bold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text h-[50%]">
               Radu Milicin
             </div>
             {/* <br></br> */}
-            <div className="relative top-[0%] flex justify-center align-middle font-medium md:text-2xl profession md:font-semibold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text h-[30%]">
+            <div className="relative top-[0%] flex justify-center align-middle font-medium md:text-2xl profession md:font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text h-[30%]">
               Software developer
             </div>
           </div>
@@ -41,7 +41,7 @@ export default function About() {
         </div>
       </div>
       <div className="absolute top-[15%] left-[55%] w-[35%] h-[85%] invisible md:visible">
-        <div className="relative top-[20%] h-[8%] w-full text-3xl greetings font-bold bg-gradient-to-r from-purple-500 to-blue-700 text-transparent bg-clip-text greetingAnimation">
+        <div className="relative top-[20%] h-[8%] w-full text-3xl greetings font-bold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text greetingAnimation">
           Hi, I'm Radu! <br></br>
         </div>  
         <div className="relative top-[28%] h-[60%] w-full text-sm font-medium  md:text-base description lg:font-medium text-blue-700 ">
@@ -95,8 +95,8 @@ function PhoneViewAbout(){
         </div>
       </div>
       <div className="flex flex-col basis-1/4 justify-center items-center">
-        <div className="flex basis-1/3 items-center justify-center text-2xl font-semibold bg-gradient-to-r from-purple-700 to-blue-700 text-transparent bg-clip-text">Radu Milicin</div>
-        <div className="flex basis-1/3 items-center justify-center text-xl font-semibold bg-gradient-to-r from-purple-700 to-blue-700 text-transparent bg-clip-text">Software Developer</div>
+        <div className="flex basis-1/3 items-center justify-center text-2xl font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text">Radu Milicin</div>
+        <div className="flex basis-1/3 items-center justify-center text-xl font-semibold bg-gradient-to-r from-green-600 to-blue-700 text-transparent bg-clip-text">Software Developer</div>
       </div>
       <div className="relative top-[0%] basis-1/8 flex justify-center items-center flex-row text-2xl font-bold text-blue-700 h-[10%] gap-4">
         <div className="relative flex flex-col basis-1/3 h-full w-[80px] items-center justify-center hover:border-2 hover:border-[#7D7D7D] rounded-xl visible md:invisible" 

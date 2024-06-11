@@ -67,7 +67,7 @@ export function Intervals(items){
 
   return (
     <div className="relative flex basis-1/12 flex-row items-center h-full w-[1/4]">
-      <div className="flex break-words justify-center items-center relative basis-3/5 h-full text-xs lg:max-xl:text-sm xl:max-2xl:text-lg 2xl:text-base text-black intervalNames font-medium">{items.text}</div>
+      <div className="flex break-words justify-center items-center relative basis-3/5 h-full text-xs lg:max-xl:text-sm xl:max-2xl:text-lg 2xl:text-base intervalNrs text-black font-bold">{items.text}</div>
       <div className="relative basis-2/5 h-full flex justify-center items-center" onClick={() => 
                                                                                           {
                                                                                             if(items.switchVal === true){
@@ -1066,21 +1066,21 @@ export default function Home() {
     setKeyChanging(!keyChanging);
   }
 
-  function KeyChoice() {
+  function KeyChoice(items) {
     return (
-      <div className="fixed left-[15%] top-[35%] w-[70%] h-[40%] grid grid-cols-4 bg-[#713D6F] z-50 rounded-2xl">
-        <div className="hover:bg-green-600 flex items-center justify-center text-2xl font-semibold rounded-tl-2xl" onClick={() => {setKey('A'); setKeyChanging(false); setAccidental("")}}>A</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('A#'); setKeyChanging(false); setAccidental("#")}}>A#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('B'); setKeyChanging(false); setAccidental("")}}>B</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-tr-2xl" onClick={() => {setKey('C'); setKeyChanging(false); setAccidental("")}}>C</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('C#'); changingKeyStatus(); setAccidental("#")}}>C#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('D'); changingKeyStatus(); setAccidental("")}}>D</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('D#'); changingKeyStatus(); setAccidental("#")}}>D#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('E'); changingKeyStatus(); setAccidental("")}}>E</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-bl-2xl" onClick={() => {setKey('F'); changingKeyStatus(); setAccidental("")}}>F</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('F#'); changingKeyStatus(); setAccidental("#")}}>F#</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold" onClick={() => {setKey('G'); changingKeyStatus(); setAccidental("")}}>G</div>
-        <div className="hover:bg-green-600  flex items-center justify-center text-2xl font-semibold rounded-br-2xl" onClick={() => {setKey('G#'); changingKeyStatus(); setAccidental("#")}}>G#</div>
+      <div className={`fixed left-[15%] top-[35%] w-[70%] h-[40%] grid grid-cols-4 bg-slate-400 bg-opacity-20 z-50 rounded-2xl md:invisible`}>
+        <div className="hover:bg-blue-700 flex items-center justify-center text-[#929292] text-2xl font-semibold rounded-tl-2xl" onClick={() => {setKey('A'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>A</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('A#'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("#")}}>A#</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('B'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>B</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold rounded-tr-2xl" onClick={() => {setKey('C'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>C</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('C#'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("#")}}>C#</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('D'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>D</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('D#'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("#")}}>D#</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('E'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>E</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold rounded-bl-2xl" onClick={() => {setKey('F'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>F</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('F#'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false); setAccidental("#")}}>F#</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold" onClick={() => {setKey('G'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("")}}>G</div>
+        <div className="hover:bg-blue-700  flex items-center justify-center text-2xl text-[#929292] font-semibold rounded-br-2xl" onClick={() => {setKey('G#'); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); changingChordStatus(false);  setAccidental("#")}}>G#</div>
       </div>
     );
   }
@@ -1106,13 +1106,13 @@ export default function Home() {
     console.log("Scale now set to = " + chosenScale)
   }
 
-  function ScaleChoice() {
+  function ScaleChoice(items) {
     return (
-      <div className="fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden">
+      <div className={`fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-slate-400 bg-opacity-20 z-51 overflow-hidden  md:hidden `}>
         {
           scaleNames.map((scaleName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-sm text-black font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName);  setScaleChanging(false); console.log("Scale changing now set to false"); setChord('Choose chord..')}}>
+              <div className="hover:bg-blue-700 flex items-center justify-center text-sm text-[#929292]  font-semibold rounded-2xl" onClick={() => {changeScale1(scaleName); changeScale(scaleName); setScale(scaleName); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false); console.log("Scale changing now set to false"); setChord('Choose chord..')}}>
                 {scaleName}
               </div>
               )
@@ -1138,13 +1138,13 @@ export default function Home() {
 
 
 
-  function ChordChoice() {
+  function ChordChoice(items) {
     return (
-      <div className="fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden">
+      <div className={`fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-slate-400 bg-opacity-20 z-51 overflow-hidden md:invisible`}>
         {
           chordNames.map((chordName) => {
             return (
-              <div className="hover:bg-green-600 flex items-center justify-center text-sm text-black font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setChordChanging(false); console.log("Chord changing now set to false"); setScale('Choose scale..')}}>
+              <div className="hover:bg-blue-700 flex items-center justify-center text-sm text-[#929292]  font-semibold rounded-2xl" onClick={() => {changeChord(chordName); setChord(chordName); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false);  console.log("Chord changing now set to false"); setScale('Choose scale..')}}>
                 {chordName}
               </div>
               )
@@ -1156,16 +1156,25 @@ export default function Home() {
 
   useEffect(() => {
     console.log("Scale changing set to " + scaleChanging);
+    if( scaleChanging === true) {
+      setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false);
+    }
   }, [scaleChanging])
 
   useEffect(() => {
     console.log("Chord changing set to " + chordChanging);
+    if(chordChanging === true) {
+      setKeyChanging(false); setTuningChanging(false); setIntervalChanging(false); setScaleChanging(false);
+    }
   }, [chordChanging])
   
   useEffect(() => {
     console.log("Key changing set to " + keyChanging);
+    if(keyChanging === true) {
+      setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false);
+    }
   }, [keyChanging])
-
+  
   useEffect(() => {
     console.log("Key chosen in Home is = " + keyChosen)
   }, [keyChosen])
@@ -1183,6 +1192,8 @@ export default function Home() {
 
 
 
+
+
   const [intervalChanging, setIntervalChanging] = useState(false);
   var intervalsChoices = ['1', 'b2', '2', 'b3', '3', '4', '#4/b5', '5', '#5/b6', '6', 'b7', '7']
 
@@ -1195,6 +1206,9 @@ export default function Home() {
           setIntervs(false);
         }
       };
+      if(intervalChanging) {
+        setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setScaleChanging(false);
+      }
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
@@ -1202,12 +1216,13 @@ export default function Home() {
 
   function IntervalChoice(items) {
    
+//     ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
     return (
-      <div ref={intervalChoiceRef} className={`fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden`}>
+      <div ref={intervalChoiceRef} className={`fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-slate-400 bg-opacity-20 z-51 overflow-hidden ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
         {
           intervalsChoices.map((intervalName, idx) => {
             return (
-              <div className={`hover:bg-green-700 flex items-center justify-center text-sm text-black font-semibold rounded-xl ${intervals[idx] === true ? 'bg-green-700' : 'bg-[#713D6F]'}`} onClick={() => {console.log("Scale changing now set to false"); changeIntervsAndSetNotes(idx)}}>
+              <div className={`hover:bg-blue-700 flex items-center justify-center text-sm text-[#929292] hover:rounded-xl font-semibold ${intervals[idx] === true ? 'bg-blue-700 rounded-xl' : 'bg-slate-400 bg-opacity-20'}`} onClick={() => {console.log("Scale changing now set to false");  setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false);  changeIntervsAndSetNotes(idx)}}>
                 {intervalName}
               </div>
               )
@@ -1219,14 +1234,22 @@ export default function Home() {
 
   const [tuningChanging, setTuningChanging] = useState(false);
   var tunings = ['E standard', 'D standard', 'C standard', 'Drop C', 'Drop D', 'B standard', 'A standard']
+  
+  useEffect(() => {
+    console.log("Key changing set to " + keyChanging);
+    if(tuningChanging === true) {
+      setChordChanging(false); setScaleChanging(false); setIntervalChanging(false); setScaleChanging(false);
+    }
+  }, [tuningChanging])
 
-   function TuningChoice() {
+
+   function TuningChoice(items) {
     return (
-      <div className="fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-[#713D6F] z-51 overflow-hidden">
+      <div className={`fixed top-[35%] left-[0%] w-[100%] h-[40%] grid grid-cols-3 bg-slate-400 bg-opacity-20 z-51 overflow-hidden ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
         {
           tunings.map((tuning) => {
             return (
-              <div className="hover:bg-green-600 flex flex-col items-center justify-center text-sm text-black font-semibold" onClick={() => {setTuning(tuning); setTuningChanging(false); console.log("Tuning changing now set to false from tuning choice"); }}>
+              <div className="hover:bg-blue-700 flex flex-col items-center justify-center text-sm text-[#929292] font-semibold" onClick={() => {setTuning(tuning); setKeyChanging(false); setTuningChanging(false); setChordChanging(false); setIntervalChanging(false); setScaleChanging(false);  console.log("Tuning changing now set to false from tuning choice"); }}>
                 {tuning}
               </div>
               )
@@ -1258,11 +1281,11 @@ export default function Home() {
   return (
     <div className="absolute top-0 left-0 h-full w-full bg-[#2D2D2D]">
       {/* Below renders on < 768px wide */}
-      {keyChanging === true ? <KeyChoice></KeyChoice> : <div></div>}
-      {scaleChanging === true ? <ScaleChoice></ScaleChoice> : <div></div>}
-      {chordChanging === true ? <ChordChoice></ChordChoice> : <div></div>}
-      {intervalChanging === true ? <IntervalChoice></IntervalChoice> : <div></div>}
-      {tuningChanging === true ? <TuningChoice></TuningChoice> : <div></div>}
+      {keyChanging === true ? <KeyChoice tuningChanging={tuningChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></KeyChoice> : <div></div>}
+      {scaleChanging === true ? <ScaleChoice  keyChanging={keyChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} intervalChanging={intervalChanging}></ScaleChoice> : <div></div>}
+      {chordChanging === true ? <ChordChoice keyChanging={keyChanging} tuningChanging={tuningChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></ChordChoice> : <div></div>}
+      {intervalChanging === true ? <IntervalChoice keyChanging={keyChanging} chordChanging={chordChanging} tuningChanging={tuningChanging}  scaleChanging={scaleChanging}></IntervalChoice> : <div></div>}
+      {tuningChanging === true ? <TuningChoice keyChanging={keyChanging} chordChanging={chordChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></TuningChoice> : <div></div>}
       <Fretboard2 blur={bgBlur} tuning={tuning} changeName={changeName} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} chosenNotes={chosenNotes} keyChosen={keyChosen} accidental={accidental} chordType={chordType} scale={scale} noteRep={noteRep} highE={highE} Bstring={Bstring} Gstring={Gstring} Dstring={Dstring} Astring={Astring} lowE={lowE}></Fretboard2>      
       <EmptyStrings2 blur={bgBlur} tuning={tuning} changeName={changeName} chosenNotes={chosenNotes} noteRep={noteRep} scale={scale} chordType={chordType} intervalChanging={intervalChanging} scaleChanging={scaleChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} keyChanging={keyChanging} keyChosen={keyChosen} accidental={accidental} isInScaleOrChordOrInterval={isInScaleOrChordOrInterval2} play={play}></EmptyStrings2>
       <Options2 changeNoteRep={changeNoteRep} noteRep={noteRep} changeTuning={changeTuning} setTuningChanging={setTuningChanging} setIntervalChanging={setIntervalChanging} intervalChanging={intervalChanging} tuningChanging={tuningChanging} 
@@ -1272,6 +1295,7 @@ export default function Home() {
       <Logo2></Logo2>
       <Dots2 keyChanging={keyChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></Dots2>
       <AboutBar></AboutBar>
+      <EndFretboardVertical keyChanging={keyChanging} chordChanging={chordChanging} tuningChanging={tuningChanging} intervalChanging={intervalChanging} scaleChanging={scaleChanging}></EndFretboardVertical>
 
       {/* Below renders on > 768px wide */}
       <Logo></Logo>
@@ -1284,18 +1308,27 @@ export default function Home() {
   );
 }
 
+export function EndFretboardVertical(items) {
+  return (
+    <div className={`absolute left-[20%] w-[60%] top-[35%] h-[1.25%] bg-slate-500  visible md:invisible ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'}  z-10 rounded-t-md`}>
+      <div className="relative left-[0%] top-0 w-full h-[1/3] bg-slate-500  visible md:invisible z-10"></div>
+      <div className="relative left-[0%] top-0 w-full h-[1/2] bg-slate-500  visible md:invisible z-10"></div>
+    </div>
+  )
+}
+
 export function Dots() {
   const nrs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
   return (
-    <div className="absolute top-[91%] left-[10%] w-[80%] h-[1%] z-3">
+    <div className="absolute top-[91.5%] left-[10%] w-[80%] h-[1%] z-3">
       <div className="relative flex flex-row top-0 w-full h-full">
         {
           nrs.map((nr) => 
             (<div 
               key={nr} 
               className="flex basis-1/12 justify-center items-center">
-                <div className={`md:w-[10px] md:h-[10px] lg:w-[15px] lg:h-[15px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'invisible md:visible' : 'invisible'}`}>
+                <div className={`md:w-[10px] md:h-[10px] lg:w-[12px] lg:h-[12px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'invisible md:visible' : 'invisible'}`}>
                 </div>
             </div>)
           )
@@ -1316,7 +1349,7 @@ export function Dots2(items) {
             (<div 
               key={nr} 
               className="flex basis-1/12 justify-center items-center">
-                <div className={`w-[12px] h-[12px] bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'visible md:invisible' : 'invisible md:invisible'} ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} `}>
+                <div className={`w-[12px] h-[12px] fretMarkers bg-red-700 rounded-full ${[3, 5, 7, 9, 12].includes(nr) ? 'visible md:invisible' : 'invisible md:invisible'} ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} `}>
                 </div>
             </div>)
           )
@@ -1414,7 +1447,7 @@ export function EmptyStrings(items) {
 
 
   return (
-      <div className="absolute flex flex-col justify-between top-[55%] left-[5%] w-[2%] h-[35%] bg-slate-600 invisible md:visible rounded-2xl">
+      <div className={`absolute flex flex-col justify-between top-[55%] left-[5%] w-[2%] h-[35%] bg-slate-600 ${items.noteRep === 0 ? 'bg-opacity-0' : 'bg-opacity-30'} invisible md:visible rounded-lg`}>
         {/*${ ? 'bg-blue-700' : 'bg-transparent'} */}
         <div className={`absolute top-[2%] w-full h-[10%] justify-center font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
           <div className="relative flex justify-center align-center text-sm md:text-xl md:top-[15%] lg:text-2xl lg:top-[10%] sizeEmptyStr w-full">
@@ -1489,9 +1522,12 @@ export function Strings() {
   );
 }
 
+// bg-[#713D6F] - eggplant violet 
+// #F26430 - orange
+// #009DDC - Celestial blue 
 export function Fretboard(items) {
   return (    
-    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-[#713D6F] opacity-90 invisible md:visible landscape">
+    <div className="absolute top-[55%] left-[10%] w-[80%] h-[35%] bg-slate-600 bg-opacity-10 invisible md:visible landscape">
       <div className="string1"></div>
       <div className="absolute top-[2%] left-0 w-full h-[8%] ">
         {/* TODO: PLAY SOUND FROM NOTES */}
@@ -1597,9 +1633,9 @@ export function EmptyStrings2(items){
 }
 
   return (
-    <div className={`absolute flex flex-col top-[32%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 rounded-t-2xl ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
+    <div className={`absolute flex flex-col top-[31%] left-[20%] w-[60%] h-[3%] z-0 bg-slate-600 ${items.noteRep === 0 ? 'bg-opacity-0' : 'bg-opacity-40 rounded-2xl'}  ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className={`absolute left-[2%] w-[10%] h-[100%] top-0 justify-center text-xl font-semibold text-black ${strings[0] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[0], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('highE')} >
-        <div className="relative flex flex-row justify-center align-center text-base left-[-0%] top-[0px] 2xl:top-[0%] w-full">
+        <div className="relative flex flex-row justify-center align-center text-base sizeEmptyStr2 left-[-0%] top-[0px] 2xl:top-[0%] w-full">
           {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[0], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
                     ? getInterval(items.keyChosen + items.accidental, strings[0])
@@ -1608,7 +1644,7 @@ export function EmptyStrings2(items){
         </div> 
       </div>
       <div className={`absolute left-[19%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[1] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[1], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('B')}  >
-        <div className="relative flex flex-row justify-center align-center text-base left-[-0%] top-[0px] 2xl:top-[0%] w-full">
+        <div className="relative flex flex-row justify-center align-center text-base sizeEmptyStr2 left-[-0%] top-[0px] 2xl:top-[0%] w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[1], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
                     ? getInterval(items.keyChosen + items.accidental , strings[1])
@@ -1617,7 +1653,7 @@ export function EmptyStrings2(items){
         </div> 
       </div>
     <div className={`absolute left-[36%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[2] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[2], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('G')}  >
-        <div className="relative flex flex-row justify-center align-center text-base left-[0%] top-[0px] w-full">
+        <div className="relative flex flex-row justify-center align-center text-base sizeEmptyStr2 left-[0%] top-[0px] w-full">
           {items.noteRep === 0
               ? (items.isInScaleOrChordOrInterval(strings[2], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
                 ? getInterval(items.keyChosen + items.accidental, strings[2])
@@ -1626,7 +1662,7 @@ export function EmptyStrings2(items){
         </div> 
       </div>
       <div className={`absolute left-[53%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[3] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[3], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('D')}  >
-        <div className="relative flex justify-center align-center text-base left-[0%] top-[0px] w-full">
+        <div className="relative flex justify-center align-center text-base sizeEmptyStr2 left-[0%] top-[0px] w-full">
           {items.noteRep === 0
                 ? (items.isInScaleOrChordOrInterval(strings[3], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
                   ? getInterval(items.keyChosen + items.accidental , strings[3])
@@ -1635,7 +1671,7 @@ export function EmptyStrings2(items){
         </div> 
       </div>
       <div className={`absolute left-[70%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[4] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[4], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'}  rounded-xl`} onClick={() => items.play('A')} >
-        <div className="relative flex justify-center align-center text-base left-[0%] top-[0px] w-full">
+        <div className="relative flex justify-center align-center text-base sizeEmptyStr2 left-[0%] top-[0px] w-full">
             {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[4], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
                     ? getInterval(items.keyChosen + items.accidental , strings[4])
@@ -1644,7 +1680,7 @@ export function EmptyStrings2(items){
         </div> 
       </div>
       <div className={`absolute left-[87%] w-[10%] h-[100%] justify-center text-xl font-semibold text-black ${strings[5] === items.keyChosen + items.accidental ? 'bg-green-700' : items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType) === true ? 'bg-blue-700' : 'bg-transparent'} rounded-xl`} onClick={() => items.play('E')} >
-        <div className="relative flex justify-center align-center text-base left-[0%] top-[0px] w-full h-[40px]">
+        <div className="relative flex justify-center align-center text-base sizeEmptyStr2 left-[0%] top-[0px] w-full h-[40px]">
               {items.noteRep === 0
                   ? (items.isInScaleOrChordOrInterval(strings[5], items.chosenNotes, items.keyChosen, items.accidental, items.scale, items.chordType)
                     ? getInterval(items.keyChosen + items.accidental, strings[5])
@@ -1736,55 +1772,55 @@ export function Options2(items) {
     <div className="absolute left-[0%] w-[100%] top-[10%] h-[20%] visible md:invisible">
       <div className="absolute left-[2%] w-[96%] top-[0%] h-[50%] flex basis-3 flex-row bg-[#3D3D3D] rounded-t-2xl">
         <div className="relative flex basis-1/3 flex-col items-center h-full justify-center">
-          <div className="flex items-center justify-center basis-1/2 text-lg text-[#929292] font-semibold">
+          <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Key
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md items-center justify-center text-opacity-70" onClick={() => {items.changeBlur(); console.log("Key pressed" + items.keyChosen + "\n\n\n\n\nKey pressed"); changeKeyPressed(); items.setKeyChanging(); console.log("Key pressed set to " + items.keyChanging); chAcc()}}>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-md textInBoxOpt2 items-center justify-center text-opacity-70" onClick={() => {items.changeBlur(); console.log("Key pressed" + items.keyChosen + "\n\n\n\n\nKey pressed"); changeKeyPressed(); items.setKeyChanging(); console.log("Key pressed set to " + items.keyChanging); chAcc()}}>
             {items.keyChosen} 
           </div>
           {/* {keyPressed && <KeyChoice></KeyChoice>} */}
         </div>
         <div className="relative flex basis-1/3 flex-col items-center h-full justify-center">
-          <div className="flex items-center justify-center basis-1/2 text-lg text-[#929292] font-semibold">
+          <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Scale
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs items-center justify-center text-opacity-70 truncate" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70 truncate" onClick={() => { items.setScaleChanging() ; console.log("Scale changing set to " + scaleChanging) }}>
             {items.scaleChosen === '' ? 'Choose scale..' : items.scaleChosen}
           </div>
         </div>
         <div className="relative flex basis-1/3 left-0 w-[90%] flex-row items-center h-full">
-          <div className="flex basis-1/2 items-center justify-center h-1/2 text-base text-[#929292] font-semibold">
+          <div className="flex basis-1/2 items-center justify-center h-1/2 text-base titlesVertical text-[#929292] font-semibold">
             Repres.
           </div> 
           <div className="relative rounded-xl border-2 border-black bg-[#727777] h-[25%] font-semibold text-xl flex basis-2/5 items-center justify-center z-1 ">
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs rounded-l-xl ${items.noteRep === 0 ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0)}}>I</div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs textInBoxOpt2 rounded-l-xl ${items.noteRep === 0 ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`} onClick ={() => {pressedRepres(0); items.changeNoteRep(0); }}>I</div>
             <div className="absolute w-[6%] h-full bg-black"></div>
-            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs rounded-r-xl ${items.noteRep === 1 ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
+            <div className={`relative z-2 flex-1 h-full flex items-center justify-center text-xs textInBoxOpt2 rounded-r-xl ${items.noteRep === 1 ? 'bg-blue-700' : 'bg-[#cb2a2a]'}`}  onClick={() => {pressedRepres(1); items.changeNoteRep(1)}}>NN</div>
           </div>
         </div>
       </div>
       <div className="absolute left-[2%] w-[96%] top-[50%] h-[50%] visible md:invisible flex basis-3 flex-row bg-[#3D3D3D] rounded-b-2xl">
         <div className="relative flex basis-1/3 flex-col items-center h-full justify-center">
-          <div className="flex items-center justify-center basis-1/2 text-lg text-[#929292] font-semibold">
+          <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Tuning
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging);  }}>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70" onClick={() => {items.setTuningChanging(true); console.log("Tuning changing set to " + items.tuningChanging);  }}>
             {items.tuning === '' ? 'Choose tuning..' : items.tuning}
           </div>
         </div>
         <div className=" relative flex basis-1/3 flex-col items-center h-full justify-center">
-          <div className="flex items-center justify-center basis-1/2 text-lg text-[#929292] font-semibold">
+          <div className="flex items-center justify-center basis-1/2 text-lg titlesVertical text-[#929292] font-semibold">
             Chord
           </div>
-          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs items-center justify-center text-opacity-70 truncate" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
+          <div className="flex left-[15%] w-[70%] h-1/4 rounded-md border-2 border-black  bg-[#727777] font-semibold text-xs textInBoxOpt2 items-center justify-center text-opacity-70 truncate" onClick={() => {items.setChordChanging(); console.log("Chord changing set to " + items.chordChanging) }}>
             {items.chordChosen === '' ? 'Choose chord..' : items.chordChosen}
           </div>
         </div>
         <div className="relative flex basis-1/3 flex-row items-center h-full justify-left">
-          <div className="flex basis-7/12 items-center justify-center h-1/2 text-base text-[#929292] font-semibold">
+          <div className="flex basis-7/12 items-center justify-center h-1/2 text-base titlesVertical text-[#929292] font-semibold">
             Intervals
           </div> 
-          <div className={`relative left-0 flex basis-3/12 rounded-full ${items.intervOn === true ? 'bg-blue-700' : 'bg-black'} w-[20px] h-[20px] font-semibold text-xl items-center z-2 `}>
+          <div className={`relative left-0 flex basis-3/12 rounded-full ${items.intervOn === true ? 'bg-blue-700' : 'bg-black'} min-w-[20%] min-h-[25%] max-w-[30%] max-h-[40%] font-semibold text-xl items-center z-2 `}>
             <div className={`absolute flex min-w-[50%] min-h-[100%] max-w-[100%] max-h-[100%] ${items.intervalChanging === false ? 'bg-[#cb2a2a]' : 'bg-blue-700 right-[2%] left-[50%]'} rounded-full z-3 border-2 border-black`}  onClick={() => {items.setIntervs(!items.intervOn) ; items.setIntervalChanging(!items.intervalChanging); console.log("intervOn is = " + items.intervOn)}}>
             </div>
           </div>
@@ -2065,7 +2101,7 @@ export function Fretboard2(items) {
 
 
   return (
-    <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-[#713D6F] opacity-90 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
+    <div className={`absolute top-[35%] left-[20%] w-[60%] h-[65%] z-20 bg-slate-600 bg-opacity-20 ${(items.keyChanging === true || items.scaleChanging === true || items.chordChanging === true || items.tuningChanging === true || items.intervalChanging === true) ? 'invisible' : 'visible'} md:invisible`}>
       <div className="relative flex flex-col top-0 left-0 w-full h-full">
         {nrs.map((nr) => (
           <div key={nr} className={`absolute left-0 w-full h-[1%] bg-slate-500  ${nr === 12 ? 'hidden' : ''}`} style={{ top: `${(100 - (nr / 12) * 100)}%` }}></div>
@@ -2081,4 +2117,4 @@ export function Fretboard2(items) {
   );
 }
      
-  
+ 
